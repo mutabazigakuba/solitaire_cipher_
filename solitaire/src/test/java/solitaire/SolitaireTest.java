@@ -31,5 +31,11 @@ public class SolitaireTest{
     public void input_string_should_be_grouped_in_fives(){
         assertEquals("HELLO HELLO", solitaire.groupLettersIntoFives("hellohello"));
     }
+
+    @Test
+    public void input_string_should_be_grouped_in_fives_and_x_added_when_not_five(){
+        assertEquals("HELLO HELLO HELXX", solitaire.groupLettersIntoFives("hellohellohel"));
+
+    }
     
 }
