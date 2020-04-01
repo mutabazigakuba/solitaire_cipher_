@@ -1,20 +1,55 @@
 package solitaire;
 
+import java.util.ArrayList;
+import java.util.List;
 
-public class Solitaire{
+public class Solitaire {
 
-    public String encoded_message(String message){
+    public String encoded_message(String message) {
 
-        String make_upper_case = message.toUpperCase();
+        String encodeMessage = groupLettersIntoFives(message);
 
-        String[] string_values = make_upper_case.split("\\W+");
+        return encodeMessage;
+    }
 
-        String new_message = new String();
+    public String changeToUpperCase(String message) {
+        String updateMessage = message.toUpperCase();
+        return updateMessage;
+    }
 
-        for (int i = 0; i < string_values.length; i++) {
-            new_message = new_message + string_values[i];
+    public String removeNonLetters(String message) {
+
+        String updateMessage = changeToUpperCase(message);
+
+        String[] cleanedMessage = updateMessage.split("\\W+");
+        String finalMessage = new String();
+
+        for (int i = 0; i < cleanedMessage.length; i++) {
+            finalMessage = finalMessage + cleanedMessage[i];
         }
 
-        return new_message;
+        return finalMessage;
+    }
+
+    public String groupLettersIntoFives(String message) {
+
+        String updateMessage = removeNonLetters(message);
+
+        int numberOfLetters = updateMessage.length();
+
+        if (numberOfLetters > 5) {
+
+            List<String> outPutMessage = new ArrayList<String>();
+
+            for (int i = 0; i < numberOfLetters; i+=5) {
+                outPutMessage.add(updateMessage.substring(i, Math.min(numberOfLetters, i + 5)));
+            }
+
+            String finalMessage = outPutMessage.toString().replace("[", "").replace("]", "").replace(",", "");
+
+            return finalMessage;
+        }
+
+        return updateMessage;
     }
 }
