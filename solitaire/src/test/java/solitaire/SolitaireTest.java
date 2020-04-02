@@ -4,37 +4,67 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
-public class SolitaireTest{
-
-    Solitaire solitaire = new Solitaire();
-    String message = "HELLO";
+public class SolitaireTest
+{
 
     @Test
-    public void input_should_only_be_a_string(){
+    public void message_should_be_converted_into_upper_case()
+    {
 
-        assertEquals(message, solitaire.encoded_message("Hello"));
+        //arrange
+        Solitaire solitaire = new Solitaire();
+
+        //act
+        String expectedMessage = "HELLO";
+        String actualMessage = solitaire.encoded_message("hello"); 
+
+        //assert
+        assertEquals(expectedMessage, actualMessage);
     }
 
     @Test
-    public void input_should_converted_to_upper_case(){
+    public void message_should_be_converted_into_letters_only()
+    {
 
-        assertEquals(message, solitaire.changeToUpperCase("hello"));
+        //arrange
+        Solitaire solitaire = new Solitaire();
+
+        //act
+        String expectedMessage = "HELLO";
+        String actualMessage = solitaire.encoded_message("hel#$lo%"); 
+
+        //assert
+        assertEquals(expectedMessage, actualMessage);
     }
 
     @Test
-    public void input_should_be_converted_letters_only(){
+    public void message_should_be_grouped_into_fives()
+    {
 
-        assertEquals(message, solitaire.removeNonLetters("@he%llo!"));
+        //arrange
+        Solitaire solitaire = new Solitaire();
+
+        //act
+        String expectedMessage = "HELLO HELLO";
+        String actualMessage = solitaire.encoded_message("hellohello"); 
+
+        //assert
+        assertEquals(expectedMessage, actualMessage);
     }
 
     @Test
-    public void input_string_should_be_grouped_in_fives(){
-        assertEquals("HELLO HELLO", solitaire.groupLettersIntoFives("hellohello"));
-    }
+    public void message_should_be_grouped_in_fives_and_x_added_when_not_equal_five()
+    {
 
-    @Test
-    public void input_string_should_be_grouped_in_fives_and_x_added_when_not_five(){
-        assertEquals("HELLO HELLO HELXX", solitaire.groupLettersIntoFives("hellohellohel"));
+        //arrange
+        Solitaire solitaire = new Solitaire();
+
+        //act
+        String expectedMessage = "HELLO HELXX";
+        String actualMessage = solitaire.encoded_message("hello hel"); 
+
+        //assert
+        assertEquals(expectedMessage, actualMessage);
 
     }
     
