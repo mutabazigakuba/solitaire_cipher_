@@ -53,7 +53,7 @@ public class SolitaireTest
     }
 
     @Test
-    public void message_with_space_should_be_grouped_into_fives_when_message_has_space()
+    public void message_with_space_should_be_grouped_into_fives()
     {
         Solitaire solitaire = new Solitaire();
 
@@ -64,15 +64,26 @@ public class SolitaireTest
     }
 
     @Test
-    public void message_should_be_grouped_in_fives_and_x_added_when_not_equal_five()
+    public void message_without_space_should_be_grouped_in_fives_and_x_added_when_not_modulus_five()
     {
         Solitaire solitaire = new Solitaire();
 
         String expectedMessage = "HELLO HELXX";
-        String actualMessage = solitaire.encoded_message("hel lo hel"); 
+        String actualMessage = solitaire.encoded_message("hellohel"); 
 
         assertEquals(expectedMessage, actualMessage);
+    }
 
+    
+    @Test
+    public void message_with_space_should_be_grouped_in_fives_and_x_added_when_not_modulus_five()
+    {
+        Solitaire solitaire = new Solitaire();
+
+        String expectedMessage = "HELLO HELXX";
+        String actualMessage = solitaire.encoded_message("hel loh el"); 
+
+        assertEquals(expectedMessage, actualMessage);
     }
     
 }
