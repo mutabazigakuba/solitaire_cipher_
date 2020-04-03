@@ -1,13 +1,19 @@
 package solitaire;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class Solitaire {
 
-    public String encoded_message(String message) {
-        String encodeMessage = groupLettersIntoFives(message);
-        return encodeMessage;
+    public String encoded_message(String message) 
+    {
+        String cleanedMessage = removeNonLetters(message);
+        String changeToUpper = changeToUpperCase(cleanedMessage);
+        String groupedIntoFives = groupLettersIntoFives(changeToUpper);
+        // String finalMessage = AddXs(groupedIntoFives);
+        // return finalMessage;
+        return groupedIntoFives;
     }
 
     private String changeToUpperCase(String message) {
@@ -15,49 +21,24 @@ public class Solitaire {
     }
 
     private String removeNonLetters(String message) {
-
-        String updateMessage = changeToUpperCase(message);
-        String[] cleanedMessage = updateMessage.split("\\W+");
-        String finalMessage = new String();
-
-        for (int i = 0; i < cleanedMessage.length; i++) {
-            finalMessage = finalMessage + cleanedMessage[i];
-        }
-
-        return finalMessage;
+        return message.replaceAll("[^\\p{L}\\p{Z}]","");
     }
 
-    private String groupLettersIntoFives(String message) {
+    private String groupLettersIntoFives(String message) 
+    {
+      return Arrays.toString(message.split("(?<=\\G.{" + 5 + "})"))
+            .replaceAll("[^\\p{L}\\p{Z}]","");
+    }
 
-        String updateMessage = removeNonLetters(message);
+    private String AddXs (String Message)
+    {
+        int numberXtoAdd = 5 - Message.length() % 5;
         
-        int numberOfLetters = updateMessage.length();
-
-        if (numberOfLetters > 5) {
-
-            List<String> outPutMessage = new ArrayList<String>();
-
-            for (int i = 0; i < numberOfLetters; i += 5) {
-                outPutMessage.add(updateMessage.substring(i, Math.min(numberOfLetters, i + 5)));
-            }
-            String finalMessage = outPutMessage.toString().replace("[", "").replace("]", "").replace(",", "");
-
-            if ((numberOfLetters % 5) == 0) {
-
-                return finalMessage;
-
-            } else {
-
-                int remainder = numberOfLetters % 5;
-
-                for (int i = 1; i < remainder; i++) {
-                    finalMessage = finalMessage + "X";
-                }
-
-                return finalMessage;
-            }
+        for (int i = 1; i < numberXtoAdd; i++) {
+            Message = Message + "X";
         }
-        return updateMessage;
+        
+        return Message;
     }
 
 }

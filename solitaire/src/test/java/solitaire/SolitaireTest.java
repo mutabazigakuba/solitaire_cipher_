@@ -24,7 +24,7 @@ public class SolitaireTest
         Solitaire solitaire = new Solitaire();
 
         String expectedMessage = "HELLO";
-        String actualMessage = solitaire.encoded_message("hel#$lo%"); 
+        String actualMessage = solitaire.encoded_message("hel3,#$lo%");
 
         assertEquals(expectedMessage, actualMessage);
     }
