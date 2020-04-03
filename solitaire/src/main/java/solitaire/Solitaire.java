@@ -1,8 +1,6 @@
 package solitaire;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 public class Solitaire {
 
@@ -11,9 +9,8 @@ public class Solitaire {
         String cleanedMessage = removeNonLetters(message);
         String changeToUpper = changeToUpperCase(cleanedMessage);
         String groupedIntoFives = groupLettersIntoFives(changeToUpper);
-        // String finalMessage = AddXs(groupedIntoFives);
-        // return finalMessage;
-        return groupedIntoFives;
+        String finalGroupedMessage = AddXs(groupedIntoFives);
+        return finalGroupedMessage;
     }
 
     private String changeToUpperCase(String message) {
@@ -26,19 +23,21 @@ public class Solitaire {
 
     private String groupLettersIntoFives(String message) 
     {
-      return Arrays.toString(message.split("(?<=\\G.{" + 5 + "})"))
+        return Arrays.toString(message.replaceAll("\\s+", "").split("(?<=\\G.{" + 5 + "})"))
             .replaceAll("[^\\p{L}\\p{Z}]","");
     }
 
-    private String AddXs (String Message)
+    private String AddXs (String message)
     {
-        int numberXtoAdd = 5 - Message.length() % 5;
-        
+        String removeSpace = message.replaceAll("\\s+", "");
+        int numberXtoAdd = removeSpace.length() % 5;
+
         for (int i = 1; i < numberXtoAdd; i++) {
-            Message = Message + "X";
+            message = message + "X";
         }
-        
-        return Message;
+        System.out.println(message);
+
+        return message;
     }
 
 }
