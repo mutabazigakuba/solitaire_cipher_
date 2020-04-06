@@ -46,4 +46,5 @@ public class Solitaire
         }
         return _message;
     }
+
 }
