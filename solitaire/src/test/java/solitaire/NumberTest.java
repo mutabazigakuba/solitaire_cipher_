@@ -25,7 +25,7 @@ public class NumberTest {
     {
         Number number = new Number("abc");
 
-        List<Integer> expectedMessage = list(1,2,3,24,24);
+        List<Integer> expectedMessage = list(1,2,3);
         List<Integer> actualMessage = number.convertedMessage();
 
         assertEquals(expectedMessage, actualMessage);
@@ -45,7 +45,7 @@ public class NumberTest {
     @Test
     public void any_sentence_should_be_converted_to_number()
     {
-        Number number = new Number("Hello world");
+        Number number = new Number("helloworld");
 
         List<Integer> expectedMessage = list(8,5,12,12,15,23,15,18,12,4);
         List<Integer> actualMessage = number.convertedMessage();
@@ -53,16 +53,6 @@ public class NumberTest {
         assertEquals(expectedMessage, actualMessage);
     }
 
-    @Test
-    public void any_sentence_with_special_characters_should_return_numbers()
-    {
-        Number number  = new Number("#$%23he866*ll+323o");
-
-        List<Integer> expectedMessage = list(8,5,12,12,15);
-        List<Integer> actualMessage = number.convertedMessage();
-
-        assertEquals(expectedMessage, actualMessage);
-    }
 
     private List<Integer> list(int... number)
     {

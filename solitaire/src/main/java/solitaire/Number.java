@@ -8,8 +8,7 @@ public class Number {
 
     public Number(String message)
     { 
-        Solitaire solitaire = new Solitaire(message);
-        _message = solitaire.encoded_message();      
+        _message = message;      
     }
 
     public List<Integer> convertedMessage(){
@@ -20,7 +19,7 @@ public class Number {
     private List<Integer> changeLetterToNumber()
     {
         List<Integer> convertedMessage = new ArrayList<Integer>();
-        char[] alphabet = "abcdefghijklmnopqrstuvwxyz".toUpperCase().toCharArray();
+        char[] alphabet = "abcdefghijklmnopqrstuvwxyz".toCharArray();
         char[] _messageToArray = _message.toCharArray();
 
         if(_message.length() < 1)
