@@ -18,3 +18,7 @@ jobs:
 
     steps:
       - checkout
+
+      - run
+        name: "Testing"
+        commnad: mvn test
