@@ -1,5 +1,4 @@
-### BUILD
-[![CircleCI](https://circleci.com/gh/mutabazigakuba/solitaire_cipher_challenge_MR.svg?style=svg&circle-token=568bf02ef81448d834a371905b6992f32a2dccc9)](https://circleci.com/gh/mutabazigakuba/solitaire_cipher_challenge_MR)
+**BUILD** [![CircleCI](https://circleci.com/gh/mutabazigakuba/solitaire_cipher_challenge_MR.svg?style=svg&circle-token=568bf02ef81448d834a371905b6992f32a2dccc9)](https://circleci.com/gh/mutabazigakuba/solitaire_cipher_challenge_MR)
 
 # solitaire cipher
 A cipher that is used to decrpyt and encrypt messages using a key generated using keyframe algorithm. The Keyframe algorithm uses a deck of cards to generate the key.
