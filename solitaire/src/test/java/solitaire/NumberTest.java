@@ -9,24 +9,36 @@ import org.junit.Test;
 
 public class NumberTest {
 
-    @Test
-    public void string_to_number_should_return_list()
-    {
-        Number number = new Number("");
 
-        List<Integer> expectedMessage = list();
-        List<Integer> actualMessage = number.convertedMessage();
+    @Test 
+    public void emptystringreturnsnonumber(){
+      String message = "";
 
-        assertEquals(expectedMessage, actualMessage);
+      List<Integer> expectedListofNumber = new ArrayList<Integer>();
+      Number number = new Number(message);
+      List<Integer> actualList = number.convertsMessageToNumber();
+
+      assertEquals(expectedListofNumber, actualList);
+    }
+
+    @Test 
+    public void singlestringreturnscorrespondingnumber(){
+      String message = "A";
+
+      List<Integer> expectedListofNumber = list(1);
+      Number number = new Number(message);
+      List<Integer> actualList = number.convertsMessageToNumber();
+
+      assertEquals(expectedListofNumber, actualList);
     }
 
     @Test
     public void abc_should_return_123()
     {
-        Number number = new Number("abc");
+        Number number = new Number("ABC");
 
         List<Integer> expectedMessage = list(1,2,3);
-        List<Integer> actualMessage = number.convertedMessage();
+        List<Integer> actualMessage = number.convertsMessageToNumber();
 
         assertEquals(expectedMessage, actualMessage);
     }
@@ -34,10 +46,10 @@ public class NumberTest {
     @Test
     public void any_word_should_be_converted_to_number()
     {
-        Number number = new Number("hello");
+        Number number = new Number("HELLO");
 
         List<Integer> expectedMessage = list(8,5,12,12,15);
-        List<Integer> actualMessage = number.convertedMessage();
+        List<Integer> actualMessage = number.convertsMessageToNumber();
 
         assertEquals(expectedMessage, actualMessage);
     }
@@ -45,10 +57,10 @@ public class NumberTest {
     @Test
     public void any_sentence_should_be_converted_to_number()
     {
-        Number number = new Number("helloworld");
+        Number number = new Number("HELLOWORLD");
 
         List<Integer> expectedMessage = list(8,5,12,12,15,23,15,18,12,4);
-        List<Integer> actualMessage = number.convertedMessage();
+        List<Integer> actualMessage = number.convertsMessageToNumber();
 
         assertEquals(expectedMessage, actualMessage);
     }

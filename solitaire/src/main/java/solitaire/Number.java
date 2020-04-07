@@ -5,39 +5,44 @@ import java.util.List;
 public class Number {
 
     String _message;
+    List<Integer> numbers = new ArrayList<Integer>();
 
     public Number(String message)
     { 
         _message = message;      
     }
 
-    public List<Integer> convertedMessage()
+    public List<Integer> convertsMessageToNumber()
     {
-        List<Integer> convertedMessage = changeLetterToNumber();
-        return convertedMessage;
+        if(_message.isEmpty())
+        {
+            return new ArrayList<Integer>();
+        }
+
+        char[] values = _message.toCharArray();
+
+        for (char value : values) {
+            int something = value - 'A' + 1;
+            numbers.add(something);
+        }
+        return numbers;
     }
-    
-    private List<Integer> changeLetterToNumber()
+
+    public String convertsNumberToMessage()
     {
-        List<Integer> convertedMessage = new ArrayList<Integer>();
-        char[] alphabet = "abcdefghijklmnopqrstuvwxyz".toCharArray();
-        char[] _messageToArray = _message.toCharArray();
-
-        if(_message.length() < 1)
+        if(numbers.isEmpty())
         {
-            return convertedMessage;
+            return "";
         }
 
-        for (int i = 0; i < _message.length(); i++) 
+        // char[] values = new char[numbers.size()];
+        String some = "";
+
+        for (int number : numbers) 
         {
-            for (int j = 0; j < alphabet.length; j++) 
-            {
-                if(_messageToArray[i] == alphabet[j])
-                {
-                    convertedMessage.add(j+1);
-                } 
-            }            
+            // String something = ""+number.
+            // values.add(something);
         }
-        return convertedMessage;
+        // return numbers;
     }
 }
