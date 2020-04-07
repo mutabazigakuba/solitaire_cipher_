@@ -83,7 +83,7 @@ public class ASCIITest
     }
 
     @Test
-    public void integration_test_passing_string_to_return_list_then_list_back_to_orignal_string()
+    public void passing_a_string_should_return_list_of_numbers_then_list_should_return_back_to_orignal_string()
     {
         String message = "HELLOWORLD";
 
