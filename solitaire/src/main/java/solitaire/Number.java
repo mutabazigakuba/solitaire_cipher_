@@ -11,7 +11,8 @@ public class Number {
         _message = message;      
     }
 
-    public List<Integer> convertedMessage(){
+    public List<Integer> convertedMessage()
+    {
         List<Integer> convertedMessage = changeLetterToNumber();
         return convertedMessage;
     }
@@ -39,6 +40,4 @@ public class Number {
         }
         return convertedMessage;
     }
-
-
 }
