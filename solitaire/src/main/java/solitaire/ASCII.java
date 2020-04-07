@@ -8,7 +8,7 @@ public class ASCII {
     {      
     }
 
-    public List<Integer> convertsMessageToNumber(String _message)
+    public static List<Integer> convertsMessageToNumber(String _message)
     {
         if(_message.isEmpty())
         {
@@ -19,13 +19,13 @@ public class ASCII {
         char[] values = _message.toCharArray();
 
         for (char value : values) {
-            int something = value - 'A' + 1;
-            numbers.add(something);
+            int number = value - 'A' + 1;
+            numbers.add(number);
         }
         return numbers;
     }
 
-    public String convertsNumberToMessage(List<Integer> numbers)
+    public static String convertsNumberToMessage(List<Integer> numbers)
     {        
         if(numbers.isEmpty())
         {
