@@ -2,23 +2,20 @@ package solitaire;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Number {
+public class ASCII {
 
-    String _message;
-    List<Integer> numbers = new ArrayList<Integer>();
-
-    public Number(String message)
-    { 
-        _message = message;      
+    public ASCII()
+    {      
     }
 
-    public List<Integer> convertsMessageToNumber()
+    public List<Integer> convertsMessageToNumber(String _message)
     {
         if(_message.isEmpty())
         {
             return new ArrayList<Integer>();
         }
 
+        List<Integer> numbers = new ArrayList<Integer>();
         char[] values = _message.toCharArray();
 
         for (char value : values) {
@@ -28,21 +25,18 @@ public class Number {
         return numbers;
     }
 
-    public String convertsNumberToMessage()
-    {
+    public String convertsNumberToMessage(List<Integer> numbers)
+    {        
         if(numbers.isEmpty())
         {
             return "";
         }
-
-        // char[] values = new char[numbers.size()];
-        String some = "";
-
+        String message = "";
         for (int number : numbers) 
         {
-            // String something = ""+number.
-            // values.add(something);
+            message +=  String.valueOf((char)(64+number));
         }
-        // return numbers;
+
+        return message;
     }
 }
