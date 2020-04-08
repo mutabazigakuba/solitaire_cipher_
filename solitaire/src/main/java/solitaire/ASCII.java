@@ -2,12 +2,8 @@ package solitaire;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ASCII {
-
-    public ASCII()
-    {      
-    }
-
+public class ASCII 
+{
     public static List<Integer> convertsMessageToNumber(String _message)
     {
         if(_message.isEmpty())
@@ -34,7 +30,7 @@ public class ASCII {
         String message = "";
         for (int number : numbers) 
         {
-            message +=  String.valueOf((char)(64+number));
+            message +=  String.valueOf((char)(64 + number));
         }
 
         return message;
