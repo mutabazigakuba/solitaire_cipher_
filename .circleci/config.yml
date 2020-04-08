@@ -4,17 +4,27 @@
 #
 version: 2
 jobs:
+
   build:
     docker:
-      # specify the version you desire here
       - image: circleci/openjdk:8-jdk
-
     working_directory: ~/repo
-
     environment:
-      # Customize the JVM maximum heap limit
       JVM_OPTS: -Xmx3200m
       TERM: dumb
-
     steps:
       - checkout
+  
+  test:
+    docker:
+      - image: circleci/openjdk:8-jdk
+    steps:
+      - checkout
+      - run: mvn test
+  
+workflows:
+  version: 2
+  build_and_test:
+    jobs:
+      - build
+      - test
