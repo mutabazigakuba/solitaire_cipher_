@@ -18,5 +18,3 @@ jobs:
 
     steps:
       - checkout
-
-      - run: mvn test
