@@ -3,6 +3,7 @@
 # Check https://circleci.com/docs/2.0/language-java/ for more details
 #
 version: 2
+
 jobs:
 
   build:
@@ -20,7 +21,11 @@ jobs:
       - image: circleci/openjdk:8-jdk
     steps:
       - checkout
-      - run: mvn test
+      - run:
+        name: running tests
+        command: mvn test
+        shell: /bin/bash
+        working directory: ~/solitaire 
   
 workflows:
   version: 2
