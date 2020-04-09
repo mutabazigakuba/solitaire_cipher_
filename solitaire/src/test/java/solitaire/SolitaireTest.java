@@ -84,6 +84,5 @@ public class SolitaireTest
         String actualMessage = solitaire.encoded_message(); 
 
         assertEquals(expectedMessage, actualMessage);
-    }
-    
+    }   
 }
