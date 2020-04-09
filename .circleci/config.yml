@@ -16,12 +16,12 @@ jobs:
       - run: echo ${CIRCLE_BRANCH}
 
   test:
-    working_directory: ~/repo/solitaire
+    working_directory: ~/repo
     docker:
       - image: circleci/openjdk:8-jdk
     steps:
       - checkout
-      - run: echo $CIRCLE_BRANCH
+      - run: mvn test
 
 workflows:
   version: 2.1
