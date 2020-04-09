@@ -13,9 +13,7 @@ jobs:
       TERM: dumb
     steps:
       - checkout
-      - run:
-        name: "what branch am i on"
-        command: echo ${CIRCLE_BRANCH}
+      - run: echo ${CIRCLE_BRANCH}
 
   test:
     working_directory: ~/repo/solitaire
