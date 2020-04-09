@@ -4,7 +4,6 @@
 #
 version: 2
 jobs:
-
   build:
     docker:
       - image: circleci/openjdk:8-jdk
@@ -14,5 +13,11 @@ jobs:
       TERM: dumb
     steps:
       - checkout
-  
-  
+  test:
+    working_directory: ~/repo/solitaire
+    docker:
+      - image: circleci/openjdk:8-jdk
+    steps:
+      - checkout
+      - run: mvn test
+    
