@@ -21,7 +21,7 @@ jobs:
       - image: circleci/openjdk:8-jdk
     steps:
       - checkout
-      - run: mvn test
+      - run: echo $CIRCLE_BRANCH
 
 workflows:
   version: 2.1
