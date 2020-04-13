@@ -2,17 +2,23 @@ package solitaire;
 
 public class Key 
 {
+    public int[] deckOfCards = new int[54];
+    
     public String mGenerateKey(int keyLength)
     {
-        if(keyLength < 1)
+        return "";
+    }
+
+    public int[] mCreateDeckOfCardsValues()
+    {
+        for (int i = 0; i < deckOfCards.length; i++) 
         {
-            return "";
+            deckOfCards[i] = i+1;
+            if(i==52 || i==53)
+            {
+                deckOfCards[i]=53;
+            }
         }
-        String generateKey = "hello";
-        if(generateKey.length() == keyLength)
-        {
-            return "hello";
-        }
-        return generateKey;
+        return deckOfCards;
     }
 } 
