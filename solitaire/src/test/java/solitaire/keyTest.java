@@ -1,5 +1,6 @@
 package solitaire;
 
+import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Before;
@@ -32,9 +33,24 @@ public class keyTest {
         Key key = new Key();
 
         int[] expectedDeckOfCards = new int[54];
-        int[] actualDeckOfCards = key.mCreateDeckOfCardsValues();
+        int[] actualDeckOfCards = key.deckOfCards;
 
-        assertEquals(expectedDeckOfCards, actualDeckOfCards);
+        assertArrayEquals(expectedDeckOfCards, actualDeckOfCards);
     }
 
+    @Test
+    public void sumOfDeckShouldAAddUpTo1484()
+    {
+        Key key = new Key();
+
+        int expectedSumOfDeck = 1484;
+        int actualSumOfDeck = key.mSumOfDeck();
+
+        assertEquals(expectedSumOfDeck, actualSumOfDeck);
+    }
+
+    @Test
+    public void shouldBeAbleToMoveJokerAOneCardBelow()
+    {
+    }
 }

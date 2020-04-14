@@ -9,7 +9,7 @@ public class Key
         return "";
     }
 
-    public int[] mCreateDeckOfCardsValues()
+    private int[] mCreateDeckOfCardsValues()
     {
         for (int i = 0; i < deckOfCards.length; i++) 
         {
@@ -20,5 +20,15 @@ public class Key
             }
         }
         return deckOfCards;
+    }
+
+    public int mSumOfDeck()
+    {
+        int sumOfDecks = 0;
+        int[] deckOfCards = mCreateDeckOfCardsValues();
+        for (int card : deckOfCards) {
+            sumOfDecks += card;
+        }
+        return sumOfDecks;
     }
 } 
