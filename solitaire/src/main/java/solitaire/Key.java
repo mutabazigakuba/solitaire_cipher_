@@ -14,10 +14,6 @@ public class Key
         for (int i = 0; i < deckOfCards.length; i++) 
         {
             deckOfCards[i] = i+1;
-            if(i==52 || i==53)
-            {
-                deckOfCards[i]=53;
-            }
         }
         return deckOfCards;
     }
@@ -30,5 +26,45 @@ public class Key
             sumOfDecks += card;
         }
         return sumOfDecks;
+    }
+
+    public int[] mMoveJokerA(int jokerA)
+    {
+        int[] newDeck = new int[54];
+        for (int i = 0; i < newDeck.length; i++) {
+            newDeck[i] = i+1;
+        }
+        newDeck[16] = 54;
+        newDeck[53] = 17;
+        newDeck[34] = 53;
+        newDeck[52] = 35;
+        for (int j = 0; j < newDeck.length; j++) {
+            if(newDeck[j] == jokerA){
+                int x = newDeck[j-1];
+                newDeck[j-1] = jokerA;
+                newDeck[j] = x;
+            } 
+        }
+        return newDeck;
+    }
+
+    public int[] mMoveJokerB(int jokerB)
+    {
+        int[] newDeck = new int[54];
+        for (int i = 0; i < newDeck.length; i++) {
+            newDeck[i] = i+1;
+        }
+        newDeck[16] = 54;
+        newDeck[53] = 17;
+        newDeck[34] = 53;
+        newDeck[52] = 35;
+        for (int j = 0; j < newDeck.length; j++) {
+            if(newDeck[j] == jokerB){
+                int x =  newDeck[j-2];
+                newDeck[j-2] = jokerB;
+                newDeck[j] = x;
+            } 
+        }
+        return newDeck;
     }
 } 
