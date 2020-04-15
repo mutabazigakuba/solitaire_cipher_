@@ -30,14 +30,7 @@ public class Key
 
     public int[] mMoveJokerA(int jokerA)
     {
-        int[] newDeck = new int[54];
-        for (int i = 0; i < newDeck.length; i++) {
-            newDeck[i] = i+1;
-        }
-        newDeck[16] = 54;
-        newDeck[53] = 17;
-        newDeck[34] = 53;
-        newDeck[52] = 35;
+        int[] newDeck = mCreateDeckOfCardsValues();
         for (int j = 0; j < newDeck.length; j++) {
             if(newDeck[j] == jokerA){
                 int x = newDeck[j-1];
@@ -50,14 +43,7 @@ public class Key
 
     public int[] mMoveJokerB(int jokerB)
     {
-        int[] newDeck = new int[54];
-        for (int i = 0; i < newDeck.length; i++) {
-            newDeck[i] = i+1;
-        }
-        newDeck[16] = 54;
-        newDeck[53] = 17;
-        newDeck[34] = 53;
-        newDeck[52] = 35;
+        int[] newDeck = mCreateDeckOfCardsValues();
         for (int j = 0; j < newDeck.length; j++) {
             if(newDeck[j] == jokerB){
                 int x =  newDeck[j-2];

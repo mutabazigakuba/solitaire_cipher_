@@ -3,8 +3,6 @@ package solitaire;
 import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
 
-import java.util.Arrays;
-
 import org.junit.Before;
 import org.junit.Test;
 
@@ -84,11 +82,6 @@ public class keyTest {
         {
             newDeck[i] = i+1;
         }
-        newDeck[16] = 54;
-        newDeck[53] = 17;
-        newDeck[34] = 53;
-        newDeck[52] = 35;
-
         //moving joker A
         if(joker == 53)
         {
