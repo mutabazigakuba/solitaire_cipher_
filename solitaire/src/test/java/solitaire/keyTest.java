@@ -88,4 +88,21 @@ public class keyTest {
 
         assertArrayEquals(expectedDeckOfCards, actualDeckOfCards);
     }
+
+    @Test
+    public void shouldMoveCardsBelowJokerAtoAboveJokerB()
+    {
+        int[] deckOfCards = new int[54];
+        deckOfCards[16] = 53;
+        deckOfCards[40] = 54;
+        Key key = new Key(deckOfCards);
+        int[] newDeckOfCards = new int[54];
+        newDeckOfCards[13] = 53;
+        newDeckOfCards[37] =54;
+
+        int[] expectedDeckOfCards = newDeckOfCards;
+        int[] actualDeckOfCards = key.mTrippleCut();
+
+        assertArrayEquals(expectedDeckOfCards, actualDeckOfCards);
+    }
 }
