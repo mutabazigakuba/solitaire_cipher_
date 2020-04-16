@@ -104,11 +104,17 @@ public class Key {
         return trippleCutDeck;
     }
 
-    public int getFinalLetter()
+    public int getFinalCardNumberValue()
     {
         int botttomCard = DeckOfCards[0];
         int finalCard = DeckOfCards[53-botttomCard];
         return finalCard;
+    }
+
+    public String getFinalCardStringValue(int cardValue)
+    {
+        int remainder = cardValue % 26;
+        return String.valueOf((char)(64+remainder));
     }
 
     private int[] mReturnCardsBelowJokerA(int numberOfCardsBelowJokerA)

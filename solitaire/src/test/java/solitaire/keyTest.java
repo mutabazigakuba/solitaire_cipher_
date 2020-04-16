@@ -115,7 +115,35 @@ public class keyTest {
         Key key = new Key(deckOfCards);
 
         int expectedCard = 37;
-        int actualCard = key.getFinalLetter();
+        int actualCard = key.getFinalCardNumberValue();
+
+        assertEquals(expectedCard, actualCard);
+    }
+
+    @Test
+    public void shouldReturnStringValueWhenValueLessThan26()
+    {
+        int[] deckOfCards = new int[54];
+        deckOfCards[0] = 5;
+        deckOfCards[48] = 1;
+        Key key = new Key(deckOfCards);
+
+        String expectedCard = "A";
+        String actualCard = key.getFinalCardStringValue(1);
+
+        assertEquals(expectedCard, actualCard);       
+    }
+
+    @Test
+    public void shouldReturnStringWhenValueIsGreaterThan26()
+    {
+        int[] deckOfCards = new int[54];
+        deckOfCards[0] = 5;
+        deckOfCards[48] = 51;
+        Key key = new Key(deckOfCards);     
+
+        String expectedCard = "Y";
+        String actualCard = key.getFinalCardStringValue(51);
 
         assertEquals(expectedCard, actualCard);
     }
