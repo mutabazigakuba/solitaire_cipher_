@@ -105,4 +105,18 @@ public class keyTest {
 
         assertArrayEquals(expectedDeckOfCards, actualDeckOfCards);
     }
+
+    @Test
+    public void shouldReturnCardAfterCountingOffCardsBasingOnBottomeCardValue()
+    {
+        int[] deckOfCards = new int[54];
+        deckOfCards[0] = 5;
+        deckOfCards[48] = 37;
+        Key key = new Key(deckOfCards);
+
+        int expectedCard = 37;
+        int actualCard = key.getFinalLetter();
+
+        assertEquals(expectedCard, actualCard);
+    }
 }

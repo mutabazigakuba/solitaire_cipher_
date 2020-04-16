@@ -104,6 +104,13 @@ public class Key {
         return trippleCutDeck;
     }
 
+    public int getFinalLetter()
+    {
+        int botttomCard = DeckOfCards[0];
+        int finalCard = DeckOfCards[53-botttomCard];
+        return finalCard;
+    }
+
     private int[] mReturnCardsBelowJokerA(int numberOfCardsBelowJokerA)
     {
         int[] cardsBelowJokerA = new int[numberOfCardsBelowJokerA];
