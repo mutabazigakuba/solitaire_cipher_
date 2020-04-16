@@ -11,7 +11,8 @@ public class keyTest {
     @Before
     public void testKeyClassShouldBeCreated()
     {
-        Key key = new Key();
+        int[] deckOfCards = new int[54];
+        Key key = new Key(deckOfCards);
 
         assertEquals(true, key instanceof Key);
     } 
@@ -19,7 +20,8 @@ public class keyTest {
     @Test
     public void generateKeyFunctionShouldReturnString()
     {
-        Key key = new Key();
+        int[] deckOfCards = new int[54];
+        Key key = new Key(deckOfCards);
 
         String expectedString = "";
         String actualString = key.mGenerateKey(0);
@@ -30,18 +32,23 @@ public class keyTest {
     @Test
     public void generateKeyFunctionShouldHaveDeckOf54Cards()
     {
-        Key key = new Key();
+        int[] deckOfCards = new int[54];
+        Key key = new Key(deckOfCards);
 
         int[] expectedDeckOfCards = new int[54];
-        int[] actualDeckOfCards = key.deckOfCards;
+        int[] actualDeckOfCards = key.DeckOfCards;
 
         assertArrayEquals(expectedDeckOfCards, actualDeckOfCards);
     }
 
     @Test
-    public void sumOfDeckShouldAAddUpTo1484()
+    public void sumOfDeckShouldAddUpTo1484()
     {
-        Key key = new Key();
+        int[] deckOfCards = new int[54];
+        for (int i = 0; i < deckOfCards.length; i++) {
+            deckOfCards[i] = i+1;
+        }
+        Key key = new Key(deckOfCards);
 
         int expectedSumOfDeck = 1485;
         int actualSumOfDeck = key.mSumOfDeck();
@@ -52,61 +59,33 @@ public class keyTest {
     @Test
     public void shouldBeAbleToMoveJokerAOneCardBelow()
     {
-        Key key = new Key();
+        int[] deckOfCards = new int[54];
         int jokerA = 53;
+        deckOfCards[16] = jokerA;
+        Key key = new Key(deckOfCards);
+        int[] newDeckOfCards = new int[54];
+        newDeckOfCards[15] = 53;
 
-        int[] expectedDeckOfCards = deckOfCards(jokerA);
+        int[] expectedDeckOfCards = newDeckOfCards;
         int[] actualDeckOfCards = key.mMoveJokerA(jokerA);
-
+        
         assertArrayEquals(expectedDeckOfCards, actualDeckOfCards);
     }
 
     
     @Test
-    public void shouldBeAbleToMoveJokerBTwoCardBelow()
+    public void shouldBeAbleToMoveJokerBTwoCardsBelow()
     {
-        Key key = new Key();
+        int[] deckOfCards = new int[54];
         int jokerB = 54;
+        deckOfCards[16] = jokerB;
+        Key key = new Key(deckOfCards);
+        int[] newDeckOfCards = new int[54];
+        newDeckOfCards[14] = 54;
 
-        int[] expectedDeckOfCards = deckOfCards(jokerB);
+        int[] expectedDeckOfCards = newDeckOfCards;
         int[] actualDeckOfCards = key.mMoveJokerB(jokerB);
 
         assertArrayEquals(expectedDeckOfCards, actualDeckOfCards);
-    }
-
-    private int[] deckOfCards(int joker)
-    {
-        int[] newDeck = new int[54];
-        //create deck
-        for (int i = 0; i < newDeck.length; i++) 
-        {
-            newDeck[i] = i+1;
-        }
-        //moving joker A
-        if(joker == 53)
-        {
-            for (int j = 0; j < newDeck.length; j++) 
-            {
-                if(newDeck[j] == 53)
-                {
-                    int x = newDeck[j-1];
-                    newDeck[j-1] = joker;
-                    newDeck[j] = x;
-                    return newDeck;
-                }
-            }
-        }
-        
-        //moving joker B
-        for (int j = 0; j < newDeck.length; j++) 
-        {
-            if(newDeck[j] == 54)
-            {
-                int x = newDeck[j-2];
-                newDeck[j-2] = joker;
-                newDeck[j] = x;
-            }
-        }    
-        return newDeck;
     }
 }

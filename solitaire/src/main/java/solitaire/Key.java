@@ -2,27 +2,22 @@ package solitaire;
 
 public class Key 
 {
-    public int[] deckOfCards = new int[54];
+    public int[] DeckOfCards = new int[54];
+
+    public Key(int[] _deckOfCards)
+    {
+        DeckOfCards = _deckOfCards;
+    }
     
     public String mGenerateKey(int keyLength)
     {
         return "";
     }
 
-    private int[] mCreateDeckOfCardsValues()
-    {
-        for (int i = 0; i < deckOfCards.length; i++) 
-        {
-            deckOfCards[i] = i+1;
-        }
-        return deckOfCards;
-    }
-
     public int mSumOfDeck()
     {
         int sumOfDecks = 0;
-        int[] deckOfCards = mCreateDeckOfCardsValues();
-        for (int card : deckOfCards) {
+        for (int card : DeckOfCards) {
             sumOfDecks += card;
         }
         return sumOfDecks;
@@ -30,27 +25,25 @@ public class Key
 
     public int[] mMoveJokerA(int jokerA)
     {
-        int[] newDeck = mCreateDeckOfCardsValues();
-        for (int j = 0; j < newDeck.length; j++) {
-            if(newDeck[j] == jokerA){
-                int x = newDeck[j-1];
-                newDeck[j-1] = jokerA;
-                newDeck[j] = x;
+        for (int j = 0; j < DeckOfCards.length; j++) {
+            if(DeckOfCards[j] == jokerA){
+                int x = DeckOfCards[j-1];
+                DeckOfCards[j-1] = jokerA;
+                DeckOfCards[j] = x;
             } 
         }
-        return newDeck;
+        return DeckOfCards;
     }
 
     public int[] mMoveJokerB(int jokerB)
     {
-        int[] newDeck = mCreateDeckOfCardsValues();
-        for (int j = 0; j < newDeck.length; j++) {
-            if(newDeck[j] == jokerB){
-                int x =  newDeck[j-2];
-                newDeck[j-2] = jokerB;
-                newDeck[j] = x;
+        for (int j = 0; j < DeckOfCards.length; j++) {
+            if(DeckOfCards[j] == jokerB){
+                int x =  DeckOfCards[j-2];
+                DeckOfCards[j-2] = jokerB;
+                DeckOfCards[j] = x;
             } 
         }
-        return newDeck;
+        return DeckOfCards;
     }
 } 
