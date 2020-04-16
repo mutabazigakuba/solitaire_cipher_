@@ -1,7 +1,6 @@
 package solitaire;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class Key {
@@ -72,7 +71,7 @@ public class Key {
             if (DeckOfCards[i] == jokerB) 
             {
                 numbercardsBetweenJokerAandJokerB = Math.abs(i - numberOfCardsBelowJokerA);
-                int[] cardsBetweenJokerAandJokerB = mReturnCardsBetweenJokerAandJokerB(numbercardsBetweenJokerAandJokerB, numberOfCardsBelowJokerA); 
+                int[] cardsBetweenJokerAandJokerB = mReturnCardsBetweenJokers(numbercardsBetweenJokerAandJokerB, numberOfCardsBelowJokerA); 
                 for (int j : cardsBetweenJokerAandJokerB) {
                     listB.add(j);
                 }
@@ -137,13 +136,13 @@ public class Key {
         return cardsAboveJokerB;
     }
 
-    private int[] mReturnCardsBetweenJokerAandJokerB(int numbercardsBetweenJokerAandJokerB, int numberOfCardsBelowJokerA) 
+    private int[] mReturnCardsBetweenJokers(int numbercardsBetweenJokers, int numberOfCardsBelowJokerA) 
     {
-        int[] cardsBetweenJokerAandJokerB = new int[numbercardsBetweenJokerAandJokerB-1];
-        for (int j = 0; j < cardsBetweenJokerAandJokerB.length; j++) 
+        int[] cardsBetweenJokers = new int[numbercardsBetweenJokers-1];
+        for (int j = 0; j < cardsBetweenJokers.length; j++) 
         {
-            cardsBetweenJokerAandJokerB[0] = DeckOfCards[numberOfCardsBelowJokerA + 1];
+            cardsBetweenJokers[0] = DeckOfCards[numberOfCardsBelowJokerA + 1];
         }
-        return cardsBetweenJokerAandJokerB;
+        return cardsBetweenJokers;
     }
 }
