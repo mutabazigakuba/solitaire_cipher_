@@ -6,11 +6,11 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.Test;
 
-public class GenerateKeyTest 
+public class GenerateKeyTest
 {
 
     @Before
-    public void testKeyClassShouldBeCreated()
+    public void keyClassShouldBeCreated()
     {
         int[] deckOfCards = new int[54];
         GenerateKey generateKey = new GenerateKey(deckOfCards);
