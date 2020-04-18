@@ -5,23 +5,28 @@ import java.util.List;
 
 public class GenerateKey 
 {
-    public int[] DeckOfCards = new int[54];
+    private int DECKOFCARDS_LENGTH = 54;
+    public int[] DeckOfCards = new int[DECKOFCARDS_LENGTH];
+    public static int JOKER_A = 53;
+    public static int JOKER_B = 54;
 
     public GenerateKey(int[] _deckOfCards) 
     {
         DeckOfCards = _deckOfCards;
     }
 
-    public String mGenerateKey(int messageLength) 
+    public String mGenerateKey(String message)  
     {
+        int messageLength = message.length();
+
         int[] DeckOfCards = mCreateDeckOfCards();
         DeckOfCards[10] = 53;
         DeckOfCards[34] = 54;
         String keyGenerated = "";
         for (int i = 0; i < messageLength; i++) {
-            DeckOfCards = mMoveJokerA(53);
-            DeckOfCards = mMoveJokerB(54);
-            DeckOfCards = mTrippleCut();
+            mMoveJokerA();
+            mMoveJokerB();
+            mTrippleCut();
             int number = getFinalCardNumberValue();
             String letter = getFinalCardStringValue(number);
             keyGenerated += letter;
@@ -29,59 +34,47 @@ public class GenerateKey
         return keyGenerated;
     }
 
-    public int mSumOfDeck() 
+    public void mMoveJokerA() 
     {
-        int sumOfDecks = 0;
-        for (int card : DeckOfCards) 
+        for (int j = 0; j < DECKOFCARDS_LENGTH; j++) 
         {
-            sumOfDecks += card;
-        }
-        return sumOfDecks;
-    }
-
-    public int[] mMoveJokerA(int jokerA) 
-    {
-        for (int j = 0; j < DeckOfCards.length; j++) 
-        {
-            if (DeckOfCards[j] == jokerA) 
+            if (DeckOfCards[j] == JOKER_A) 
             {
                 int x = DeckOfCards[j - 1];
-                DeckOfCards[j - 1] = jokerA;
+                DeckOfCards[j - 1] = JOKER_A;
                 DeckOfCards[j] = x;
             }
         }
-        return DeckOfCards;
     }
 
-    public int[] mMoveJokerB(int jokerB) 
+    public void mMoveJokerB() 
     {
-        for (int j = 0; j < DeckOfCards.length; j++) 
+        for (int j = 0; j < DECKOFCARDS_LENGTH; j++) 
         {
-            if (DeckOfCards[j] == jokerB)
+            if (DeckOfCards[j] == JOKER_B)
             {
                 int x = DeckOfCards[j - 2];
                 int y = DeckOfCards[j -1];
-                DeckOfCards[j - 2] = jokerB;
+                DeckOfCards[j - 2] = JOKER_B;
                 DeckOfCards[j - 1] = x;
                 DeckOfCards[j] = y;
             }
         }
-        return DeckOfCards;
     }
 
-    public int[] mTrippleCut() 
+    public void mTrippleCut() 
     {
         int numberOfCardsBelowJokerA = 0;
         int numberOfCardsAboveJokerB = 0;
         int numbercardsBetweenJokerAandJokerB = 0;
-        int jokerA = 53;
-        int jokerB = 54;
+
         List<Integer> listOfCardsBelowJokerA = new ArrayList<Integer>();
         List<Integer> listOfCardsBetweenJokers = new ArrayList<Integer>();
         List<Integer> listOfCardsAboveJokerB = new ArrayList<Integer>();
-        for (int i = 0; i < DeckOfCards.length; i++) 
+        
+        for (int i = 0; i < DECKOFCARDS_LENGTH; i++) 
         {
-            if (DeckOfCards[i] == jokerA) 
+            if (DeckOfCards[i] == JOKER_A) 
             {
                 numberOfCardsBelowJokerA = i;
                 int[] cardsBelowJokerA = mReturnCardsBelowJokerA(numberOfCardsBelowJokerA);
@@ -90,7 +83,7 @@ public class GenerateKey
                     listOfCardsBelowJokerA.add(j);
                 }
             }
-            if (DeckOfCards[i] == jokerB) 
+            if (DeckOfCards[i] == JOKER_B) 
             {
                 numbercardsBetweenJokerAandJokerB = Math.abs(i - numberOfCardsBelowJokerA);
                 int[] cardsBetweenJokers = mReturnCardsBetweenJokers(numbercardsBetweenJokerAandJokerB, numberOfCardsBelowJokerA); 
@@ -111,12 +104,12 @@ public class GenerateKey
         {
             listOfTrippleCutDeck.add(i);
         }
-        listOfTrippleCutDeck.add(53);
+        listOfTrippleCutDeck.add(JOKER_A);
         for (int i : listOfCardsBetweenJokers) 
         {
             listOfTrippleCutDeck.add(i);            
         }
-        listOfTrippleCutDeck.add(54);
+        listOfTrippleCutDeck.add(JOKER_B);
         for (int i : listOfCardsBelowJokerA) 
         {
             listOfTrippleCutDeck.add(i);
@@ -127,25 +120,25 @@ public class GenerateKey
         {
             trippleCutDeck[i] = listOfTrippleCutDeck.get(i);
         }
-        return trippleCutDeck;
+        DeckOfCards = trippleCutDeck;
     }
 
     public int getFinalCardNumberValue()
     {
         int botttomCardValue = DeckOfCards[0];
-        int cardNumberValue = DeckOfCards[53-botttomCardValue];
+        int cardNumberValue = DeckOfCards[JOKER_A - botttomCardValue];
         return cardNumberValue; 
     }
 
     public String getFinalCardStringValue(int cardValue)
     {
         int remainder = cardValue % 26;
-        return String.valueOf((char)(64+remainder));
+        return String.valueOf((char)(64 + remainder));
     }
 
     public int[] mCreateDeckOfCards()
     {
-        for (int i = 0; i < DeckOfCards.length; i++)
+        for (int i = 0; i < DECKOFCARDS_LENGTH; i++)
         {
             DeckOfCards[i] = i+1;
         }
@@ -154,7 +147,7 @@ public class GenerateKey
 
     public int mKeyLength(String message)
     {
-        String finalString = mGenerateKey(message.length());
+        String finalString = mGenerateKey(message);
         return finalString.length();
     }
 

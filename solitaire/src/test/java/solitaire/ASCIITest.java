@@ -14,7 +14,7 @@ public class ASCIITest
     public void empty_string_returns_no_number() 
     {
         List<Integer> expectedMessage = new ArrayList<Integer>();
-        List<Integer> actualList = ASCII.convertsMessageToNumber("");
+        List<Integer> actualList = ASCII.mconvertsToNumber("");
 
         assertEquals(expectedMessage, actualList);
     }
@@ -23,7 +23,7 @@ public class ASCIITest
     public void single_string_returns_corresponding_number() 
     {
         List<Integer> expectedMessage = list(1);
-        List<Integer> actualList = ASCII.convertsMessageToNumber("A");
+        List<Integer> actualList = ASCII.mconvertsToNumber("A");
 
         assertEquals(expectedMessage, actualList);
     }
@@ -32,7 +32,7 @@ public class ASCIITest
     public void abc_should_return_123() 
     {
         List<Integer> expectedMessage = list(1, 2, 3);
-        List<Integer> actualMessage = ASCII.convertsMessageToNumber("ABC");
+        List<Integer> actualMessage = ASCII.mconvertsToNumber("ABC");
 
         assertEquals(expectedMessage, actualMessage);
     }
@@ -41,7 +41,7 @@ public class ASCIITest
     public void any_word_should_be_converted_to_number() 
     {
         List<Integer> expectedMessage = list(8, 5, 12, 12, 15);
-        List<Integer> actualMessage = ASCII.convertsMessageToNumber("HELLO");
+        List<Integer> actualMessage = ASCII.mconvertsToNumber("HELLO");
 
         assertEquals(expectedMessage, actualMessage);
     }
@@ -50,7 +50,7 @@ public class ASCIITest
     public void any_sentence_should_be_converted_to_number() 
     {
         List<Integer> expectedMessage = list(8, 5, 12, 12, 15, 23, 15, 18, 12, 4);
-        List<Integer> actualMessage = ASCII.convertsMessageToNumber("HELLOWORLD");
+        List<Integer> actualMessage = ASCII.mconvertsToNumber("HELLOWORLD");
 
         assertEquals(expectedMessage, actualMessage);
     }
@@ -59,7 +59,7 @@ public class ASCIITest
     public void empty_list_should_return_empty_string() 
     {
         String expectedMessage = "";
-        String actualMessage = ASCII.convertsNumberToMessage(list());
+        String actualMessage = ASCII.mConvertsNumberToMessage(list());
 
         assertEquals(expectedMessage, actualMessage);
     }
@@ -68,7 +68,7 @@ public class ASCIITest
     public void list_with_a_1_should_return_A()
     {
         String expectedMessage = "A";
-        String actualMessage = ASCII.convertsNumberToMessage(list(1));
+        String actualMessage = ASCII.mConvertsNumberToMessage(list(1));
 
         assertEquals(expectedMessage, actualMessage);
     }
@@ -77,7 +77,7 @@ public class ASCIITest
     public void list_with_any_number_should_return_respective_letters()
     {
         String expectedMessage = "HELLO";
-        String actualMessage = ASCII.convertsNumberToMessage(list(8,5,12,12,15));
+        String actualMessage = ASCII.mConvertsNumberToMessage(list(8,5,12,12,15));
 
         assertEquals(expectedMessage, actualMessage);
     }
@@ -88,8 +88,8 @@ public class ASCIITest
         String message = "HELLOWORLD";
 
         String expectedMessage  = "HELLOWORLD";
-        List<Integer> list = ASCII.convertsMessageToNumber(message);
-        String actualMessage = ASCII.convertsNumberToMessage(list);
+        List<Integer> list = ASCII.mconvertsToNumber(message);
+        String actualMessage = ASCII.mConvertsNumberToMessage(list);
 
         assertEquals(expectedMessage, actualMessage);
     }

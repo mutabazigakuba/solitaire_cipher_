@@ -10,15 +10,15 @@ public class EncryptTest
     @Test
     public void encryptClassShouldBeCreated()
     {
-        Encrypt encrypt = new Encrypt();
+        Converter encrypt = new Converter();
 
-        assertEquals(true, encrypt instanceof Encrypt);
+        assertEquals(true, encrypt instanceof Converter);
     }
 
     @Test
     public void messageShouldBeGivenNumbers()
     {
-        Encrypt encrypt = new Encrypt();
+        Converter encrypt = new Converter();
         int[] message = new int[0];
 
         String expectedMessage = "";
@@ -30,7 +30,7 @@ public class EncryptTest
     @Test
     public void keyShouldBeGivenInNumbers()
     {
-        Encrypt encrypt = new Encrypt();
+        Converter encrypt = new Converter();
         int[] key = new int[0];
 
         String expectedKey = "";
@@ -42,7 +42,7 @@ public class EncryptTest
     @Test
     public void keyAndMessageShouldBeOfSameLength()
     {
-        Encrypt encrypt = new Encrypt();
+        Converter encrypt = new Converter();
         int length = 0;
         int[] key = new int[length];
         int[] message = new int[length];
@@ -56,7 +56,7 @@ public class EncryptTest
     @Test
     public void encryptMessageShouldBeTheSumOfMessageAndKey()
     {
-        Encrypt encrypt = new Encrypt();
+        Converter encrypt = new Converter();
         int[] key = new int[]{1,2};
         int[] message = new int[]{3,4};
         String encryptedMessage = "DF";

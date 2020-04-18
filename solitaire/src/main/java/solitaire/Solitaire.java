@@ -1,50 +1,57 @@
 package solitaire;
 
-import java.util.Arrays;
-
 public class Solitaire 
 {
-    private String _message;
-    public Solitaire(String message)
+    public String Message;
+    public GenerateKey Key;
+    public Message CleanMessage;
+    
+    public Solitaire (String message, GenerateKey key, Message cleanMessage)
     {
-        _message = message;
+        Message = message;  
+        Key = key;
+        CleanMessage = cleanMessage; 
     }
 
-    public String encoded_message() 
+    public String mEncryptMessage()
     {
-        _message = removeNonLetters();
-        _message = changeToUpperCase();
-        _message = groupLettersIntoFives();
-        _message = AddXs();
-        return _message;
-    }
-
-    private String removeNonLetters() 
-    {
-        return _message.replaceAll("[^\\p{L}\\p{Z}]","");
-    }
-
-    private String changeToUpperCase() 
-    {
-        return _message.toUpperCase();
-    }
-
-    private String groupLettersIntoFives() 
-    {
-        return Arrays.toString(_message.replaceAll("\\s+", "").split("(?<=\\G.{" + 5 + "})"))
-            .replaceAll("[^\\p{L}\\p{Z}]","");
-    }
-
-    private String AddXs()
-    {
-        String removeSpace = _message.replaceAll("\\s+", "");
-        int numberXtoAdd = removeSpace.length() % 5;
-
-        for (int i = 1; i < numberXtoAdd; i++) 
-        {
-            _message = _message + "X";
+        Message = CleanMessage.mClean();
+        if(Message.length() == 0){
+            return "";
         }
-        return _message;
-    }
 
+        String key = Key.mGenerateKey(Message);
+
+        int[] encryptMessageArray = new int[Message.length()];
+        
+        for (int i = 0; i < key.length(); i++) {
+            encryptMessageArray[i] = Message[i] + key[i];
+        }
+        String encryptMessage = "";
+        for (int number : encryptMessageArray) 
+        {
+            encryptMessage +=  String.valueOf((char)(64 + number));
+        }
+        return encryptMessage;
+    }
+    public String mDencryptMessage(int[] message)
+    {
+        if(message.length == 0){
+            return "";
+        }
+        int[] encryptMessageArray = new int[message.length];
+        for (int i = 0; i < key.length; i++) {
+            if(message[i] <= key[i])
+            {
+               encryptMessageArray[i] = (message[i] + 26) - key[i];
+            }
+            encryptMessageArray[i] = message[i] - key[i];
+        }
+        String encryptMessage = "";
+        for (int number : encryptMessageArray) 
+        {
+            encryptMessage +=  String.valueOf((char)(64 + number));
+        }
+        return encryptMessage;
+    }
 }
