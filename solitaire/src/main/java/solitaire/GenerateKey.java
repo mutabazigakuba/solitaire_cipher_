@@ -148,6 +148,7 @@ public class GenerateKey
     public int mKeyLength(String message)
     {
         String finalString = mGenerateKey(message);
+        System.out.println(finalString);
         return finalString.length();
     }
 

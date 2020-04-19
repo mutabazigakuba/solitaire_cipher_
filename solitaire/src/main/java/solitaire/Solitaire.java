@@ -21,12 +21,22 @@ public class Solitaire
         }
 
         String key = Key.mGenerateKey(Message);
+        char[] keyArray = new char[key.length()];
+        for (int i = 0; i < key.length(); i++) {
+            keyArray[i] = key.charAt(i);
+        }
+
+        char[] messageArray = new char[Message.length()];
+        for (int i = 0; i < Message.length(); i++) {
+            messageArray[i] = Message.charAt(i);
+        }
 
         int[] encryptMessageArray = new int[Message.length()];
         
         for (int i = 0; i < key.length(); i++) {
-            encryptMessageArray[i] = Message[i] + key[i];
+            encryptMessageArray[i] = messageArray[i] + keyArray[i];
         }
+
         String encryptMessage = "";
         for (int number : encryptMessageArray) 
         {
@@ -34,18 +44,30 @@ public class Solitaire
         }
         return encryptMessage;
     }
-    public String mDencryptMessage(int[] message)
+    public String mDencryptMessage()
     {
-        if(message.length == 0){
+        if(Message.length() == 0){
             return "";
         }
-        int[] encryptMessageArray = new int[message.length];
-        for (int i = 0; i < key.length; i++) {
-            if(message[i] <= key[i])
+
+        String key = Key.mGenerateKey(Message);
+        char[] keyArray = new char[key.length()];
+        for (int i = 0; i < key.length(); i++) {
+            keyArray[i] = key.charAt(i);
+        }
+
+        char[] messageArray = new char[Message.length()];
+        for (int i = 0; i < Message.length(); i++) {
+            messageArray[i] = Message.charAt(i);
+        }
+
+        int[] encryptMessageArray = new int[Message.length()];
+        for (int i = 0; i < key.length(); i++) {
+            if(messageArray[i] <= keyArray[i])
             {
-               encryptMessageArray[i] = (message[i] + 26) - key[i];
+               encryptMessageArray[i] = (messageArray[i] + 26) - keyArray[i];
             }
-            encryptMessageArray[i] = message[i] - key[i];
+            encryptMessageArray[i] = messageArray[i] - keyArray[i];
         }
         String encryptMessage = "";
         for (int number : encryptMessageArray) 
