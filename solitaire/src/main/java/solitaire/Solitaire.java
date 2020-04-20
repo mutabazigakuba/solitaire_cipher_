@@ -2,9 +2,9 @@ package solitaire;
 
 public class Solitaire 
 {
-    public String Message;
-    public GenerateKey Key;
-    public Message CleanMessage;
+    private String Message;
+    private GenerateKey Key;
+    private Message CleanMessage;
     
     public Solitaire (String message, GenerateKey key, Message cleanMessage)
     {
@@ -21,24 +21,20 @@ public class Solitaire
             return "";
         }
 
-        //GETTING KEY EQUAL TO LENGTH OF STRING
         String message = Message.replaceAll("\\s+", "");
         String generatedKey = Key.mGenerateKey(message);
 
-        //CONVERT MESSAGE AND KEY TO NUMBERS
         int[] keyArray = new int[generatedKey.length()];
         int[] messageArray = new int[Message.length()];
         messageArray = CleanMessage.mConvertsToNumber();
         keyArray = mConvertsKeyToNumber(generatedKey);
 
-        //ADDING MESSAGE AND KEY ARRAY VALUES
         int[] encryptMessageArray = new int[Message.length()];
         for (int i = 0; i < generatedKey.length(); i++) 
         {
             encryptMessageArray[i] = messageArray[i] + keyArray[i];
         }
 
-        //GENERATING ENCRYPTED MESSAGE
         String encryptMessage = CleanMessage.mConvertsNumberToMessage(encryptMessageArray);
         encryptMessage = encryptMessage.replaceAll("[^\\p{L}\\p{Z}]","");
         return encryptMessage;
@@ -54,7 +50,7 @@ public class Solitaire
 
         String generatedKey = Key.mGenerateKey(Message);
         
-        //CONVERT MESSAGE AND KEY TO NUMBERS
+
         int[] keyArray = new int[generatedKey.length()];
         int[] messageArray = new int[Message.length()];
         messageArray = CleanMessage.mConvertsToNumber();
@@ -65,8 +61,7 @@ public class Solitaire
         {
             decryptMessageArray[i] = messageArray[i] - keyArray[i];
         }
-        String decryptMessage = CleanMessage.mConvertsNumberToMessage(decryptMessageArray);
-        return decryptMessage;
+        return CleanMessage.mConvertsNumberToMessage(decryptMessageArray);
     }
 
     private static int[] mConvertsKeyToNumber(String key)

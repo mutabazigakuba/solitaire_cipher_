@@ -2,6 +2,7 @@ package solitaire;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class GenerateKey 
 {
@@ -9,6 +10,8 @@ public class GenerateKey
     public int[] DeckOfCards = new int[DECKOFCARDS_LENGTH];
     public static int JOKER_A = 53;
     public static int JOKER_B = 54;
+    private int positionOfJokerA = 0;
+    private int positionOfJokerB = 0;
 
     public GenerateKey(int[] _deckOfCards) 
     {
@@ -18,11 +21,7 @@ public class GenerateKey
     public String mGenerateKey(String message)  
     {
         int messageLength = message.length();
-        int[] DeckOfCards = mCreateDeckOfCards();
-        DeckOfCards[10] = 53;
-        DeckOfCards[52] = 11;
-        DeckOfCards[34] = 54;
-        DeckOfCards[53] = 35;
+        mCreateDeckOfCards();
         String keyGenerated = "";
         for (int i = 0; i < messageLength; i++) 
         {
@@ -66,8 +65,6 @@ public class GenerateKey
 
     public void mTrippleCut() 
     {
-        int positionOfJokerA = 0;
-        int positionOfJokerB = 0;
         int numbercardsBetweenJokerAandJokerB = 0;
 
         List<Integer> listOfCardsBelowJokerA = new ArrayList<Integer>();
@@ -144,7 +141,46 @@ public class GenerateKey
         {
             DeckOfCards[i] = i+1;
         }
+        shuffleDeckOfCards(DeckOfCards);
+
+        mFindPositionOfJoker(DeckOfCards, JOKER_A);
+        mFindPositionOfJoker(DeckOfCards, JOKER_B);
+        
+        if(positionOfJokerA > positionOfJokerB){
+            DeckOfCards[positionOfJokerA] = JOKER_B;
+            DeckOfCards[positionOfJokerB] = JOKER_A;
+        }
         return DeckOfCards;
+    }
+
+    private void mFindPositionOfJoker(int[] Deck, int joker)
+    {
+        for (int i = 0; i < Deck.length; i++) 
+        {
+            if(Deck[i] == JOKER_A)
+            {
+                positionOfJokerA = i;
+            }
+            if(Deck[i] == JOKER_B)
+            {
+                positionOfJokerB = i;
+            }
+        }
+    }
+
+    private void shuffleDeckOfCards(int card[])
+    {
+        Random random = new Random();
+        for (int i = 0; i < DECKOFCARDS_LENGTH; i++) 
+        {
+            int r = i+random.nextInt(DECKOFCARDS_LENGTH - 1);
+            if(r < DECKOFCARDS_LENGTH)
+            {
+                int temp = card[r];
+                card[r] = card[i];
+                card[i] = temp;
+            } 
+        }
     }
 
     public int mKeyLength(String message)
