@@ -5,9 +5,12 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 
 public class SolitaireTest {
+
+   // encrpyt
+
    @Test
    public void encryptesMessage() {
-      String message = "HELLO WORLD@#@#";
+      String message = "HELLO";
 
       int[] _deckOfCards = new int[54];
       GenerateKey generateKey = new GenerateKey(_deckOfCards);
@@ -20,7 +23,6 @@ public class SolitaireTest {
       assertEquals(expectedMessage, actualMessage);
    }
 
-   // encrpyt
    @Test
    public void messageShouldBeGivenInAString() {
       String message = "";
@@ -49,21 +51,6 @@ public class SolitaireTest {
       assertEquals(expectedKey, actualKey);
    }
 
-   @Test
-   public void encryptMessageShouldBeTheSumOfMessageAndKey() {
-      String message = "HELLO";
-      int[] _deckOfCards = new int[54];
-      GenerateKey generateKey = new GenerateKey(_deckOfCards);
-      Message cleanMessage = new Message(message);
-      Solitaire solitaire = new Solitaire(message, generateKey, cleanMessage);
-      String encryptedMessage = "B";
-
-      String expectedEncryptedMessage = encryptedMessage;
-      String actualEncryptedMessage = solitaire.mEncryptMessage();
-
-      assertEquals(expectedEncryptedMessage, actualEncryptedMessage);
-   }
-
    // Decrpyt
 
    @Test
@@ -75,7 +62,7 @@ public class SolitaireTest {
       Solitaire solitaire = new Solitaire(message, generateKey, cleanMessage);
 
       String expectedMessage = "";
-      String actualMessage = solitaire.mDencryptMessage();
+      String actualMessage = solitaire.mDecryptMessage();
 
       assertEquals(expectedMessage, actualMessage);
    }
@@ -89,7 +76,7 @@ public class SolitaireTest {
       Solitaire solitaire = new Solitaire(message, generateKey, cleanMessage);
 
       String expectedKey = "";
-      String actualKey = solitaire.mDencryptMessage();
+      String actualKey = solitaire.mDecryptMessage();
 
       assertEquals(expectedKey, actualKey);
    }
@@ -107,16 +94,16 @@ public class SolitaireTest {
    }
 
    @Test
-   public void dencryptMessageShouldBeTheDifferenceOfMessageAndKey() {
-      String message = "E";
+   public void decryptMessage() {
+      String message = "QYUGY";
       int[] _deckOfCards = new int[54];
       GenerateKey generateKey = new GenerateKey(_deckOfCards);
       Message cleanMessage = new Message(message);
       Solitaire solitaire = new Solitaire(message, generateKey, cleanMessage);
-      String dencryptedMessage = "B";
+      String dencryptedMessage = "HELLO";
 
       String expectedDencryptedMessage = dencryptedMessage;
-      String actualDencryptedMessage = solitaire.mDencryptMessage();
+      String actualDencryptedMessage = solitaire.mDecryptMessage();
 
       assertEquals(expectedDencryptedMessage, actualDencryptedMessage);
    }

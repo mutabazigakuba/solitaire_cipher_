@@ -21,61 +21,68 @@ public class Solitaire
         if(Message.length() == 0){
             return "";
         }
+
+        //GETTING KEY EQUAL TO LENGTH OF STRING
         String message = Message.replaceAll("\\s+", "");
         String generatedKey = Key.mGenerateKey(message);
 
+        //CONVERT MESSAGE AND KEY TO NUMBERS
         int[] keyArray = new int[generatedKey.length()];
         int[] messageArray = new int[Message.length()];
+        messageArray = CleanMessage.mConvertsToNumber();
+        keyArray = mConvertsKeyToNumber(generatedKey);
 
-        //CONVERT MESSAGE AND KEY TO NUMBERS
-        
-        for (int i = 0; i < generatedKey.length(); i++) {
-            keyArray[i] = generatedKey.charAt(i);
-        }
-        for (int i = 0; i < Message.length(); i++) {
-            messageArray[i] = Message.charAt(i);
-        }
+        //ADDING MESSAGE AND KEY ARRAY VALUES
         int[] encryptMessageArray = new int[Message.length()];
         for (int i = 0; i < generatedKey.length(); i++) {
             encryptMessageArray[i] = messageArray[i] + keyArray[i];
         }
-        String encryptMessage = "";
-        for (int number : encryptMessageArray) 
-        {
-            encryptMessage +=  String.valueOf((char)(64 + number));
-        }
+
+        //GENERATING ENCRYPTED MESSAGE
+        String encryptMessage = CleanMessage.mConvertsNumberToMessage(encryptMessageArray);
         return encryptMessage;
     }
-    public String mDencryptMessage()
+
+    //decrypt
+    public String mDecryptMessage()
     {
         if(Message.length() == 0){
             return "";
         }
 
         String generatedKey = Key.mGenerateKey(Message);
-        char[] keyArray = new char[generatedKey.length()];
-        for (int i = 0; i < generatedKey.length(); i++) {
-            keyArray[i] = generatedKey.charAt(i);
-        }
+        
+        //CONVERT MESSAGE AND KEY TO NUMBERS
+        int[] keyArray = new int[generatedKey.length()];
+        int[] messageArray = new int[Message.length()];
+        messageArray = CleanMessage.mConvertsToNumber();
+        keyArray = mConvertsKeyToNumber(generatedKey);
 
-        char[] messageArray = new char[Message.length()];
-        for (int i = 0; i < Message.length(); i++) {
-            messageArray[i] = Message.charAt(i);
-        }
+        System.out.println(Arrays.toString(messageArray));
+        System.out.println(Arrays.toString(keyArray));
 
-        int[] encryptMessageArray = new int[Message.length()];
+
+        int[] decryptMessageArray = new int[Message.length()];
         for (int i = 0; i < generatedKey.length(); i++) {
-            if(messageArray[i] <= keyArray[i])
-            {
-               encryptMessageArray[i] = (messageArray[i] + 26) - keyArray[i];
-            }
-            encryptMessageArray[i] = messageArray[i] - keyArray[i];
+            decryptMessageArray[i] = messageArray[i] - keyArray[i];
         }
-        String encryptMessage = "";
-        for (int number : encryptMessageArray) 
+        String decryptMessage = CleanMessage.mConvertsNumberToMessage(decryptMessageArray);
+        return decryptMessage;
+    }
+
+    private int[] mConvertsKeyToNumber(String key)
+    {
+        if(key.isEmpty())
         {
-            encryptMessage +=  String.valueOf((char)(64 + number));
+            return new int[0];
         }
-        return encryptMessage;
+
+        int[] numbers = new int[key.length()];
+        char[] values = key.toCharArray();
+        for (int i = 0; i < values.length; i++) {
+            int number = values[i] - 'A' +1;
+            numbers[i] = number;
+        }
+        return numbers;
     }
 }
