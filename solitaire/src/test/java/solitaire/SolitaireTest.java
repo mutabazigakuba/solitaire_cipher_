@@ -17,7 +17,7 @@ public class SolitaireTest {
       Message cleanMessage = new Message(message);
       Solitaire solitaire = new Solitaire(message, generateKey, cleanMessage);
 
-      String expectedMessage = "FGSWK FFDKK";
+      String expectedMessage = "QYUGY";
       String actualMessage = solitaire.mEncryptMessage();
 
       assertEquals(expectedMessage, actualMessage);
