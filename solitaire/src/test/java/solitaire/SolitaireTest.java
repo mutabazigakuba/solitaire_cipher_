@@ -9,7 +9,7 @@ public class SolitaireTest {
    // encrpyt
 
    @Test
-   public void encryptesMessage() {
+   public void encryptesMessageWithOutSpecialChars() {
       String message = "HELLO";
 
       int[] _deckOfCards = new int[54];
@@ -18,6 +18,21 @@ public class SolitaireTest {
       Solitaire solitaire = new Solitaire(message, generateKey, cleanMessage);
 
       String expectedMessage = "QYUGY";
+      String actualMessage = solitaire.mEncryptMessage();
+
+      assertEquals(expectedMessage, actualMessage);
+   }
+ 
+   @Test
+   public void encryptesMessageWithSpecialChars() {
+      String message = "HEL 34LO WORL32@#d";
+
+      int[] _deckOfCards = new int[54];
+      GenerateKey generateKey = new GenerateKey(_deckOfCards);
+      Message cleanMessage = new Message(message);
+      Solitaire solitaire = new Solitaire(message, generateKey, cleanMessage);
+
+      String expectedMessage = "QYUGYPIOES";
       String actualMessage = solitaire.mEncryptMessage();
 
       assertEquals(expectedMessage, actualMessage);

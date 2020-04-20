@@ -40,6 +40,7 @@ public class Solitaire
 
         //GENERATING ENCRYPTED MESSAGE
         String encryptMessage = CleanMessage.mConvertsNumberToMessage(encryptMessageArray);
+        encryptMessage = encryptMessage.replaceAll("[^\\p{L}\\p{Z}]","");
         return encryptMessage;
     }
 
