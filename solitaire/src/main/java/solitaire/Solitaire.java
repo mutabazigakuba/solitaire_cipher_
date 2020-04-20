@@ -1,5 +1,7 @@
 package solitaire;
 
+import java.util.Arrays;
+
 public class Solitaire 
 {
     public String Message;
@@ -19,24 +21,24 @@ public class Solitaire
         if(Message.length() == 0){
             return "";
         }
+        String message = Message.replaceAll("\\s+", "");
+        String generatedKey = Key.mGenerateKey(message);
 
-        String key = Key.mGenerateKey(Message);
-        char[] keyArray = new char[key.length()];
-        for (int i = 0; i < key.length(); i++) {
-            keyArray[i] = key.charAt(i);
+        int[] keyArray = new int[generatedKey.length()];
+        int[] messageArray = new int[Message.length()];
+
+        //CONVERT MESSAGE AND KEY TO NUMBERS
+        
+        for (int i = 0; i < generatedKey.length(); i++) {
+            keyArray[i] = generatedKey.charAt(i);
         }
-
-        char[] messageArray = new char[Message.length()];
         for (int i = 0; i < Message.length(); i++) {
             messageArray[i] = Message.charAt(i);
         }
-
         int[] encryptMessageArray = new int[Message.length()];
-        
-        for (int i = 0; i < key.length(); i++) {
+        for (int i = 0; i < generatedKey.length(); i++) {
             encryptMessageArray[i] = messageArray[i] + keyArray[i];
         }
-
         String encryptMessage = "";
         for (int number : encryptMessageArray) 
         {
@@ -50,10 +52,10 @@ public class Solitaire
             return "";
         }
 
-        String key = Key.mGenerateKey(Message);
-        char[] keyArray = new char[key.length()];
-        for (int i = 0; i < key.length(); i++) {
-            keyArray[i] = key.charAt(i);
+        String generatedKey = Key.mGenerateKey(Message);
+        char[] keyArray = new char[generatedKey.length()];
+        for (int i = 0; i < generatedKey.length(); i++) {
+            keyArray[i] = generatedKey.charAt(i);
         }
 
         char[] messageArray = new char[Message.length()];
@@ -62,7 +64,7 @@ public class Solitaire
         }
 
         int[] encryptMessageArray = new int[Message.length()];
-        for (int i = 0; i < key.length(); i++) {
+        for (int i = 0; i < generatedKey.length(); i++) {
             if(messageArray[i] <= keyArray[i])
             {
                encryptMessageArray[i] = (messageArray[i] + 26) - keyArray[i];

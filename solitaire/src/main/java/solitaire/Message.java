@@ -15,31 +15,30 @@ public class Message
     {
         _message = removeNonLetters();
         _message = changeToUpperCase();
-        _message = groupLettersIntoFives();
         _message = AddXs();
+        _message = groupLettersIntoFives();
         return _message;
     }
 
-    public List<Integer> mConvertsToNumber()
+    public int[] mConvertsToNumber()
     {
         if(_message.isEmpty())
         {
-            return new ArrayList<Integer>();
+            return new int[0];
         }
 
-        List<Integer> numbers = new ArrayList<Integer>();
+        int[] numbers = new int[_message.length()];
         char[] values = _message.toCharArray();
-
-        for (char value : values) {
-            int number = value - 'A' + 1;
-            numbers.add(number);
+        for (int i = 0; i < values.length; i++) {
+            int number = values[i] - 'A' +1;
+            numbers[i] = number;
         }
         return numbers;
     }
 
-    public String mConvertsNumberToMessage(List<Integer> numbers)
+    public String mConvertsNumberToMessage(int[] numbers)
     {        
-        if(numbers.isEmpty())
+        if(numbers.length == 0)
         {
             return "";
         }
@@ -62,22 +61,23 @@ public class Message
         return _message.toUpperCase();
     }
 
-    private String groupLettersIntoFives() 
-    {
-        return Arrays.toString(_message.replaceAll("\\s+", "").split("(?<=\\G.{" + 5 + "})"))
-            .replaceAll("[^\\p{L}\\p{Z}]","");
-    }
-
     private String AddXs()
     {
         String removeSpace = _message.replaceAll("\\s+", "");
         int numberXtoAdd = removeSpace.length() % 5;
-
-        for (int i = 1; i < numberXtoAdd; i++) 
+        if (numberXtoAdd == 0){
+            return _message;
+        }
+        for (int i = 0; i < (5-numberXtoAdd); i++) 
         {
             _message = _message + "X";
         }
         return _message;
     }
 
+    private String groupLettersIntoFives() 
+    {
+        return Arrays.toString(_message.replaceAll("\\s+", "").split("(?<=\\G.{" + 5 + "})"))
+            .replaceAll("[^\\p{L}\\p{Z}]","");
+    }
 }

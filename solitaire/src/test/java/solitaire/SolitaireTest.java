@@ -9,13 +9,13 @@ public class SolitaireTest {
    public void encryptesMessage() {
       String message = "HELLO WORLD@#@#";
 
-      int[] _deckOfCards = new int[53];
+      int[] _deckOfCards = new int[54];
       GenerateKey generateKey = new GenerateKey(_deckOfCards);
       Message cleanMessage = new Message(message);
       Solitaire solitaire = new Solitaire(message, generateKey, cleanMessage);
 
       String expectedMessage = "FGSWK FFDKK";
-      String actualMessage = solitaire.mDencryptMessage();
+      String actualMessage = solitaire.mEncryptMessage();
 
       assertEquals(expectedMessage, actualMessage);
    }
@@ -24,7 +24,7 @@ public class SolitaireTest {
    @Test
    public void messageShouldBeGivenInAString() {
       String message = "";
-      int[] _deckOfCards = new int[53];
+      int[] _deckOfCards = new int[54];
       GenerateKey generateKey = new GenerateKey(_deckOfCards);
       Message cleanMessage = new Message(message);
       Solitaire solitaire = new Solitaire(message, generateKey, cleanMessage);
@@ -38,7 +38,7 @@ public class SolitaireTest {
    @Test
    public void keyShouldBeGivenInString() {
       String message = "";
-      int[] _deckOfCards = new int[53];
+      int[] _deckOfCards = new int[54];
       GenerateKey generateKey = new GenerateKey(_deckOfCards);
       Message cleanMessage = new Message(message);
       Solitaire solitaire = new Solitaire(message, generateKey, cleanMessage);
@@ -51,8 +51,8 @@ public class SolitaireTest {
 
    @Test
    public void encryptMessageShouldBeTheSumOfMessageAndKey() {
-      String message = "G";
-      int[] _deckOfCards = new int[53];
+      String message = "HELLO";
+      int[] _deckOfCards = new int[54];
       GenerateKey generateKey = new GenerateKey(_deckOfCards);
       Message cleanMessage = new Message(message);
       Solitaire solitaire = new Solitaire(message, generateKey, cleanMessage);
@@ -69,7 +69,7 @@ public class SolitaireTest {
    @Test
    public void messageShouldBeGivenAsString() {
       String message = "";
-      int[] _deckOfCards = new int[53];
+      int[] _deckOfCards = new int[54];
       GenerateKey generateKey = new GenerateKey(_deckOfCards);
       Message cleanMessage = new Message(message);
       Solitaire solitaire = new Solitaire(message, generateKey, cleanMessage);
@@ -83,7 +83,7 @@ public class SolitaireTest {
    @Test
    public void keyShouldBeGivenAsString() {
       String message = "";
-      int[] _deckOfCards = new int[53];
+      int[] _deckOfCards = new int[54];
       GenerateKey generateKey = new GenerateKey(_deckOfCards);
       Message cleanMessage = new Message(message);
       Solitaire solitaire = new Solitaire(message, generateKey, cleanMessage);
@@ -97,7 +97,7 @@ public class SolitaireTest {
    @Test
    public void keyAndMessageShouldBeOfSameLength() {
       String message = "";
-      int[] _deckOfCards = new int[53];
+      int[] _deckOfCards = new int[54];
       GenerateKey generateKey = new GenerateKey(_deckOfCards);
 
       int expectedKeyLength = generateKey.mGenerateKey(message).length();
@@ -109,7 +109,7 @@ public class SolitaireTest {
    @Test
    public void dencryptMessageShouldBeTheDifferenceOfMessageAndKey() {
       String message = "E";
-      int[] _deckOfCards = new int[53];
+      int[] _deckOfCards = new int[54];
       GenerateKey generateKey = new GenerateKey(_deckOfCards);
       Message cleanMessage = new Message(message);
       Solitaire solitaire = new Solitaire(message, generateKey, cleanMessage);

@@ -106,8 +106,8 @@ public class GenerateKeyTest
     {
         int[] deckOfCards = new int[54];
         GenerateKey generateKey = new GenerateKey(deckOfCards);
-        String message = "hello";
-        String keyGenereated = "AAYYY";
+        String message = "hell";
+        String keyGenereated = "ITIU";
 
         String expectedKeyGenerated = keyGenereated;
         String actualKeyGenereated = generateKey.mGenerateKey(message);
@@ -120,8 +120,8 @@ public class GenerateKeyTest
     {
         int[] deckOfCards = new int[54];
         GenerateKey generateKey = new GenerateKey(deckOfCards);
-        String message = "ab"; 
-        String keyGenerated = "am";
+        String message = "helloo"; 
+        String keyGenerated = "helloo";
 
         int expectedKeyLength = keyGenerated.length();
         int actualKeyLength = generateKey.mKeyLength(message);

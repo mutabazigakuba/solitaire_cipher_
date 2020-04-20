@@ -18,10 +18,11 @@ public class GenerateKey
     public String mGenerateKey(String message)  
     {
         int messageLength = message.length();
-
         int[] DeckOfCards = mCreateDeckOfCards();
         DeckOfCards[10] = 53;
+        DeckOfCards[52] = 11;
         DeckOfCards[34] = 54;
+        DeckOfCards[53] = 35;
         String keyGenerated = "";
         for (int i = 0; i < messageLength; i++) {
             mMoveJokerA();
@@ -64,8 +65,8 @@ public class GenerateKey
 
     public void mTrippleCut() 
     {
-        int numberOfCardsBelowJokerA = 0;
-        int numberOfCardsAboveJokerB = 0;
+        int positionOfJokerA = 0;
+        int positionOfJokerB = 0;
         int numbercardsBetweenJokerAandJokerB = 0;
 
         List<Integer> listOfCardsBelowJokerA = new ArrayList<Integer>();
@@ -76,8 +77,8 @@ public class GenerateKey
         {
             if (DeckOfCards[i] == JOKER_A) 
             {
-                numberOfCardsBelowJokerA = i;
-                int[] cardsBelowJokerA = mReturnCardsBelowJokerA(numberOfCardsBelowJokerA);
+                positionOfJokerA = i;
+                int[] cardsBelowJokerA = mReturnCardsBelowJokerA(positionOfJokerA);
                 for (int j : cardsBelowJokerA) 
                 {
                     listOfCardsBelowJokerA.add(j);
@@ -85,17 +86,17 @@ public class GenerateKey
             }
             if (DeckOfCards[i] == JOKER_B) 
             {
-                numbercardsBetweenJokerAandJokerB = Math.abs(i - numberOfCardsBelowJokerA);
-                int[] cardsBetweenJokers = mReturnCardsBetweenJokers(numbercardsBetweenJokerAandJokerB, numberOfCardsBelowJokerA); 
-                for (int j : cardsBetweenJokers) 
-                {
-                    listOfCardsBetweenJokers.add(j);
-                }
-                numberOfCardsAboveJokerB = 53 - i;
-                int[] cardsAboveJokerB = mReturnCardsAboveJokerB(numberOfCardsAboveJokerB, i);
+                positionOfJokerB = 53 - i;
+                int[] cardsAboveJokerB = mReturnCardsAboveJokerB(positionOfJokerB, i);
                 for (int j : cardsAboveJokerB) 
                 {
                     listOfCardsAboveJokerB.add(j);
+                }
+                numbercardsBetweenJokerAandJokerB = Math.abs(i - positionOfJokerA);
+                int[] cardsBetweenJokers = mReturnCardsBetweenJokers(numbercardsBetweenJokerAandJokerB, positionOfJokerA); 
+                for (int j : cardsBetweenJokers) 
+                {
+                    listOfCardsBetweenJokers.add(j);
                 }
             }
         }
@@ -148,36 +149,35 @@ public class GenerateKey
     public int mKeyLength(String message)
     {
         String finalString = mGenerateKey(message);
-        System.out.println(finalString);
         return finalString.length();
     }
 
-    private int[] mReturnCardsBelowJokerA(int numberOfCardsBelowJokerA)
+    private int[] mReturnCardsBelowJokerA(int positionOfJokerA)
     {
-        int[] cardsBelowJokerA = new int[numberOfCardsBelowJokerA];
-        for (int j = 0; j < numberOfCardsBelowJokerA; j++) 
+        int[] cardsBelowJokerA = new int[positionOfJokerA];
+        for (int j = 0; j < positionOfJokerA; j++) 
         {
             cardsBelowJokerA[j] = DeckOfCards[j];
         }
         return cardsBelowJokerA;
     }
 
-    private int[] mReturnCardsAboveJokerB(int numberOfCardsAboveJokerB, int i) 
+    private int[] mReturnCardsAboveJokerB(int positionOfJokerB, int i) 
     {
-        int[] cardsAboveJokerB = new int[numberOfCardsAboveJokerB];
-        for (int j = 0; j < numberOfCardsAboveJokerB; j++) 
+        int[] cardsAboveJokerB = new int[positionOfJokerB];
+        for (int j = 0; j < positionOfJokerB; j++) 
         {
             cardsAboveJokerB[j] = DeckOfCards[i + j + 1];
         }
         return cardsAboveJokerB;
     }
 
-    private int[] mReturnCardsBetweenJokers(int numbercardsBetweenJokers, int numberOfCardsBelowJokerA) 
+    private int[] mReturnCardsBetweenJokers(int numbercardsBetweenJokers, int positionOfJokerA) 
     {
         int[] cardsBetweenJokers = new int[numbercardsBetweenJokers-1];
         for (int j = 0; j < cardsBetweenJokers.length; j++) 
         {
-            cardsBetweenJokers[0] = DeckOfCards[numberOfCardsBelowJokerA + 1];
+            cardsBetweenJokers[j] = DeckOfCards[j + positionOfJokerA + 1];
         }
         return cardsBetweenJokers;
     }
