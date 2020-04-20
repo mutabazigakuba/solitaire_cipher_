@@ -27,7 +27,8 @@ public class Message
 
         int[] numbers = new int[_message.length()];
         char[] values = _message.toCharArray();
-        for (int i = 0; i < values.length; i++) {
+        for (int i = 0; i < values.length; i++) 
+        {
             int number = values[i] - 'A' +1;
             numbers[i] = number;
         }
@@ -44,7 +45,8 @@ public class Message
         int remainder;
         for (int number : numbers) 
         {
-            if(number < 0){
+            if(number < 0)
+            {
                 number += 26;
             }
             remainder = number % 26;
@@ -68,7 +70,8 @@ public class Message
     {
         String removeSpace = _message.replaceAll("\\s+", "");
         int numberXtoAdd = removeSpace.length() % 5;
-        if (numberXtoAdd == 0){
+        if (numberXtoAdd == 0)
+        {
             return _message;
         }
         for (int i = 0; i < (5-numberXtoAdd); i++) 

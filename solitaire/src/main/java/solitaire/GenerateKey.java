@@ -24,7 +24,8 @@ public class GenerateKey
         DeckOfCards[34] = 54;
         DeckOfCards[53] = 35;
         String keyGenerated = "";
-        for (int i = 0; i < messageLength; i++) {
+        for (int i = 0; i < messageLength; i++) 
+        {
             mMoveJokerA();
             mMoveJokerB();
             mTrippleCut();

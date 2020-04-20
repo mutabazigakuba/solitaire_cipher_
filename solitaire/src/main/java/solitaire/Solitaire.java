@@ -1,7 +1,5 @@
 package solitaire;
 
-import java.util.Arrays;
-
 public class Solitaire 
 {
     public String Message;
@@ -18,7 +16,8 @@ public class Solitaire
     public String mEncryptMessage()
     {
         Message = CleanMessage.mClean();
-        if(Message.length() == 0){
+        if(Message.length() == 0)
+        {
             return "";
         }
 
@@ -34,7 +33,8 @@ public class Solitaire
 
         //ADDING MESSAGE AND KEY ARRAY VALUES
         int[] encryptMessageArray = new int[Message.length()];
-        for (int i = 0; i < generatedKey.length(); i++) {
+        for (int i = 0; i < generatedKey.length(); i++) 
+        {
             encryptMessageArray[i] = messageArray[i] + keyArray[i];
         }
 
@@ -47,7 +47,8 @@ public class Solitaire
     //decrypt
     public String mDecryptMessage()
     {
-        if(Message.length() == 0){
+        if(Message.length() == 0)
+        {
             return "";
         }
 
@@ -59,19 +60,16 @@ public class Solitaire
         messageArray = CleanMessage.mConvertsToNumber();
         keyArray = mConvertsKeyToNumber(generatedKey);
 
-        System.out.println(Arrays.toString(messageArray));
-        System.out.println(Arrays.toString(keyArray));
-
-
         int[] decryptMessageArray = new int[Message.length()];
-        for (int i = 0; i < generatedKey.length(); i++) {
+        for (int i = 0; i < generatedKey.length(); i++) 
+        {
             decryptMessageArray[i] = messageArray[i] - keyArray[i];
         }
         String decryptMessage = CleanMessage.mConvertsNumberToMessage(decryptMessageArray);
         return decryptMessage;
     }
 
-    private int[] mConvertsKeyToNumber(String key)
+    private static int[] mConvertsKeyToNumber(String key)
     {
         if(key.isEmpty())
         {
@@ -80,7 +78,8 @@ public class Solitaire
 
         int[] numbers = new int[key.length()];
         char[] values = key.toCharArray();
-        for (int i = 0; i < values.length; i++) {
+        for (int i = 0; i < values.length; i++) 
+        {
             int number = values[i] - 'A' +1;
             numbers[i] = number;
         }
