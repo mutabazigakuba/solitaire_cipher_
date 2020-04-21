@@ -128,4 +128,36 @@ public class GenerateKeyTest
 
         assertEquals(expectedKeyLength, actualKeyLength);
     }
+
+    @Test
+    public void movesJOKER_A_by_One_Position()
+    {
+        int[] deckOfCards = new int[54];
+        deckOfCards[4] = 53;
+        deckOfCards[3] = 5;
+        GenerateKey generateKey = new GenerateKey(deckOfCards);
+        int[] newDeckOfCards = new int[54];
+        newDeckOfCards[4] = 5;
+        newDeckOfCards[3] = 53;
+
+        int[] expected = newDeckOfCards;
+        generateKey.mMoveJokerA();
+        int[] actual = generateKey.DeckOfCards;
+        
+        assertArrayEquals(expected, actual);       
+    }
+    
+    // @Test
+    // public void encryptsMessage()
+    // {
+    //     String message = "YOUR CIPHER IS WORKING";
+    //     int[] deckOfCards = new int[54];
+    //     GenerateKey generateKey = new GenerateKey(deckOfCards);
+
+    //     Solitaire solitaire = new Solitaire(message, generateKey, new Message(message));
+    //     String expectedMessage = "CLEPKHHNIYCFPWHFDFEH";
+    //     String actualMessage = solitaire.mEncryptMessage();
+      
+    //     assertEquals(expectedMessage, actualMessage);       
+    // } 
 }

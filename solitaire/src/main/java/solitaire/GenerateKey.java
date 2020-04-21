@@ -19,10 +19,10 @@ public class GenerateKey
     {
         int messageLength = message.length();
         int[] DeckOfCards = mCreateDeckOfCards();
-        DeckOfCards[10] = 53;
-        DeckOfCards[52] = 11;
-        DeckOfCards[34] = 54;
-        DeckOfCards[53] = 35;
+        // DeckOfCards[10] = 53;
+        // DeckOfCards[52] = 11;
+        // DeckOfCards[34] = 54;
+        // DeckOfCards[53] = 35;
         String keyGenerated = "";
         for (int i = 0; i < messageLength; i++) 
         {
