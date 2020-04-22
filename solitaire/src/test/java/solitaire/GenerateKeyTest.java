@@ -9,15 +9,16 @@ public class GenerateKeyTest
 { 
 
     @Test
-    public void generateKeyFunctionShouldReturnString()
+    public void emptyMessageShouldGenerateNoKey()
     {
+        String message = "";
         int[] deckOfCards = new int[54];
         GenerateKey generateKey = new GenerateKey(deckOfCards);
 
-        String expectedString = "";
-        String actualString = generateKey.mGenerateKey("");
+        String expectedGeneratedKey = "";
+        String actualGeneratedKey = generateKey.mGenerateKey(message);
 
-        assertEquals(expectedString, actualString);
+        assertEquals(expectedGeneratedKey, actualGeneratedKey);
     }
 
     @Test
@@ -32,74 +33,101 @@ public class GenerateKeyTest
         assertArrayEquals(expectedDeckOfCards, actualDeckOfCards);
     }
 
-
     @Test
-    public void shouldReturnCardAfterCountingOffCardsBasingOnBottomeCardValue()
+    public void generateADeckOfCardsShouldBeConveretedToNumbers()
     {
-        int[] deckOfCards = new int[54];
-        deckOfCards[0] = 5;
-        deckOfCards[48] = 37;
-        GenerateKey generateKey = new GenerateKey(deckOfCards);
-
-        int expectedCard = 37;
-        int actualCard = generateKey.getFinalCardNumberValue();
-
-        assertEquals(expectedCard, actualCard);
-    }
-
-    @Test
-    public void shouldReturnStringValueWhenValueLessThan26()
-    {
-        int[] deckOfCards = new int[54];
-        deckOfCards[0] = 5;
-        deckOfCards[48] = 15;
-        GenerateKey generateKey = new GenerateKey(deckOfCards);
-
-        String expectedCard = "O";
-        String actualCard = generateKey.getFinalCardStringValue(15);
-
-        assertEquals(expectedCard, actualCard);       
-    }
-
-    @Test
-    public void shouldReturnStringWhenValueIsGreaterThan26()
-    {
-        int[] deckOfCards = new int[54];
-        deckOfCards[0] = 5;
-        deckOfCards[48] = 51;
-        GenerateKey generateKey = new GenerateKey(deckOfCards);     
-
-        String expectedCard = "Y";
-        String actualCard = generateKey.getFinalCardStringValue(51);
-
-        assertEquals(expectedCard, actualCard);
-    }
-
-    @Test
-    public void shouldGenerateADeckOfCardsConveretedToNumbers()
-    {
-        int[] deckOfCards = new int[54];
-        for (int i = 0; i < deckOfCards.length; i++) 
-        {
-            deckOfCards[i] = i+1;
-        }
+        int[] deckOfCards = mCreateDeckOfCards();
         GenerateKey generateKey = new GenerateKey(deckOfCards);
 
         int[] expectedDeckOfCards = deckOfCards;
-        int[] actualDeckOfCards = generateKey.mCreateDeckOfCards();
+        int[] actualDeckOfCards = generateKey.DeckOfCards;
 
         assertArrayEquals(expectedDeckOfCards, actualDeckOfCards);
     }
 
     @Test
-    public void generateKeyShouldReturnKeyWhenMessageLengthPassed()
+    public void moveJokerAoneCardDown()
     {
-        int[] deckOfCards = new int[54];
+        int jokerA = 53;
+        int[] deckOfCards = mCreateDeckOfCards(); 
         GenerateKey generateKey = new GenerateKey(deckOfCards);
-        String message = "hell";
-        String keyGenereated = "ITIU";
+        int[] newDeckOfCards = mCreateDeckOfCards();
+        newDeckOfCards[53] = jokerA;
+        newDeckOfCards[52] = 54;
 
-        String expectedKeyGenerated = keyGenereated;
+        int[] expectedDeckOfCards = newDeckOfCards;
+        generateKey.mMoveJokerA();
+        int[] actualDeckOfCards = generateKey.DeckOfCards;
+
+        assertArrayEquals(expectedDeckOfCards, actualDeckOfCards);
+    }
+
+    @Test
+    public void swapJokerBtwoCardsDown()
+    {
+        int jokerB = 54;
+        int[] deckOfCards = mCreateDeckOfCards();
+        deckOfCards[52] = jokerB;
+        GenerateKey generateKey = new GenerateKey(deckOfCards);
+        int[] newDeckOfCards = mCreateDeckOfCards();
+        newDeckOfCards[1] = jokerB;
+        newDeckOfCards[52] = 2;
+
+        int[] expectedDeckOfCards = newDeckOfCards;
+        generateKey.mMoveJokerB();
+        int[] actualDeckOfCards = generateKey.DeckOfCards;
+
+        assertArrayEquals(expectedDeckOfCards, actualDeckOfCards);
+    }
+
+    @Test
+    public void swapCardsBelowBottomJokerWithCardsAboveTopJokerCaseWhenJokerAisLower()
+    {
+        int jokerA = 53;
+        int jokerB = 54;
+        int[] deckOfCards = new int[54];
+        deckOfCards[1] = jokerA;
+        deckOfCards[50] = jokerB;
+        GenerateKey generateKey = new GenerateKey(deckOfCards);
+        int[] newDeckOfCards = new int[54];
+        newDeckOfCards[3] = jokerA;
+        newDeckOfCards[52] = jokerB;
+
+        int[] expectedDeckOfCards = newDeckOfCards;
+        generateKey.mTrippleCut();
+        int[] actualDeckOfCards = generateKey.DeckOfCards;
+
+        assertArrayEquals(expectedDeckOfCards, actualDeckOfCards);
+    }
+
+    @Test
+    public void swapCardsBelowBottomJokerWithCardsAboveTopJokerCaseWhenJokerBisLower()
+    {
+        int jokerA = 53;
+        int jokerB = 54;
+        int[] deckOfCards = new int[54];
+        deckOfCards[53] = jokerA;
+        deckOfCards[1] = jokerB;
+        GenerateKey generateKey = new GenerateKey(deckOfCards);
+        int[] newDeckOfCards = new int[54];
+        newDeckOfCards[52] = jokerA;
+        newDeckOfCards[0] = jokerB;
+
+        int[] expectedDeckOfCards = newDeckOfCards;
+        generateKey.mTrippleCut();
+        int[] actualDeckOfCards = generateKey.DeckOfCards;
+
+        assertArrayEquals(expectedDeckOfCards, actualDeckOfCards);
+    }
+
+    @Test
+    public void generateKeyShouldReturnKeyWhenMessagePassed()
+    {
+        int[] deckOfCards = mCreateDeckOfCards();
+        GenerateKey generateKey = new GenerateKey(deckOfCards);
+        String message = "hello";
+
+        String expectedKeyGenerated = "BBCEH";
         String actualKeyGenereated = generateKey.mGenerateKey(message);
 
         assertEquals(expectedKeyGenerated, actualKeyGenereated);
@@ -108,14 +136,21 @@ public class GenerateKeyTest
     @Test
     public void shouldReturnStringKeyLengthEqualToMessageLength()
     {
-        int[] deckOfCards = new int[54];
+        int[] deckOfCards = mCreateDeckOfCards();
         GenerateKey generateKey = new GenerateKey(deckOfCards);
-        String message = "helloo"; 
-        String keyGenerated = "helloo";
+        String message = "hello"; 
 
-        int expectedKeyLength = keyGenerated.length();
+        int expectedKeyLength = 5;
         int actualKeyLength = generateKey.mKeyLength(message);
 
         assertEquals(expectedKeyLength, actualKeyLength);
+    }
+
+    private int[] mCreateDeckOfCards() {
+        int[] deck = new int[54];
+        for (int i = 0; i < deck.length; i++) {
+            deck[i] = i+1;
+        }
+        return deck;
     }
 }

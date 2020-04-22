@@ -6,18 +6,16 @@ import org.junit.Test;
 
 public class SolitaireTest {
 
-   // encrpyt
-
    @Test
-   public void encryptesMessageWithOutSpecialChars() {
+   public void encryptesMessageWithOutSpecialChars() 
+   {
       String message = "HELLO";
-
-      int[] _deckOfCards = new int[54];
+      int[] _deckOfCards = mCreateDeckOfCards();
       GenerateKey generateKey = new GenerateKey(_deckOfCards);
       Message cleanMessage = new Message(message);
       Solitaire solitaire = new Solitaire(message, generateKey, cleanMessage);
 
-      String expectedMessage = "QYUGY";
+      String expectedMessage = "JGOQW";
       String actualMessage = solitaire.mEncryptMessage();
 
       assertEquals(expectedMessage, actualMessage);
@@ -27,79 +25,21 @@ public class SolitaireTest {
    public void encryptesMessageWithSpecialChars() {
       String message = "HEL 34LO WORL32@#d";
 
-      int[] _deckOfCards = new int[54];
+      int[] _deckOfCards = mCreateDeckOfCards();
       GenerateKey generateKey = new GenerateKey(_deckOfCards);
       Message cleanMessage = new Message(message);
       Solitaire solitaire = new Solitaire(message, generateKey, cleanMessage);
 
-      String expectedMessage = "QYUGYPIOES";
+      String expectedMessage = "JGOQWGVAXR";
       String actualMessage = solitaire.mEncryptMessage();
 
       assertEquals(expectedMessage, actualMessage);
-   }
-
-   @Test
-   public void messageShouldBeGivenInAString() {
-      String message = "";
-      int[] _deckOfCards = new int[54];
-      GenerateKey generateKey = new GenerateKey(_deckOfCards);
-      Message cleanMessage = new Message(message);
-      Solitaire solitaire = new Solitaire(message, generateKey, cleanMessage);
-
-      String expectedMessage = "";
-      String actualMessage = solitaire.mEncryptMessage();
-
-      assertEquals(expectedMessage, actualMessage);
-   }
-
-   @Test
-   public void keyShouldBeGivenInString() {
-      String message = "";
-      int[] _deckOfCards = new int[54];
-      GenerateKey generateKey = new GenerateKey(_deckOfCards);
-      Message cleanMessage = new Message(message);
-      Solitaire solitaire = new Solitaire(message, generateKey, cleanMessage);
-
-      String expectedKey = "";
-      String actualKey = solitaire.mEncryptMessage();
-
-      assertEquals(expectedKey, actualKey);
-   }
-
-   // Decrpyt
-
-   @Test
-   public void messageShouldBeGivenAsString() {
-      String message = "";
-      int[] _deckOfCards = new int[54];
-      GenerateKey generateKey = new GenerateKey(_deckOfCards);
-      Message cleanMessage = new Message(message);
-      Solitaire solitaire = new Solitaire(message, generateKey, cleanMessage);
-
-      String expectedMessage = "";
-      String actualMessage = solitaire.mDecryptMessage();
-
-      assertEquals(expectedMessage, actualMessage);
-   }
-
-   @Test
-   public void keyShouldBeGivenAsString() {
-      String message = "";
-      int[] _deckOfCards = new int[54];
-      GenerateKey generateKey = new GenerateKey(_deckOfCards);
-      Message cleanMessage = new Message(message);
-      Solitaire solitaire = new Solitaire(message, generateKey, cleanMessage);
-
-      String expectedKey = "";
-      String actualKey = solitaire.mDecryptMessage();
-
-      assertEquals(expectedKey, actualKey);
    }
 
    @Test
    public void keyAndMessageShouldBeOfSameLength() {
       String message = "";
-      int[] _deckOfCards = new int[54];
+      int[] _deckOfCards = mCreateDeckOfCards();
       GenerateKey generateKey = new GenerateKey(_deckOfCards);
 
       int expectedKeyLength = generateKey.mGenerateKey(message).length();
@@ -110,8 +50,8 @@ public class SolitaireTest {
 
    @Test
    public void decryptMessage() {
-      String message = "QYUGY";
-      int[] _deckOfCards = new int[54];
+      String message = "JGOQW";
+      int[] _deckOfCards = mCreateDeckOfCards();
       GenerateKey generateKey = new GenerateKey(_deckOfCards);
       Message cleanMessage = new Message(message);
       Solitaire solitaire = new Solitaire(message, generateKey, cleanMessage);
@@ -122,5 +62,49 @@ public class SolitaireTest {
 
       assertEquals(expectedDencryptedMessage, actualDencryptedMessage);
    }
+
+   @Test
+   public void encrpytOneLetterMessageWithConvertedDeck()
+   {
+      String message = "H";
+      int[] _deckOfCards = mCreateDeckOfCards();
+      for (int i = 0; i < _deckOfCards.length; i++) {
+         _deckOfCards[i] = i+1;
+      }
+      GenerateKey generateKey = new GenerateKey(_deckOfCards);
+      Message cleanMessage = new Message(message);
+      Solitaire solitaire = new Solitaire(message, generateKey, cleanMessage);
+      
+      String expectedMessage = "JZACF";
+      String actualMessage = solitaire.mEncryptMessage();
+
+      assertEquals(expectedMessage, actualMessage);
+   }
+
+   @Test
+   public void encrpytManyLetterMessageWithConvertedDeck()
+   { 
+      String message = "YOUR CIPHER IS WORKING";
+      int[] _deckOfCards = mCreateDeckOfCards();
+      for (int i = 0; i < _deckOfCards.length; i++) {
+         _deckOfCards[i] = i+1;
+      }
+      GenerateKey generateKey = new GenerateKey(_deckOfCards);
+      Message cleanMessage = new Message(message);
+      Solitaire solitaire = new Solitaire(message, generateKey, cleanMessage);
+      
+      String expectedMessage = "CLEPKHHNIYCFPWHFDFEH";
+      String actualMessage = solitaire.mEncryptMessage();
+
+      assertEquals(expectedMessage, actualMessage);
+   }
+
+   private int[] mCreateDeckOfCards() {
+      int[] deck = new int[54];
+      for (int i = 0; i < deck.length; i++) {
+          deck[i] = i+1;
+      }
+      return deck;
+  }
 
 }

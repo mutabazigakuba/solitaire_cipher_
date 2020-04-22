@@ -42,15 +42,18 @@ public class Message
             return "";
         }
         String message = "";
-        int remainder;
         for (int number : numbers) 
         {
-            if(number < 0)
+            number = Math.abs(number);
+            if(number > 26)
             {
-                number += 26;
+                number -= 26;
             }
-            remainder = number % 26;
-            message +=  String.valueOf((char)(64 + remainder));
+            if(number == 0)
+            {
+                number = 26;
+            }
+            message +=  String.valueOf((char)(64 + number));
         }
 
         return message;

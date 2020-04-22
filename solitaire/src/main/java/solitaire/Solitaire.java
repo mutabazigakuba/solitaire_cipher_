@@ -1,5 +1,7 @@
 package solitaire;
 
+import java.util.Arrays;
+
 public class Solitaire 
 {
     private String Message;
@@ -26,17 +28,18 @@ public class Solitaire
 
         int[] keyArray = new int[generatedKey.length()];
         int[] messageArray = new int[Message.length()];
-        messageArray = CleanMessage.mConvertsToNumber();
+
+        messageArray = mConvertsKeyToNumber(message);
         keyArray = mConvertsKeyToNumber(generatedKey);
 
-        int[] encryptMessageArray = new int[Message.length()];
+        int[] encryptMessageArray = new int[message.length()];
         for (int i = 0; i < generatedKey.length(); i++) 
         {
             encryptMessageArray[i] = messageArray[i] + keyArray[i];
         }
+        System.out.println("encrypted "+Arrays.toString(encryptMessageArray));
 
         String encryptMessage = CleanMessage.mConvertsNumberToMessage(encryptMessageArray);
-        encryptMessage = encryptMessage.replaceAll("[^\\p{L}\\p{Z}]","");
         return encryptMessage;
     }
 
@@ -64,7 +67,7 @@ public class Solitaire
         return CleanMessage.mConvertsNumberToMessage(decryptMessageArray);
     }
 
-    private static int[] mConvertsKeyToNumber(String key)
+    private int[] mConvertsKeyToNumber(String key)
     {
         if(key.isEmpty())
         {
