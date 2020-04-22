@@ -1,7 +1,5 @@
 package solitaire;
 
-import java.util.Arrays;
-
 public class Solitaire 
 {
     private String Message;
