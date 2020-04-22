@@ -37,13 +37,9 @@ public class Solitaire
         {
             encryptMessageArray[i] = messageArray[i] + keyArray[i];
         }
-        System.out.println("encrypted "+Arrays.toString(encryptMessageArray));
-
-        String encryptMessage = CleanMessage.mConvertsNumberToMessage(encryptMessageArray);
-        return encryptMessage;
+        return CleanMessage.mConvertsNumberToMessage(encryptMessageArray);
     }
 
-    //decrypt
     public String mDecryptMessage()
     {
         if(Message.length() == 0)

@@ -1,7 +1,6 @@
 package solitaire;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class GenerateKey {
@@ -17,7 +16,6 @@ public class GenerateKey {
     }
 
     public String mGenerateKey(String message) {
-        // System.out.println("generate method "+Arrays.toString(DeckOfCards));
         // mCreateDeckOfCards();
         String keyGenerated = "";
         for (int i = 0; i < message.length(); i++) {
@@ -36,7 +34,6 @@ public class GenerateKey {
     }
 
     public void mMoveJokerA() {
-        // System.out.println(Arrays.toString(DeckOfCards));
         for (int j = 0; j < DECKOFCARDS_LENGTH; j++) {
             if (DeckOfCards[j] == JOKER_A) {
                 int positionOfCard = j + 1;
@@ -54,11 +51,9 @@ public class GenerateKey {
                 }
             }
         }
-        // System.out.println("move joker A "+Arrays.toString(DeckOfCards));
     }
 
     public void mMoveJokerB() {
-        System.out.println(Arrays.toString(DeckOfCards));
         for (int j = 0; j < DECKOFCARDS_LENGTH; j++) {
             if (DeckOfCards[j] == JOKER_B) {
                 int positionOfCard = j + 2;
@@ -76,7 +71,6 @@ public class GenerateKey {
                 }
             }
         }
-        System.out.println("move joker B "+Arrays.toString(DeckOfCards));
     }
 
     private void mFindPositionOfJokers() {
@@ -172,7 +166,6 @@ public class GenerateKey {
                 trippleCutDeck[i] = listOfTrippleCutDeck.get(i);
             }
         }
-        // System.out.println("move joker A "+Arrays.toString(trippleCutDeck));
         DeckOfCards = trippleCutDeck;
     }
 
