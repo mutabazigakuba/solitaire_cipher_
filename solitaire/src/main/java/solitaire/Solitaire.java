@@ -47,7 +47,6 @@ public class Solitaire
 
         String generatedKey = Key.mGenerateKey(Message);
         
-
         int[] keyArray = new int[generatedKey.length()];
         int[] messageArray = new int[Message.length()];
         messageArray = CleanMessage.mConvertsToNumber();

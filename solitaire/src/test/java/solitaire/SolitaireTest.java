@@ -22,7 +22,8 @@ public class SolitaireTest {
    }
  
    @Test
-   public void encryptesMessageWithSpecialChars() {
+   public void encryptesMessageWithSpecialChars()
+   {
       String message = "HEL 34LO WORL32@#d";
 
       int[] _deckOfCards = mCreateDeckOfCards();
