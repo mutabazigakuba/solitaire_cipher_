@@ -4,7 +4,8 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
-public class SolitaireTest {
+public class SolitaireTest 
+{
 
    @Test
    public void encryptesMessageWithOutSpecialChars() 
@@ -38,7 +39,8 @@ public class SolitaireTest {
    }
 
    @Test
-   public void keyAndMessageShouldBeOfSameLength() {
+   public void keyAndMessageShouldBeOfSameLength() 
+   {
       String message = "";
       int[] _deckOfCards = mCreateDeckOfCards();
       GenerateKey generateKey = new GenerateKey(_deckOfCards);
@@ -50,7 +52,8 @@ public class SolitaireTest {
    }
 
    @Test
-   public void decryptMessage() {
+   public void decryptMessage() 
+   {
       String message = "JGOQW";
       int[] _deckOfCards = mCreateDeckOfCards();
       GenerateKey generateKey = new GenerateKey(_deckOfCards);
@@ -69,7 +72,8 @@ public class SolitaireTest {
    {
       String message = "H";
       int[] _deckOfCards = mCreateDeckOfCards();
-      for (int i = 0; i < _deckOfCards.length; i++) {
+      for (int i = 0; i < _deckOfCards.length; i++) 
+      {
          _deckOfCards[i] = i+1;
       }
       GenerateKey generateKey = new GenerateKey(_deckOfCards);
@@ -87,22 +91,21 @@ public class SolitaireTest {
    { 
       String message = "YOUR CIPHER IS WORKING";
       int[] _deckOfCards = mCreateDeckOfCards();
-      for (int i = 0; i < _deckOfCards.length; i++) {
-         _deckOfCards[i] = i+1;
-      }
       GenerateKey generateKey = new GenerateKey(_deckOfCards);
       Message cleanMessage = new Message(message);
       Solitaire solitaire = new Solitaire(message, generateKey, cleanMessage);
       
-      String expectedMessage = "AQXWKSWQQFTFMGGBCJZS";
+      String expectedMessage = "CLEPKHHNIYCFPWHFDFEH";
       String actualMessage = solitaire.mEncryptMessage();
 
       assertEquals(expectedMessage, actualMessage);
    }
 
-   private int[] mCreateDeckOfCards() {
+   private int[] mCreateDeckOfCards() 
+   {
       int[] deck = new int[54];
-      for (int i = 0; i < deck.length; i++) {
+      for (int i = 0; i < deck.length; i++) 
+      {
           deck[i] = i+1;
       }
       return deck;

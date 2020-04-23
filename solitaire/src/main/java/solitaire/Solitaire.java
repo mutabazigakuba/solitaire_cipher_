@@ -27,8 +27,8 @@ public class Solitaire
         int[] keyArray = new int[generatedKey.length()];
         int[] messageArray = new int[Message.length()];
 
-        messageArray = mConvertsKeyToNumber(message);
-        keyArray = mConvertsKeyToNumber(generatedKey);
+        messageArray = mConvertsToArrayOfNumber(message);
+        keyArray = mConvertsToArrayOfNumber(generatedKey);
 
         int[] encryptMessageArray = new int[message.length()];
         for (int i = 0; i < generatedKey.length(); i++) 
@@ -49,8 +49,9 @@ public class Solitaire
         
         int[] keyArray = new int[generatedKey.length()];
         int[] messageArray = new int[Message.length()];
-        messageArray = CleanMessage.mConvertsToNumber();
-        keyArray = mConvertsKeyToNumber(generatedKey);
+
+        messageArray = mConvertsToArrayOfNumber(Message);
+        keyArray = mConvertsToArrayOfNumber(generatedKey);
 
         int[] decryptMessageArray = new int[Message.length()];
         for (int i = 0; i < generatedKey.length(); i++) 
@@ -60,15 +61,15 @@ public class Solitaire
         return CleanMessage.mConvertsNumberToMessage(decryptMessageArray);
     }
 
-    private int[] mConvertsKeyToNumber(String key)
+    private int[] mConvertsToArrayOfNumber(String string)
     {
-        if(key.isEmpty())
+        if(string.isEmpty())
         {
             return new int[0];
         }
 
-        int[] numbers = new int[key.length()];
-        char[] values = key.toCharArray();
+        int[] numbers = new int[string.length()];
+        char[] values = string.toCharArray();
         for (int i = 0; i < values.length; i++) 
         {
             int number = values[i] - 'A' +1;

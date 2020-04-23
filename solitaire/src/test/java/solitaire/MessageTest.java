@@ -76,8 +76,6 @@ public class MessageTest
         assertEquals(expectedMessage, actualMessage);
     } 
     
-    //convert
-
     @Test
     public void singleStringReturnsCorrespondingNumber() 
     {

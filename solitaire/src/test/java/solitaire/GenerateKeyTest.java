@@ -49,11 +49,11 @@ public class GenerateKeyTest
     public void moveJokerAoneCardDown()
     {
         int jokerA = 53;
-        int[] deckOfCards = mCreateDeckOfCards(); 
+        int[] deckOfCards = new int[54]; 
+        deckOfCards[53] = 53;
         GenerateKey generateKey = new GenerateKey(deckOfCards);
-        int[] newDeckOfCards = mCreateDeckOfCards();
-        newDeckOfCards[53] = jokerA;
-        newDeckOfCards[52] = 54;
+        int[] newDeckOfCards = new int[54];
+        newDeckOfCards[0] = jokerA;
 
         int[] expectedDeckOfCards = newDeckOfCards;
         generateKey.mMoveJokerA();
@@ -63,15 +63,18 @@ public class GenerateKeyTest
     }
 
     @Test
-    public void swapJokerBtwoCardsDown()
+    public void moveJokerBtwoCardsDown()
     {
         int jokerB = 54;
-        int[] deckOfCards = mCreateDeckOfCards();
+        int[] deckOfCards = new int[54];
         deckOfCards[52] = jokerB;
+        deckOfCards[0] = 1;
+        deckOfCards[1] =2;
         GenerateKey generateKey = new GenerateKey(deckOfCards);
-        int[] newDeckOfCards = mCreateDeckOfCards();
+        int[] newDeckOfCards = new int[54];
+        newDeckOfCards[0] = 1;
         newDeckOfCards[1] = jokerB;
-        newDeckOfCards[52] = 2;
+        newDeckOfCards[2] = 2;
 
         int[] expectedDeckOfCards = newDeckOfCards;
         generateKey.mMoveJokerB();
@@ -146,9 +149,11 @@ public class GenerateKeyTest
         assertEquals(expectedKeyLength, actualKeyLength);
     }
 
-    private int[] mCreateDeckOfCards() {
+    private int[] mCreateDeckOfCards() 
+    {
         int[] deck = new int[54];
-        for (int i = 0; i < deck.length; i++) {
+        for (int i = 0; i < deck.length; i++) 
+        {
             deck[i] = i+1;
         }
         return deck;
