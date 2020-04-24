@@ -6,7 +6,9 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 
 public class GenerateKeyTest
-{ 
+{
+    private int jokerA = 53;
+    private int jokerB = 54;
 
     @Test
     public void emptyMessageShouldGenerateNoKey()
@@ -34,7 +36,7 @@ public class GenerateKeyTest
     }
 
     @Test
-    public void generateADeckOfCardsShouldBeConveretedToNumbers()
+    public void generatedDeckOfCardsShouldBeConveretedToNumbers()
     {
         int[] deckOfCards = mCreateDeckOfCards();
         GenerateKey generateKey = new GenerateKey(deckOfCards);
@@ -46,35 +48,23 @@ public class GenerateKeyTest
     }
 
     @Test
-    public void moveJokerAoneCardDownCaseJokerAisAtTheBottom()
+    public void moveJokerAoneCardDownCaseWhereJokerAisAtTheBottom()
     {
-        int jokerA = 53;
         int[] deckOfCards = new int[54]; 
-        deckOfCards[53] = jokerA;
-        deckOfCards[0] = 1;
-        GenerateKey generateKey = new GenerateKey(deckOfCards);
-        int[] newDeckOfCards = new int[54];
-        newDeckOfCards[0] = jokerA;
-        newDeckOfCards[1] = 1;
-
-        int[] expectedDeckOfCards = newDeckOfCards;
-        generateKey.mMoveJokerA();
-        int[] actualDeckOfCards = generateKey.DeckOfCards;
-
-        assertArrayEquals(expectedDeckOfCards, actualDeckOfCards);
-    }
-
-    @Test
-    public void moveJokerAoneCardDownCaseJokerAisNotAtTheBottom()
-    {
-        int jokerA = 53;
-        int[] deckOfCards = new int[54]; 
-        deckOfCards[52] = jokerA;
         deckOfCards[53] = 1;
+        deckOfCards[52] = 2;
+        deckOfCards[51] = 3;
+        deckOfCards[2] = 52;
+        deckOfCards[1] = jokerB;
+        deckOfCards[0] = jokerA;
         GenerateKey generateKey = new GenerateKey(deckOfCards);
         int[] newDeckOfCards = new int[54];
         newDeckOfCards[53] = jokerA;
         newDeckOfCards[52] = 1;
+        newDeckOfCards[51] = 2;
+        newDeckOfCards[50] = 3;
+        newDeckOfCards[1] = 52;
+        newDeckOfCards[0] = jokerB;
 
         int[] expectedDeckOfCards = newDeckOfCards;
         generateKey.mMoveJokerA();
@@ -84,90 +74,106 @@ public class GenerateKeyTest
     }
 
     @Test
-    public void moveJokerBtwoCardsDownCaseJokerIsInLastPositions()
+    public void moveJokerAoneCardDownCaseWhereJokerAisNotAtTheBottom()
     {
-        int jokerB = 54;
-        int[] deckOfCards = new int[54];
-        deckOfCards[52] = jokerB;
-        deckOfCards[0] = 1;
-        deckOfCards[1] =2;
-        GenerateKey generateKey = new GenerateKey(deckOfCards);
-        int[] newDeckOfCards = new int[54];
-        newDeckOfCards[0] = 1;
-        newDeckOfCards[1] = jokerB;
-        newDeckOfCards[2] = 2;
-
-        int[] expectedDeckOfCards = newDeckOfCards;
-        generateKey.mMoveJokerB();
-        int[] actualDeckOfCards = generateKey.DeckOfCards;
-
-        assertArrayEquals(expectedDeckOfCards, actualDeckOfCards);
-    }
-
-    @Test
-    public void moveJokerBtwoCardsDownCaseJokerIsInFirstPositions()
-    {
-        int jokerB = 54;
-        int[] deckOfCards = new int[54];
-        deckOfCards[0] = 1;
-        deckOfCards[1] = 2;
-        deckOfCards[2] = jokerB;
-        deckOfCards[3] = 3;
-        deckOfCards[4] = 4;
-        deckOfCards[5] = 5;
-        deckOfCards[6] = 6;
-
-        deckOfCards[53] = 7;
-        GenerateKey generateKey = new GenerateKey(deckOfCards);
-        int[] newDeckOfCards = new int[54];
-        newDeckOfCards[0] = 7;
-        newDeckOfCards[1] = 1;
-        newDeckOfCards[2] =2;
-        newDeckOfCards[3] = 3;
-        newDeckOfCards[4] = 4;
-        newDeckOfCards[5] = jokerB;
-        newDeckOfCards[6] = 5;
-        newDeckOfCards[7] = 6;
-
-        int[] expectedDeckOfCards = newDeckOfCards;
-        generateKey.mMoveJokerB();
-        int[] actualDeckOfCards = generateKey.DeckOfCards;
-
-        assertArrayEquals(expectedDeckOfCards, actualDeckOfCards);
-    }
-
-    @Test
-    public void swapCardsBelowBottomJokerWithCardsAboveTopJokerCaseWhenJokerAisLower()
-    {
-        int jokerA = 53;
-        int jokerB = 54;
-        int[] deckOfCards = new int[54];
+        int[] deckOfCards = new int[54]; 
+        deckOfCards[53] = 1;
+        deckOfCards[52] = 2;
+        deckOfCards[51] = 3;
+        deckOfCards[2] = 52;
         deckOfCards[1] = jokerA;
-        deckOfCards[50] = jokerB;
+        deckOfCards[0] = jokerB;
         GenerateKey generateKey = new GenerateKey(deckOfCards);
         int[] newDeckOfCards = new int[54];
-        newDeckOfCards[3] = jokerA;
-        newDeckOfCards[52] = jokerB;
+        newDeckOfCards[53] = 1;
+        newDeckOfCards[52] = 2;
+        newDeckOfCards[51] = 3;
+        newDeckOfCards[2] = 52;
+        newDeckOfCards[1] = jokerB;
+        newDeckOfCards[0] = jokerA;
 
         int[] expectedDeckOfCards = newDeckOfCards;
-        generateKey.mTrippleCut();
+        generateKey.mMoveJokerA();
         int[] actualDeckOfCards = generateKey.DeckOfCards;
 
         assertArrayEquals(expectedDeckOfCards, actualDeckOfCards);
     }
 
     @Test
-    public void swapCardsBelowBottomJokerWithCardsAboveTopJokerCaseWhenJokerBisLower()
+    public void moveJokerBtwoCardsDownCaseWhereJokerIsInBottomPositions()
     {
-        int jokerA = 53;
+        int[] deckOfCards = new int[54];
+        deckOfCards[53] = 1;
+        deckOfCards[52] = 2;
+        deckOfCards[51] = 3;
+        deckOfCards[2] = 52;
+        deckOfCards[1] = jokerB;
+        deckOfCards[0] = jokerA;
+        GenerateKey generateKey = new GenerateKey(deckOfCards);
+        int[] newDeckOfCards = new int[54];
+        newDeckOfCards[53] = 1;
+        newDeckOfCards[52] = jokerB;
+        newDeckOfCards[51] = 2;
+        newDeckOfCards[50] = 3;
+        newDeckOfCards[1] = 52;
+        newDeckOfCards[0] = jokerA;
+
+        int[] expectedDeckOfCards = newDeckOfCards;
+        generateKey.mMoveJokerB();
+        int[] actualDeckOfCards = generateKey.DeckOfCards;
+
+        assertArrayEquals(expectedDeckOfCards, actualDeckOfCards);
+    }
+
+    @Test
+    public void moveJokerBtwoCardsDownCaseWhereJokerIsNotInBottomPositions()
+    {
         int jokerB = 54;
         int[] deckOfCards = new int[54];
-        deckOfCards[53] = jokerA;
-        deckOfCards[1] = jokerB;
+        deckOfCards[53] = 1;
+        deckOfCards[52] = 2;
+        deckOfCards[5] = 49;
+        deckOfCards[4] = jokerB;
+        deckOfCards[3] = 50;
+        deckOfCards[2] = 51;
+        deckOfCards[1] = 52;
+        deckOfCards[0] = jokerA;
         GenerateKey generateKey = new GenerateKey(deckOfCards);
         int[] newDeckOfCards = new int[54];
-        newDeckOfCards[52] = jokerA;
-        newDeckOfCards[0] = jokerB;
+        newDeckOfCards[53] = 1;
+        newDeckOfCards[52] = 2;
+        newDeckOfCards[5] = 49;
+        newDeckOfCards[4] = 50;
+        newDeckOfCards[3] = 51;
+        newDeckOfCards[2] = 52;
+        newDeckOfCards[1] = jokerB;
+        newDeckOfCards[0] = jokerA;
+
+        int[] expectedDeckOfCards = newDeckOfCards;
+        generateKey.mMoveJokerB();
+        int[] actualDeckOfCards = generateKey.DeckOfCards;
+
+        assertArrayEquals(expectedDeckOfCards, actualDeckOfCards);
+    }
+
+    @Test
+    public void trippleCutCaseWhenJokerAisLower()
+    {
+        int[] deckOfCards = new int[54];
+        deckOfCards[53] = 1;
+        deckOfCards[52] = jokerB;
+        deckOfCards[51] = 2;
+        deckOfCards[50] = 3;
+        deckOfCards[1] = 52;
+        deckOfCards[0] = jokerA;
+        GenerateKey generateKey = new GenerateKey(deckOfCards);
+        int[] newDeckOfCards = new int[54];
+        newDeckOfCards[53] = jokerB;
+        newDeckOfCards[52] = 2;
+        newDeckOfCards[51] = 3;
+        newDeckOfCards[2] = 52;
+        newDeckOfCards[1] = jokerA;
+        newDeckOfCards[0] = 1;
 
         int[] expectedDeckOfCards = newDeckOfCards;
         generateKey.mTrippleCut();
@@ -177,27 +183,51 @@ public class GenerateKeyTest
     }
 
     @Test
-    public void countCardsOffTheTopBasingOnTheBottomCard()
+    public void trippleCutCaseWhenJokerBisLower()
     {
         int[] deckOfCards = new int[54];
-        deckOfCards[53] = 54;
+        deckOfCards[53] = 1;
+        deckOfCards[52] = jokerA;
+        deckOfCards[51] = 2;
+        deckOfCards[50] = 3;
+        deckOfCards[1] = 52;
+        deckOfCards[0] = jokerB;
+        GenerateKey generateKey = new GenerateKey(deckOfCards);
+        int[] newDeckOfCards = new int[54];
+        newDeckOfCards[53] = jokerA;
+        newDeckOfCards[52] = 2;
+        newDeckOfCards[51] = 3;
+        newDeckOfCards[2] = 52;
+        newDeckOfCards[1] = jokerB;
+        newDeckOfCards[0] = 1;
+
+        int[] expectedDeckOfCards = newDeckOfCards;
+        generateKey.mTrippleCut();
+        int[] actualDeckOfCards = generateKey.DeckOfCards;
+
+        assertArrayEquals(expectedDeckOfCards, actualDeckOfCards);
+    }
+
+    @Test
+    public void countCutCardsOffTheTopBasingOnTheBottomCard()
+    {
+        int[] deckOfCards = new int[54];
+        deckOfCards[53] = jokerB;
         deckOfCards[52] = 2;
         deckOfCards[51] = 3;
         deckOfCards[50] = 4;
-
         deckOfCards[2] = 52;
-        deckOfCards[1] = 53;
-        deckOfCards[0] = 2;
+        deckOfCards[1] = jokerA;
+        deckOfCards[0] = 1;
         GenerateKey generateKey = new GenerateKey(deckOfCards);
         int[] newDeckOfCards = new int[54];
-        newDeckOfCards[53] = 3;
-        newDeckOfCards[52] = 4;
-
-        newDeckOfCards[4] = 52;
-        newDeckOfCards[3] = 53;
-        newDeckOfCards[2] = 2;
-        newDeckOfCards[1] = 54;
-        newDeckOfCards[0] = 2;
+        newDeckOfCards[53] = 2;
+        newDeckOfCards[52] = 3;
+        newDeckOfCards[51] = 4;
+        newDeckOfCards[3] = 52;
+        newDeckOfCards[2] = jokerA;
+        newDeckOfCards[1] = jokerB;
+        newDeckOfCards[0] = 1;
 
         int[] expectedDeckOfCards = newDeckOfCards;
         generateKey.mMoveCardsBasingOnBottomCard();
@@ -207,15 +237,15 @@ public class GenerateKeyTest
     }
 
     @Test
-    public void countOffCardsFromTopToGetValueOfFinalCard()
+    public void countOffCardsFromTopBadingOnTopCardToGetValueOfFinalCard()
     {
         int[] deckOfCards = new int[54];
         deckOfCards[53] = 2;
         deckOfCards[52] = 3;
         deckOfCards[51] = 4;
-
-        deckOfCards[2] = 53;
-        deckOfCards[1] = 54;
+        deckOfCards[3] = 52;
+        deckOfCards[2] = jokerA;
+        deckOfCards[1] = jokerB;
         deckOfCards[0] = 1;
         GenerateKey generateKey = new GenerateKey(deckOfCards);
 
@@ -230,7 +260,6 @@ public class GenerateKeyTest
     public void numberShouldReturnAstringValue()
     {
         int[] deckOfCards = new int[54];
-        deckOfCards[53] = 4;
         GenerateKey generateKey = new GenerateKey(deckOfCards);
 
         String expectedValue = "A";
@@ -251,19 +280,6 @@ public class GenerateKeyTest
         String actualKeyGenereated = generateKey.mGenerateKey(message);
 
         assertEquals(expectedKeyGenerated, actualKeyGenereated);
-    }
-
-    @Test
-    public void shouldReturnStringKeyLengthEqualToMessageLength()
-    {
-        int[] deckOfCards = mCreateDeckOfCards();
-        GenerateKey generateKey = new GenerateKey(deckOfCards);
-        String message = "hello"; 
-
-        int expectedKeyLength = 5;
-        int actualKeyLength = generateKey.mKeyLength(message);
-
-        assertEquals(expectedKeyLength, actualKeyLength);
     }
 
     private int[] mCreateDeckOfCards() 

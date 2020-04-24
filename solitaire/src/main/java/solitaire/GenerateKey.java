@@ -1,6 +1,7 @@
 package solitaire;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class GenerateKey 
@@ -42,21 +43,23 @@ public class GenerateKey
         }
     }
 
-    public void mMoveJokerA() {
+    public void mMoveJokerA() 
+    {
         for (int j = 0; j < DECKOFCARDS_LENGTH; j++) 
         {
             if (DeckOfCards[j] == JOKER_A) 
             {
-                int newPositionOfJoker = j + 1;
-                if (newPositionOfJoker > 53) 
+                int oldPostionOfJoker = j;
+                int newPositionOfJoker = j - 1;
+                if (oldPostionOfJoker == 0) 
                 {
-                    newPositionOfJoker = newPositionOfJoker - 54;
+                    newPositionOfJoker = 53;
                     int[] newDeckOfCards = new int[54];
 
                     newDeckOfCards[newPositionOfJoker] = JOKER_A;
-                    for (int i = 1; i < newDeckOfCards.length; i++) 
+                    for (int i = 0; i < 53; i++) 
                     {
-                        newDeckOfCards[i] = DeckOfCards[i-1];
+                        newDeckOfCards[i] = DeckOfCards[i+1];
                     }
                     DeckOfCards = newDeckOfCards;
                     break;
@@ -65,7 +68,7 @@ public class GenerateKey
                 {
                     int x = DeckOfCards[newPositionOfJoker];
                     DeckOfCards[newPositionOfJoker] = JOKER_A;
-                    DeckOfCards[j] = x;
+                    DeckOfCards[oldPostionOfJoker] = x;
                     break;
                 }
             }
@@ -78,71 +81,32 @@ public class GenerateKey
         {
             if (DeckOfCards[j] == JOKER_B) 
             {
-                int newPositionOfJoker = j + 3;
-                if (newPositionOfJoker > 53) 
+                int oldPostionOfJoker = j;
+                int newPositionOfJoker = j - 3;
+                if (newPositionOfJoker < 0) 
                 {
-                    newPositionOfJoker = newPositionOfJoker - 54;
-                    DeckOfCards = mRearrangeDeck(newPositionOfJoker, j, JOKER_B);
+                    newPositionOfJoker = 50 + Math.abs(newPositionOfJoker);
+                    DeckOfCards = mRearrangeDeck(newPositionOfJoker, oldPostionOfJoker);
                     break;
                 } 
                 else 
                 {
                     int[] newDeckOfCards = new int[54];
-                    newDeckOfCards[0] = DeckOfCards[53];
-                    for (int i = 1; i <= j; i++) 
+                    for (int i = 0; i < newPositionOfJoker; i++) 
                     {
-                        newDeckOfCards[i] = DeckOfCards[i-1];
-                    }
-                    for (int i = j; i < newPositionOfJoker; i++) 
-                    {
-                        newDeckOfCards[i+1] = DeckOfCards[j+1];
-                        j++;
+                        newDeckOfCards[i] = DeckOfCards[i];
                     }
                     newDeckOfCards[newPositionOfJoker] = JOKER_B;
-                    for (int i = newPositionOfJoker; i < 53; i++) 
+                    for (int i = newPositionOfJoker; i < oldPostionOfJoker; i++) 
                     {
-                        newDeckOfCards[i+1] = DeckOfCards[newPositionOfJoker];
-                        newPositionOfJoker++;
+                        newDeckOfCards[i+1] = DeckOfCards[i];
+                    }
+                    for (int i = oldPostionOfJoker; i < 53; i++) {
+                        newDeckOfCards[i+1] = DeckOfCards[i+1];
                     }
                     DeckOfCards = newDeckOfCards;
                     break;
                 }
-            }
-        }
-    }
-
-    private int[] mRearrangeDeck(int newPositionOfJoker, int oldPostionOfJoker, int joker) 
-    {
-        int[] newDeckOfCards = new int[DECKOFCARDS_LENGTH];
-
-        for (int i = 0; i < newPositionOfJoker; i++) 
-        {
-            newDeckOfCards[i] = DeckOfCards[i];
-        }
-        newDeckOfCards[newPositionOfJoker] = joker;
-        for (int i = newPositionOfJoker; i < oldPostionOfJoker; i++) 
-        {
-            newDeckOfCards[i + 1] = DeckOfCards[newPositionOfJoker];
-            newPositionOfJoker++;
-        }
-        for (int i = oldPostionOfJoker; i < 53; i++) 
-        {
-            newDeckOfCards[i + 1] = DeckOfCards[i + 1];
-        }
-        return newDeckOfCards;        
-    }
-
-    private void mFindPositionOfJokers() 
-    {
-        for (int i = 0; i < DECKOFCARDS_LENGTH; i++) 
-        {
-            if (DeckOfCards[i] == JOKER_A) 
-            {
-                positionOfJokerA = i;
-            }
-            if (DeckOfCards[i] == JOKER_B) 
-            {
-                positionOfJokerB = i;
             }
         }
     }
@@ -162,21 +126,15 @@ public class GenerateKey
         if (positionOfJokerA < positionOfJokerB) 
         {
             int[] cardsBelowJokerA = mCardsBelowBottomJoker(positionOfJokerA);
-            for (int j : cardsBelowJokerA) 
-            {
-                listOfCardsBelow.add(j);
-            }
+            listOfCardsBelow = mAddElementsToList(cardsBelowJokerA);
+            
             int[] cardsAboveJokerB = mCardsAboveTopJoker(positionOfJokerB);
-            for (int j : cardsAboveJokerB) 
-            {
-                listOfCardsAbove.add(j);
-            }
+            listOfCardsAbove = mAddElementsToList(cardsAboveJokerB);
+            
             numbercardsBetweenJokerAandJokerB = Math.abs(positionOfJokerB - positionOfJokerA);
             int[] cardsBetweenJokers = mCardsBetweenJokers(numbercardsBetweenJokerAandJokerB, positionOfJokerA);
-            for (int j : cardsBetweenJokers) 
-            {
-                listOfCardsBetweenJokers.add(j);
-            }
+            listOfCardsBetweenJokers = mAddElementsToList(cardsBetweenJokers);
+            
             List<Integer> listOfTrippleCutDeck = new ArrayList<Integer>();
             for (int i : listOfCardsAbove) 
             {
@@ -201,21 +159,15 @@ public class GenerateKey
         else 
         {
             int[] cardsAboveJokerA = mCardsAboveTopJoker(positionOfJokerA);
-            for (int j : cardsAboveJokerA) 
-            {
-                listOfCardsAbove.add(j);
-            }
+            listOfCardsAbove = mAddElementsToList(cardsAboveJokerA);
+            
             int[] cardsBelowJokerB = mCardsBelowBottomJoker(positionOfJokerB);
-            for (int j : cardsBelowJokerB) 
-            {
-                listOfCardsBelow.add(j);
-            }
+            listOfCardsBelow = mAddElementsToList(cardsBelowJokerB);
+            
             numbercardsBetweenJokerAandJokerB = Math.abs(positionOfJokerA - positionOfJokerB);
             int[] cardsBetweenJokers = mCardsBetweenJokers(numbercardsBetweenJokerAandJokerB, positionOfJokerB);
-            for (int j : cardsBetweenJokers) 
-            {
-                listOfCardsBetweenJokers.add(j);
-            }
+            listOfCardsBetweenJokers = mAddElementsToList(cardsBetweenJokers);
+            
             List<Integer> listOfTrippleCutDeck = new ArrayList<Integer>();
             for (int i : listOfCardsAbove) 
             {
@@ -266,6 +218,16 @@ public class GenerateKey
         DeckOfCards = newDeckOfCards;
     }
 
+    public void mCountOffCardsFromTopBaseOnTopCardValue()
+    {
+        int valueOfCardAtTop = DeckOfCards[53]; 
+        if(valueOfCardAtTop == 54)
+        {
+            cardToConvert =DeckOfCards[0];
+        }       
+        cardToConvert = DeckOfCards[53-valueOfCardAtTop];
+    }
+
     public String cardValue() 
     {
         if(cardToConvert == 53 || cardToConvert == 54)
@@ -283,20 +245,13 @@ public class GenerateKey
         }  
     }
 
-    public void mCountOffCardsFromTopBaseOnTopCardValue()
+    private List<Integer> mAddElementsToList(int[] array)
     {
-        int valueOfCardAtTop = DeckOfCards[53]; 
-        if(valueOfCardAtTop == 54)
-        {
-            cardToConvert =DeckOfCards[0];
-        }       
-        cardToConvert = DeckOfCards[53-valueOfCardAtTop];
-    }
-
-    public int mKeyLength(String message) 
-    {
-        String finalString = mGenerateKey(message);
-        return finalString.length();
+        List<Integer> list = new ArrayList<>();
+        for (int i : array) {
+            list.add(i);
+        }
+        return list;
     }
 
     private int[] mCardsBelowBottomJoker(int positionOfBottomJoker) 
@@ -327,5 +282,41 @@ public class GenerateKey
             cardsBetweenJokers[j] = DeckOfCards[j + positionOfJokerA + 1];
         }
         return cardsBetweenJokers;
+    }
+
+    
+    private int[] mRearrangeDeck(int newPositionOfJoker, int oldPostionOfJoker) 
+    {
+        int[] newDeckOfCards = new int[DECKOFCARDS_LENGTH];
+
+        for (int i = 0; i < oldPostionOfJoker; i++) 
+        {
+            newDeckOfCards[i] = DeckOfCards[i];
+        }
+        for (int i = oldPostionOfJoker; i < newPositionOfJoker; i++) 
+        {
+            newDeckOfCards[i] = DeckOfCards[i+1];
+        }
+        newDeckOfCards[newPositionOfJoker] = JOKER_B;
+        for (int i = newPositionOfJoker; i < 53; i++) 
+        {
+            newDeckOfCards[i + 1] = DeckOfCards[i + 1];
+        }
+        return newDeckOfCards;        
+    }
+
+    private void mFindPositionOfJokers() 
+    {
+        for (int i = 0; i < DECKOFCARDS_LENGTH; i++) 
+        {
+            if (DeckOfCards[i] == JOKER_A) 
+            {
+                positionOfJokerA = i;
+            }
+            if (DeckOfCards[i] == JOKER_B) 
+            {
+                positionOfJokerB = i;
+            }
+        }
     }
 }
