@@ -25,11 +25,18 @@ public class GenerateKey
         String keyGenerated = "";
         for (int i = 0; i < message.length(); i++) 
         {
+            System.out.println("=====ROUND "+i+"======");
+            System.out.println("OG deck "+Arrays.toString(DeckOfCards));
             mMoveJokerA();
+            System.out.println("Afte A "+Arrays.toString(DeckOfCards));
             mMoveJokerB();
+            System.out.println("Afte B "+Arrays.toString(DeckOfCards));
             mTrippleCut();
+            System.out.println("Tripple "+Arrays.toString(DeckOfCards));
             mMoveCardsBasingOnBottomCard();
-            cardValue();
+            System.out.println("Move Cards "+Arrays.toString(DeckOfCards));
+            mCountOffCardsFromTopBaseOnTopCardValue();
+            System.out.println("Get value "+Arrays.toString(DeckOfCards));
             keyGenerated += cardValue();
         }
         return keyGenerated;
@@ -37,9 +44,11 @@ public class GenerateKey
 
     public void mCreateDeckOfCards() 
     {
+        int j = 54;
         for (int i = 0; i < DECKOFCARDS_LENGTH; i++) 
         {
-            DeckOfCards[i] = i + 1;
+            DeckOfCards[i] = j;
+            j--;
         }
     }
 
@@ -83,9 +92,10 @@ public class GenerateKey
             {
                 int oldPostionOfJoker = j;
                 int newPositionOfJoker = j - 3;
+                System.out.println("As i am "+newPositionOfJoker);
                 if (newPositionOfJoker < 0) 
                 {
-                    newPositionOfJoker = 50 + Math.abs(newPositionOfJoker);
+                    newPositionOfJoker = 54 + newPositionOfJoker;
                     DeckOfCards = mRearrangeDeck(newPositionOfJoker, oldPostionOfJoker);
                     break;
                 } 
@@ -203,7 +213,7 @@ public class GenerateKey
         }
 
         /**
-         * when the bottom card a joker does not to work. 
+         * when the bottom card is a joker does not work. 
          * And that condition is not described in the doc.
          */
 
