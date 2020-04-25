@@ -13,6 +13,9 @@ public class GenerateKey
     private int positionOfJokerA = 0;
     private int positionOfJokerB = 0;
     public int cardToConvert = 1;
+    String keyGenerated = "";
+    int ASCII_BASE = 64;
+    int NUMBER_OF_ALPHABETS = 26;
 
     public GenerateKey(int[] _deckOfCards) 
     {
@@ -21,35 +24,16 @@ public class GenerateKey
 
     public String mGenerateKey(String message) 
     {
-        // mCreateDeckOfCards();
-        String keyGenerated = "";
         for (int i = 0; i < message.length(); i++) 
         {
-            System.out.println("=====ROUND "+i+"======");
-            System.out.println("OG deck "+Arrays.toString(DeckOfCards));
             mMoveJokerA();
-            System.out.println("Afte A "+Arrays.toString(DeckOfCards));
             mMoveJokerB();
-            System.out.println("Afte B "+Arrays.toString(DeckOfCards));
             mTrippleCut();
-            System.out.println("Tripple "+Arrays.toString(DeckOfCards));
             mMoveCardsBasingOnBottomCard();
-            System.out.println("Move Cards "+Arrays.toString(DeckOfCards));
             mCountOffCardsFromTopBaseOnTopCardValue();
-            System.out.println("Get value "+Arrays.toString(DeckOfCards));
             keyGenerated += cardValue();
         }
         return keyGenerated;
-    }
-
-    public void mCreateDeckOfCards() 
-    {
-        int j = 54;
-        for (int i = 0; i < DECKOFCARDS_LENGTH; i++) 
-        {
-            DeckOfCards[i] = j;
-            j--;
-        }
     }
 
     public void mMoveJokerA() 
@@ -63,10 +47,10 @@ public class GenerateKey
                 if (oldPostionOfJoker == 0) 
                 {
                     newPositionOfJoker = 53;
-                    int[] newDeckOfCards = new int[54];
+                    int[] newDeckOfCards = new int[JOKER_B];
 
                     newDeckOfCards[newPositionOfJoker] = JOKER_A;
-                    for (int i = 0; i < 53; i++) 
+                    for (int i = 0; i < JOKER_A; i++) 
                     {
                         newDeckOfCards[i] = DeckOfCards[i+1];
                     }
@@ -92,7 +76,6 @@ public class GenerateKey
             {
                 int oldPostionOfJoker = j;
                 int newPositionOfJoker = j - 3;
-                System.out.println("As i am "+newPositionOfJoker);
                 if (newPositionOfJoker < 0) 
                 {
                     newPositionOfJoker = 54 + newPositionOfJoker;
@@ -205,53 +188,73 @@ public class GenerateKey
     public void mMoveCardsBasingOnBottomCard()
     {
         int valueOfCardAtBottom = DeckOfCards[0];
-        int[] newDeckOfCards = new int[54];
+        int[] newDeckOfCards = new int[JOKER_B];   
         newDeckOfCards[0] = valueOfCardAtBottom;
+
         if(valueOfCardAtBottom == 54)
         {
             valueOfCardAtBottom = 53;
         }
-
         /**
          * when the bottom card is a joker does not work. 
          * And that condition is not described in the doc.
          */
-
+        
+        /**
+         * adding one by one from starting from top card
+         */
         for (int i = 0; i < valueOfCardAtBottom; i++) 
         {
             newDeckOfCards[i+1] = DeckOfCards[53-i];
         }
-        for (int i = 0; i < 53-valueOfCardAtBottom; i++) 
+        for (int i = 0; i < JOKER_A-valueOfCardAtBottom; i++) 
         {
             newDeckOfCards[valueOfCardAtBottom+i+1] = DeckOfCards[i+1];
         }
+        /**
+         * adding whole cards from top and placing it at once above bottom deck
+         * means top card shall be somewhere in the middle
+         * 
+         * for (int i = 0; i < valueOfCardAtBottom; i++) 
+            {
+                newDeckOfCards[i+1] = DeckOfCards[54-valueOfCardAtBottom+i];
+            }
+            for (int i = valueOfCardAtBottom; i < 53; i++) 
+            {
+                newDeckOfCards[i+1] = DeckOfCards[i];
+            }
+         */
         DeckOfCards = newDeckOfCards;
     }
 
     public void mCountOffCardsFromTopBaseOnTopCardValue()
     {
-        int valueOfCardAtTop = DeckOfCards[53]; 
-        if(valueOfCardAtTop == 54)
+        int valueOfCardAtTop = DeckOfCards[JOKER_A]; 
+        if(valueOfCardAtTop == JOKER_B)
         {
             cardToConvert =DeckOfCards[0];
         }       
-        cardToConvert = DeckOfCards[53-valueOfCardAtTop];
+        cardToConvert = DeckOfCards[JOKER_A-valueOfCardAtTop];
     }
 
     public String cardValue() 
     {
-        if(cardToConvert == 53 || cardToConvert == 54)
+        if(cardToConvert == JOKER_B)
         {
-            return String.valueOf((char) (64 + cardToConvert));
+            cardToConvert = JOKER_A;
         }
-        else if(cardToConvert <= 26)
+        if(cardToConvert == JOKER_A)
         {
-            return String.valueOf((char) (64 + cardToConvert));
+            return "@";
+        }
+        else if(cardToConvert <= NUMBER_OF_ALPHABETS)
+        {
+            return String.valueOf((char) (ASCII_BASE + cardToConvert));
         }
         else
         {
-            cardToConvert = cardToConvert % 26;
-            return String.valueOf((char) (64 + cardToConvert));
+            cardToConvert = cardToConvert % NUMBER_OF_ALPHABETS;
+            return String.valueOf((char) (ASCII_BASE + cardToConvert));
         }  
     }
 

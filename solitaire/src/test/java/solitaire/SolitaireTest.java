@@ -103,10 +103,12 @@ public class SolitaireTest
 
    private int[] mCreateDeckOfCards() 
    {
+      int j = 54;
       int[] deck = new int[54];
       for (int i = 0; i < deck.length; i++) 
       {
-          deck[i] = i+1;
+          deck[i] = j;
+          j--;
       }
       return deck;
   }

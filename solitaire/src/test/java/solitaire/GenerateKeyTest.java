@@ -124,6 +124,7 @@ public class GenerateKeyTest
 
         assertArrayEquals(expectedDeckOfCards, actualDeckOfCards);
     }
+    
 
     @Test
     public void moveJokerBtwoCardsDownCaseWhereJokerIsNotInBottomPositions()

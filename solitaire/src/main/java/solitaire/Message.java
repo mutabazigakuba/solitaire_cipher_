@@ -4,6 +4,8 @@ import java.util.Arrays;
 public class Message 
 {
     private String _message;
+    GenerateKey generateKey = new GenerateKey(new int[54]);
+    private int GROUP_IN = 5;
     public Message(String message)
     {
         _message = message;
@@ -45,23 +47,18 @@ public class Message
         for (int number : numbers) 
         {
             number = Math.abs(number);
-            if(number > 26)
+            if(number > generateKey.NUMBER_OF_ALPHABETS)
             {
-                number -= 26;
+                number -= generateKey.NUMBER_OF_ALPHABETS;
             }
             if(number == 0)
             {
-                number = 26;
+                number = generateKey.NUMBER_OF_ALPHABETS;
             }
-            message +=  String.valueOf((char)(64 + number));
+            message +=  String.valueOf((char)(generateKey.ASCII_BASE + number));
         }
 
         return message;
-    }
-
-    private String removeNonLetters() 
-    {
-        return _message.replaceAll("[^\\p{L}\\p{Z}]","");
     }
 
     private String changeToUpperCase() 
@@ -69,15 +66,24 @@ public class Message
         return _message.toUpperCase();
     }
 
+    private String removeNonLetters() 
+    {
+        return _message.replaceAll("[^\\p{L}\\p{Z}]","");
+    }
+
+    public String removeWhiteSpace(String string)
+    {
+        return string.replaceAll("\\s+", "");
+    }
     private String AddXs()
     {
-        String removeSpace = _message.replaceAll("\\s+", "");
-        int numberXtoAdd = removeSpace.length() % 5;
+        String removeSpace = removeWhiteSpace(_message);
+        int numberXtoAdd = removeSpace.length() % GROUP_IN;
         if (numberXtoAdd == 0)
         {
             return _message;
         }
-        for (int i = 0; i < (5-numberXtoAdd); i++) 
+        for (int i = 0; i < (GROUP_IN -numberXtoAdd); i++) 
         {
             _message = _message + "X";
         }

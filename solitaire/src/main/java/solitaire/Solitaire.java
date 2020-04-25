@@ -21,7 +21,7 @@ public class Solitaire
             return "";
         }
 
-        String message = Message.replaceAll("\\s+", "");
+        String message = CleanMessage.removeWhiteSpace(Message);
         String generatedKey = Key.mGenerateKey(message);
 
         int[] keyArray = new int[generatedKey.length()];
