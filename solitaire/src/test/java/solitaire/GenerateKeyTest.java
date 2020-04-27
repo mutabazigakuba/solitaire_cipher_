@@ -275,9 +275,9 @@ public class GenerateKeyTest
     {
         int[] deckOfCards = mCreateDeckOfCards();
         GenerateKey generateKey = new GenerateKey(deckOfCards);
-        String message = "ab";
+        String message = "a";
 
-        String expectedKeyGenerated = "DW";
+        String expectedKeyGenerated = "D";
         String actualKeyGenereated = generateKey.mGenerateKey(message);
 
         assertEquals(expectedKeyGenerated, actualKeyGenereated);
