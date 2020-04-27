@@ -4,7 +4,8 @@ import java.util.Arrays;
 public class Message 
 {
     private String _message;
-    GenerateKey generateKey = new GenerateKey(new int[54]);
+    private int NUMBER_OF_ALPHABETS = 26;
+    private int ASCII_BASE = 64;
     private int GROUP_IN = 5;
     public Message(String message)
     {
@@ -31,7 +32,7 @@ public class Message
         char[] values = _message.toCharArray();
         for (int i = 0; i < values.length; i++) 
         {
-            int number = values[i] - 'A' +1;
+            int number = values[i] - 'A' + 1;
             numbers[i] = number;
         }
         return numbers;
@@ -47,15 +48,15 @@ public class Message
         for (int number : numbers) 
         {
             number = Math.abs(number);
-            if(number > generateKey.NUMBER_OF_ALPHABETS)
+            if(number > NUMBER_OF_ALPHABETS)
             {
-                number -= generateKey.NUMBER_OF_ALPHABETS;
+                number -= NUMBER_OF_ALPHABETS;
             }
             if(number == 0)
             {
-                number = generateKey.NUMBER_OF_ALPHABETS;
+                number = NUMBER_OF_ALPHABETS;
             }
-            message +=  String.valueOf((char)(generateKey.ASCII_BASE + number));
+            message +=  String.valueOf((char)(ASCII_BASE + number));
         }
 
         return message;

@@ -194,14 +194,6 @@ public class GenerateKey
         {
             valueOfCardAtBottom = 53;
         }
-        /**
-         * when the bottom card is a joker does not work. 
-         * And that condition is not described in the doc.
-         */
-        
-        /**
-         * adding one by one from starting from top card
-         */
         for (int i = 0; i < valueOfCardAtBottom; i++) 
         {
             newDeckOfCards[i+1] = DeckOfCards[53-i];
@@ -210,19 +202,6 @@ public class GenerateKey
         {
             newDeckOfCards[valueOfCardAtBottom+i+1] = DeckOfCards[i+1];
         }
-        /**
-         * adding whole cards from top and placing it at once above bottom deck
-         * means top card shall be somewhere in the middle
-         * 
-         * for (int i = 0; i < valueOfCardAtBottom; i++) 
-            {
-                newDeckOfCards[i+1] = DeckOfCards[54-valueOfCardAtBottom+i];
-            }
-            for (int i = valueOfCardAtBottom; i < 53; i++) 
-            {
-                newDeckOfCards[i+1] = DeckOfCards[i];
-            }
-         */
         DeckOfCards = newDeckOfCards;
     }
 
@@ -233,7 +212,7 @@ public class GenerateKey
         {
             cardToConvert =DeckOfCards[0];
         }       
-        cardToConvert = DeckOfCards[JOKER_A-valueOfCardAtTop];
+        cardToConvert = DeckOfCards[JOKER_A - valueOfCardAtTop];
     }
 
     public String cardValue() 

@@ -2,30 +2,28 @@ package solitaire;
 
 public class Solitaire 
 {
-    private String Message;
     private GenerateKey Key;
-    private Message CleanMessage;
+    private Message Message;
     
-    public Solitaire (String message, GenerateKey key, Message cleanMessage)
+    public Solitaire (GenerateKey key, Message message)
     {
-        Message = message;  
         Key = key;
-        CleanMessage = cleanMessage; 
+        Message = message; 
     }
 
     public String mEncryptMessage()
     {
-        Message = CleanMessage.mClean();
-        if(Message.length() == 0)
+        String message = Message.mClean();
+        if(message.length() == 0)
         {
             return "";
         }
 
-        String message = CleanMessage.removeWhiteSpace(Message);
+        message = Message.removeWhiteSpace(message);
         String generatedKey = Key.mGenerateKey(message);
 
         int[] keyArray = new int[generatedKey.length()];
-        int[] messageArray = new int[Message.length()];
+        int[] messageArray = new int[message.length()];
 
         messageArray = mConvertsToArrayOfNumber(message);
         keyArray = mConvertsToArrayOfNumber(generatedKey);
@@ -35,30 +33,31 @@ public class Solitaire
         {
             encryptMessageArray[i] = messageArray[i] + keyArray[i];
         }
-        return CleanMessage.mConvertsNumberToMessage(encryptMessageArray);
+        return Message.mConvertsNumberToMessage(encryptMessageArray);
     }
 
     public String mDecryptMessage()
     {
-        if(Message.length() == 0)
+        String message = Message.mClean();
+        if(message.length() == 0)
         {
             return "";
         }
 
-        String generatedKey = Key.mGenerateKey(Message);
+        String generatedKey = Key.mGenerateKey(message);
         
         int[] keyArray = new int[generatedKey.length()];
-        int[] messageArray = new int[Message.length()];
+        int[] messageArray = new int[message.length()];
 
-        messageArray = mConvertsToArrayOfNumber(Message);
+        messageArray = mConvertsToArrayOfNumber(message);
         keyArray = mConvertsToArrayOfNumber(generatedKey);
 
-        int[] decryptMessageArray = new int[Message.length()];
+        int[] decryptMessageArray = new int[message.length()];
         for (int i = 0; i < generatedKey.length(); i++) 
         {
             decryptMessageArray[i] = messageArray[i] - keyArray[i];
         }
-        return CleanMessage.mConvertsNumberToMessage(decryptMessageArray);
+        return Message.mConvertsNumberToMessage(decryptMessageArray);
     }
 
     private int[] mConvertsToArrayOfNumber(String string)

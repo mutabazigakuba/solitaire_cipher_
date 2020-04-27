@@ -14,7 +14,7 @@ public class SolitaireTest
       int[] _deckOfCards = mCreateDeckOfCards();
       GenerateKey generateKey = new GenerateKey(_deckOfCards);
       Message cleanMessage = new Message(message);
-      Solitaire solitaire = new Solitaire(message, generateKey, cleanMessage);
+      Solitaire solitaire = new Solitaire(generateKey, cleanMessage);
 
       String expectedMessage = "LFLRQ";
       String actualMessage = solitaire.mEncryptMessage();
@@ -22,22 +22,6 @@ public class SolitaireTest
       assertEquals(expectedMessage, actualMessage);
    }
  
-   // @Test
-   // public void encryptesMessageWithSpecialChars()
-   // {
-   //    String message = "HEL 34LO WORL32@#d";
-
-   //    int[] _deckOfCards = mCreateDeckOfCards();
-   //    GenerateKey generateKey = new GenerateKey(_deckOfCards);
-   //    Message cleanMessage = new Message(message);
-   //    Solitaire solitaire = new Solitaire(message, generateKey, cleanMessage);
-
-   //    String expectedMessage = "JGOQWGVAXR";
-   //    String actualMessage = solitaire.mEncryptMessage();
-
-   //    assertEquals(expectedMessage, actualMessage);
-   // }
-
    @Test
    public void keyAndMessageShouldBeOfSameLength() 
    {
@@ -58,7 +42,7 @@ public class SolitaireTest
       int[] _deckOfCards = mCreateDeckOfCards();
       GenerateKey generateKey = new GenerateKey(_deckOfCards);
       Message cleanMessage = new Message(message);
-      Solitaire solitaire = new Solitaire(message, generateKey, cleanMessage);
+      Solitaire solitaire = new Solitaire(generateKey, cleanMessage);
       String dencryptedMessage = "FFOKU";
 
       String expectedDencryptedMessage = dencryptedMessage;
@@ -66,40 +50,6 @@ public class SolitaireTest
 
       assertEquals(expectedDencryptedMessage, actualDencryptedMessage);
    }
-
-   // @Test
-   // public void encrpytOneLetterMessageWithConvertedDeck()
-   // {
-   //    String message = "H";
-   //    int[] _deckOfCards = mCreateDeckOfCards();
-   //    for (int i = 0; i < _deckOfCards.length; i++) 
-   //    {
-   //       _deckOfCards[i] = i+1;
-   //    }
-   //    GenerateKey generateKey = new GenerateKey(_deckOfCards);
-   //    Message cleanMessage = new Message(message);
-   //    Solitaire solitaire = new Solitaire(message, generateKey, cleanMessage);
-      
-   //    String expectedMessage = "JZACF";
-   //    String actualMessage = solitaire.mEncryptMessage();
-
-   //    assertEquals(expectedMessage, actualMessage);
-   // }
-
-   // @Test
-   // public void encrpytManyLetterMessageWithConvertedDeck()
-   // { 
-   //    String message = "YOUR CIPHER IS WORKING";
-   //    int[] _deckOfCards = mCreateDeckOfCards();
-   //    GenerateKey generateKey = new GenerateKey(_deckOfCards);
-   //    Message cleanMessage = new Message(message);
-   //    Solitaire solitaire = new Solitaire(message, generateKey, cleanMessage);
-      
-   //    String expectedMessage = "CLEPKHHNIYCFPWHFDFEH";
-   //    String actualMessage = solitaire.mEncryptMessage();
-
-   //    assertEquals(expectedMessage, actualMessage);
-   // }
 
    private int[] mCreateDeckOfCards() 
    {
