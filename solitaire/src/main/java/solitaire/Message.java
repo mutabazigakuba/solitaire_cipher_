@@ -3,7 +3,7 @@ import java.util.Arrays;
 
 public class Message 
 {
-    private String _message;
+    public String _message;
     private int NUMBER_OF_ALPHABETS = 26;
     private int ASCII_BASE = 64;
     private int GROUP_IN = 5;
@@ -17,7 +17,7 @@ public class Message
         _message = removeNonLetters();
         _message = changeToUpperCase();
         _message = AddXs();
-        _message = groupLettersIntoFives();
+        _message = removeWhiteSpace(_message);
         return _message;
     }
 
@@ -59,7 +59,7 @@ public class Message
             message +=  String.valueOf((char)(ASCII_BASE + number));
         }
 
-        return message;
+        return groupIntoFives(message);
     }
 
     private String changeToUpperCase() 
@@ -91,9 +91,9 @@ public class Message
         return _message;
     }
 
-    private String groupLettersIntoFives() 
+    private String groupIntoFives(String message) 
     {
-        return Arrays.toString(_message.replaceAll("\\s+", "").split("(?<=\\G.{" + 5 + "})"))
+        return Arrays.toString(message.replaceAll("\\s+", "").split("(?<=\\G.{" + 5 + "})"))
             .replaceAll("[^\\p{L}\\p{Z}]","");
     }
 }

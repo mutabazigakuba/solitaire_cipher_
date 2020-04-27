@@ -36,18 +36,7 @@ public class MessageTest
     {
         Message solitaire = new Message("he  ll o hel lo");
 
-        String expectedMessage = "HELLO HELLO";
-        String actualMessage = solitaire.mClean(); 
-
-        assertEquals(expectedMessage, actualMessage);
-    }
-
-    @Test
-    public void messageShouldBeGroupedIntoFives()
-    {
-        Message solitaire = new Message("hellohello");
-
-        String expectedMessage = "HELLO HELLO";
+        String expectedMessage = "HELLOHELLO";
         String actualMessage = solitaire.mClean(); 
 
         assertEquals(expectedMessage, actualMessage);
@@ -64,17 +53,6 @@ public class MessageTest
         assertEquals(expectedMessage, actualMessage);
     }
 
-    
-    @Test
-    public void messageWithSpaceShouldBeGroupedInFivesAndXAddedWhenNotModulusFive()
-    {
-        Message solitaire = new Message("hel loh el");
-
-        String expectedMessage = "HELLO HELXX";
-        String actualMessage = solitaire.mClean(); 
-
-        assertEquals(expectedMessage, actualMessage);
-    } 
     
     @Test
     public void singleStringReturnsCorrespondingNumber() 
@@ -166,7 +144,7 @@ public class MessageTest
         String _message = "HELLOWORLD";
         Message message = new Message(_message);
 
-        String expectedMessage  = "HELLOWORLD";
+        String expectedMessage  = "HELLO WORLD";
         int[] list = message.mConvertsToNumber();
         String actualMessage = message.mConvertsNumberToMessage(list);
 

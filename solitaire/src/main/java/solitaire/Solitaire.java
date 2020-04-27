@@ -19,7 +19,6 @@ public class Solitaire
             return "";
         }
 
-        message = Message.removeWhiteSpace(message);
         String generatedKey = Key.mGenerateKey(message);
 
         int[] keyArray = new int[generatedKey.length()];
@@ -76,4 +75,5 @@ public class Solitaire
         }
         return numbers;
     }
+
 }
