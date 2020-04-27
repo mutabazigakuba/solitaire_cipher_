@@ -12,7 +12,7 @@ public class SolitaireTest
    {
       String message = "HELLO";
       int[] _deckOfCards = mCreateDeckOfCards();
-      GenerateKey generateKey = new GenerateKey(_deckOfCards);
+      Key generateKey = new Key(_deckOfCards);
       Message cleanMessage = new Message(message);
       Solitaire solitaire = new Solitaire(generateKey, cleanMessage);
 
@@ -27,9 +27,9 @@ public class SolitaireTest
    {
       String message = "";
       int[] _deckOfCards = mCreateDeckOfCards();
-      GenerateKey generateKey = new GenerateKey(_deckOfCards);
+      Key generateKey = new Key(_deckOfCards);
 
-      int expectedKeyLength = generateKey.mGenerateKey(message).length();
+      int expectedKeyLength = generateKey.mGenerate(message).length();
       int actualKeyLength = message.length();
 
       assertEquals(expectedKeyLength, actualKeyLength);
@@ -40,7 +40,7 @@ public class SolitaireTest
    {
       String message = "JGOQW";
       int[] _deckOfCards = mCreateDeckOfCards();
-      GenerateKey generateKey = new GenerateKey(_deckOfCards);
+      Key generateKey = new Key(_deckOfCards);
       Message cleanMessage = new Message(message);
       Solitaire solitaire = new Solitaire(generateKey, cleanMessage);
       String dencryptedMessage = "FFOKU";

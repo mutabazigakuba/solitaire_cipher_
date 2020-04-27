@@ -3,7 +3,7 @@ package solitaire;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GenerateKey 
+public class Key
 {
     private int DECKOFCARDS_LENGTH = 54;
     public int[] DeckOfCards = new int[DECKOFCARDS_LENGTH];
@@ -16,12 +16,12 @@ public class GenerateKey
     int ASCII_BASE = 64;
     int NUMBER_OF_ALPHABETS = 26;
 
-    public GenerateKey(int[] _deckOfCards) 
+    public Key(int[] _deckOfCards) 
     {
         DeckOfCards = _deckOfCards;
     }
 
-    public String mGenerateKey(String message) 
+    public String mGenerate(String message) 
     {
         for (int i = 0; i < message.length(); i++) 
         {

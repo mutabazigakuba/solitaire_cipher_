@@ -15,10 +15,10 @@ public class GenerateKeyTest
     {
         String message = "";
         int[] deckOfCards = new int[54];
-        GenerateKey generateKey = new GenerateKey(deckOfCards);
+        Key generateKey = new Key(deckOfCards);
 
         String expectedGeneratedKey = "";
-        String actualGeneratedKey = generateKey.mGenerateKey(message);
+        String actualGeneratedKey = generateKey.mGenerate(message);
 
         assertEquals(expectedGeneratedKey, actualGeneratedKey);
     }
@@ -27,7 +27,7 @@ public class GenerateKeyTest
     public void generateKeyFunctionShouldHaveDeckOf54Cards()
     {
         int[] deckOfCards = new int[54];
-        GenerateKey generateKey = new GenerateKey(deckOfCards);
+        Key generateKey = new Key(deckOfCards);
 
         int[] expectedDeckOfCards = new int[54];
         int[] actualDeckOfCards = generateKey.DeckOfCards;
@@ -39,7 +39,7 @@ public class GenerateKeyTest
     public void generatedDeckOfCardsShouldBeConveretedToNumbers()
     {
         int[] deckOfCards = mCreateDeckOfCards();
-        GenerateKey generateKey = new GenerateKey(deckOfCards);
+        Key generateKey = new Key(deckOfCards);
 
         int[] expectedDeckOfCards = deckOfCards;
         int[] actualDeckOfCards = generateKey.DeckOfCards;
@@ -57,7 +57,7 @@ public class GenerateKeyTest
         deckOfCards[2] = 52;
         deckOfCards[1] = jokerB;
         deckOfCards[0] = jokerA;
-        GenerateKey generateKey = new GenerateKey(deckOfCards);
+        Key generateKey = new Key(deckOfCards);
         int[] newDeckOfCards = new int[54];
         newDeckOfCards[53] = jokerA;
         newDeckOfCards[52] = 1;
@@ -83,7 +83,7 @@ public class GenerateKeyTest
         deckOfCards[2] = 52;
         deckOfCards[1] = jokerA;
         deckOfCards[0] = jokerB;
-        GenerateKey generateKey = new GenerateKey(deckOfCards);
+        Key generateKey = new Key(deckOfCards);
         int[] newDeckOfCards = new int[54];
         newDeckOfCards[53] = 1;
         newDeckOfCards[52] = 2;
@@ -109,7 +109,7 @@ public class GenerateKeyTest
         deckOfCards[2] = 52;
         deckOfCards[1] = jokerB;
         deckOfCards[0] = jokerA;
-        GenerateKey generateKey = new GenerateKey(deckOfCards);
+        Key generateKey = new Key(deckOfCards);
         int[] newDeckOfCards = new int[54];
         newDeckOfCards[53] = 1;
         newDeckOfCards[52] = jokerB;
@@ -139,7 +139,7 @@ public class GenerateKeyTest
         deckOfCards[2] = 51;
         deckOfCards[1] = 52;
         deckOfCards[0] = jokerA;
-        GenerateKey generateKey = new GenerateKey(deckOfCards);
+        Key generateKey = new Key(deckOfCards);
         int[] newDeckOfCards = new int[54];
         newDeckOfCards[53] = 1;
         newDeckOfCards[52] = 2;
@@ -167,7 +167,7 @@ public class GenerateKeyTest
         deckOfCards[50] = 3;
         deckOfCards[1] = 52;
         deckOfCards[0] = jokerA;
-        GenerateKey generateKey = new GenerateKey(deckOfCards);
+        Key generateKey = new Key(deckOfCards);
         int[] newDeckOfCards = new int[54];
         newDeckOfCards[53] = jokerB;
         newDeckOfCards[52] = 2;
@@ -193,7 +193,7 @@ public class GenerateKeyTest
         deckOfCards[50] = 3;
         deckOfCards[1] = 52;
         deckOfCards[0] = jokerB;
-        GenerateKey generateKey = new GenerateKey(deckOfCards);
+        Key generateKey = new Key(deckOfCards);
         int[] newDeckOfCards = new int[54];
         newDeckOfCards[53] = jokerA;
         newDeckOfCards[52] = 2;
@@ -220,7 +220,7 @@ public class GenerateKeyTest
         deckOfCards[2] = 52;
         deckOfCards[1] = jokerA;
         deckOfCards[0] = 1;
-        GenerateKey generateKey = new GenerateKey(deckOfCards);
+        Key generateKey = new Key(deckOfCards);
         int[] newDeckOfCards = new int[54];
         newDeckOfCards[53] = 2;
         newDeckOfCards[52] = 3;
@@ -248,7 +248,7 @@ public class GenerateKeyTest
         deckOfCards[2] = jokerA;
         deckOfCards[1] = jokerB;
         deckOfCards[0] = 1;
-        GenerateKey generateKey = new GenerateKey(deckOfCards);
+        Key generateKey = new Key(deckOfCards);
 
         int expectedCardValue = 4;
         generateKey.mCountOffCardsFromTopBaseOnTopCardValue();
@@ -261,7 +261,7 @@ public class GenerateKeyTest
     public void numberShouldReturnAstringValue()
     {
         int[] deckOfCards = new int[54];
-        GenerateKey generateKey = new GenerateKey(deckOfCards);
+        Key generateKey = new Key(deckOfCards);
 
         String expectedValue = "A";
         generateKey.cardValue();
@@ -274,11 +274,11 @@ public class GenerateKeyTest
     public void generateKeyShouldReturnKeyWhenMessagePassed()
     {
         int[] deckOfCards = mCreateDeckOfCards();
-        GenerateKey generateKey = new GenerateKey(deckOfCards);
+        Key generateKey = new Key(deckOfCards);
         String message = "a";
 
         String expectedKeyGenerated = "D";
-        String actualKeyGenereated = generateKey.mGenerateKey(message);
+        String actualKeyGenereated = generateKey.mGenerate(message);
 
         assertEquals(expectedKeyGenerated, actualKeyGenereated);
     }

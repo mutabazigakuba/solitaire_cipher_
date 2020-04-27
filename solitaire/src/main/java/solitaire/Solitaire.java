@@ -2,10 +2,10 @@ package solitaire;
 
 public class Solitaire 
 {
-    private GenerateKey Key;
+    private Key Key;
     private Message Message;
     
-    public Solitaire (GenerateKey key, Message message)
+    public Solitaire (Key key, Message message)
     {
         Key = key;
         Message = message; 
@@ -19,7 +19,7 @@ public class Solitaire
             return "";
         }
 
-        String generatedKey = Key.mGenerateKey(message);
+        String generatedKey = Key.mGenerate(message);
 
         int[] keyArray = new int[generatedKey.length()];
         int[] messageArray = new int[message.length()];
@@ -43,7 +43,7 @@ public class Solitaire
             return "";
         }
 
-        String generatedKey = Key.mGenerateKey(message);
+        String generatedKey = Key.mGenerate(message);
         
         int[] keyArray = new int[generatedKey.length()];
         int[] messageArray = new int[message.length()];
