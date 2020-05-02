@@ -210,7 +210,44 @@ public class GenerateKeyTest
     }
 
     @Test
-    public void countCutCardsOffTheTopBasingOnTheBottomCard()
+    public void trippleCutCaseWhenJokerBandJokerAareBetween()
+    {
+        int[] deckOfCards = new int[54];
+        deckOfCards[53] = 2;
+        deckOfCards[52] = 4;
+        deckOfCards[51] = 6;
+        deckOfCards[50] = jokerB;
+        deckOfCards[49] = 5;
+        deckOfCards[48] = 8;
+        deckOfCards[4] = 7;
+        deckOfCards[3] = 1;
+        deckOfCards[2] = jokerA;
+        deckOfCards[1] = 3;
+        deckOfCards[0] = 9;
+
+        Key generateKey = new Key(deckOfCards);
+        int[] newDeckOfCards = new int[54];
+        newDeckOfCards[53] = 3;
+        newDeckOfCards[52] = 9;
+        newDeckOfCards[51] = jokerB;
+        newDeckOfCards[50] = 5;
+        newDeckOfCards[49] = 8;
+        newDeckOfCards[5] = 7;
+        newDeckOfCards[4] = 1;
+        newDeckOfCards[3] = jokerA;
+        newDeckOfCards[2] = 2;
+        newDeckOfCards[1] = 4;
+        newDeckOfCards[0] = 6;
+
+        int[] expectedDeckOfCards = newDeckOfCards;
+        generateKey.mTrippleCut();
+        int[] actualDeckOfCards = generateKey.DeckOfCards;
+
+        assertArrayEquals(expectedDeckOfCards, actualDeckOfCards);
+    }
+
+    @Test
+    public void countCutWhenBottomCardIsOne()
     {
         int[] deckOfCards = new int[54];
         deckOfCards[53] = jokerB;
@@ -231,14 +268,45 @@ public class GenerateKeyTest
         newDeckOfCards[0] = 1;
 
         int[] expectedDeckOfCards = newDeckOfCards;
-        generateKey.mMoveCardsBasingOnBottomCard();
+        generateKey.mCountCut();
         int[] actualDeckOfCards = generateKey.DeckOfCards;
 
         assertArrayEquals(expectedDeckOfCards, actualDeckOfCards);
     }
 
     @Test
-    public void countOffCardsFromTopBadingOnTopCardToGetValueOfFinalCard()
+    
+    public void countCutWhenBottomCardIsNine()
+    {
+        int[] deckOfCards = new int[54];
+        deckOfCards[53] = 7;
+        deckOfCards[50] = 2;
+        deckOfCards[45] = 4;
+        deckOfCards[44] = 5;
+        deckOfCards[43] = 14;
+        deckOfCards[2] = 6;
+        deckOfCards[1] = 8;
+        deckOfCards[0] = 9;
+        Key generateKey = new Key(deckOfCards);
+        int[] newDeckOfCards = new int[54];
+        newDeckOfCards[53] = 5;
+        newDeckOfCards[52] = 14;
+        newDeckOfCards[11] = 6;
+        newDeckOfCards[10] = 8;
+        newDeckOfCards[9] = 7;
+        newDeckOfCards[6] = 2;
+        newDeckOfCards[1] = 4;
+        newDeckOfCards[0] = 9;
+
+        int[] expectedDeckOfCards = newDeckOfCards;
+        generateKey.mCountCut();
+        int[] actualDeckOfCards = generateKey.DeckOfCards;
+
+        assertArrayEquals(expectedDeckOfCards, actualDeckOfCards);
+    }
+
+    @Test
+    public void countOffCardsFromTopBasingOnTopCardToGetValueOfFinalCard()
     {
         int[] deckOfCards = new int[54];
         deckOfCards[53] = 2;
@@ -251,7 +319,7 @@ public class GenerateKeyTest
         Key generateKey = new Key(deckOfCards);
 
         int expectedCardValue = 4;
-        generateKey.mCountOffCardsFromTopBaseOnTopCardValue();
+        generateKey.mOutPutCardInNumbers();
         int actualCardValue = generateKey.cardToConvert;
 
         assertEquals(expectedCardValue, actualCardValue);

@@ -16,7 +16,7 @@ public class SolitaireTest
       Message cleanMessage = new Message(message);
       Solitaire solitaire = new Solitaire(generateKey, cleanMessage);
 
-      String expectedMessage = "LFLRQ";
+      String expectedMessage = "LODZY";
       String actualMessage = solitaire.mEncryptMessage();
 
       assertEquals(expectedMessage, actualMessage);
@@ -43,7 +43,7 @@ public class SolitaireTest
       Key generateKey = new Key(_deckOfCards);
       Message cleanMessage = new Message(message);
       Solitaire solitaire = new Solitaire(generateKey, cleanMessage);
-      String dencryptedMessage = "FFOKU";
+      String dencryptedMessage = "FCCCM";
 
       String expectedDencryptedMessage = dencryptedMessage;
       String actualDencryptedMessage = solitaire.mDecryptMessage();

@@ -1,4 +1,4 @@
-package solitaire;
+ package solitaire;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,9 +28,11 @@ public class Key
             mMoveJokerA();
             mMoveJokerB();
             mTrippleCut();
-            mMoveCardsBasingOnBottomCard();
-            mCountOffCardsFromTopBaseOnTopCardValue();
-            keyGenerated += cardValue();
+            mCountCut();
+            mOutPutCardInNumbers();
+            String keyValue = cardValue();
+            if(keyValue == ""){i = i-1;}
+            keyGenerated += keyValue;
         }
         return keyGenerated;
     }
@@ -46,10 +48,10 @@ public class Key
                 if (oldPostionOfJoker == 0) 
                 {
                     newPositionOfJoker = 53;
-                    int[] newDeckOfCards = new int[JOKER_B];
+                    int[] newDeckOfCards = new int[54];
 
                     newDeckOfCards[newPositionOfJoker] = JOKER_A;
-                    for (int i = 0; i < JOKER_A; i++) 
+                    for (int i = 0; i < 53; i++) 
                     {
                         newDeckOfCards[i] = DeckOfCards[i+1];
                     }
@@ -58,9 +60,9 @@ public class Key
                 } 
                 else 
                 {
-                    int x = DeckOfCards[newPositionOfJoker];
+                    int cardToSwap = DeckOfCards[newPositionOfJoker];
                     DeckOfCards[newPositionOfJoker] = JOKER_A;
-                    DeckOfCards[oldPostionOfJoker] = x;
+                    DeckOfCards[oldPostionOfJoker] = cardToSwap;
                     break;
                 }
             }
@@ -106,124 +108,86 @@ public class Key
     public void mTrippleCut() 
     {
         int numbercardsBetweenJokerAandJokerB = 0;
-
         List<Integer> listOfCardsBelow = new ArrayList<Integer>();
         List<Integer> listOfCardsBetweenJokers = new ArrayList<Integer>();
         List<Integer> listOfCardsAbove = new ArrayList<Integer>();
-
         int[] trippleCutDeck = new int[DECKOFCARDS_LENGTH];
 
         mFindPositionOfJokers();
 
+        numbercardsBetweenJokerAandJokerB = Math.abs(positionOfJokerB - positionOfJokerA);
+
         if (positionOfJokerA < positionOfJokerB) 
         {
-            int[] cardsBelowJokerA = mCardsBelowBottomJoker(positionOfJokerA);
-            listOfCardsBelow = mAddElementsToList(cardsBelowJokerA);
+            listOfCardsBelow = mCardsBelowBottomJoker(positionOfJokerA);
             
-            int[] cardsAboveJokerB = mCardsAboveTopJoker(positionOfJokerB);
-            listOfCardsAbove = mAddElementsToList(cardsAboveJokerB);
+            listOfCardsAbove = mCardsAboveTopJoker(positionOfJokerB);
             
-            numbercardsBetweenJokerAandJokerB = Math.abs(positionOfJokerB - positionOfJokerA);
-            int[] cardsBetweenJokers = mCardsBetweenJokers(numbercardsBetweenJokerAandJokerB, positionOfJokerA);
-            listOfCardsBetweenJokers = mAddElementsToList(cardsBetweenJokers);
+            listOfCardsBetweenJokers = mCardsBetweenJokers(numbercardsBetweenJokerAandJokerB, positionOfJokerA);
             
-            List<Integer> listOfTrippleCutDeck = new ArrayList<Integer>();
-            for (int i : listOfCardsAbove) 
-            {
-                listOfTrippleCutDeck.add(i);
-            }
-            listOfTrippleCutDeck.add(JOKER_A);
-            for (int i : listOfCardsBetweenJokers) 
-            {
-                listOfTrippleCutDeck.add(i);
-            }
-            listOfTrippleCutDeck.add(JOKER_B);
-            for (int i : listOfCardsBelow) 
-            {
-                listOfTrippleCutDeck.add(i);
-            }
+            trippleCutDeck = mFinalTrippleCutDeck(listOfCardsAbove, listOfCardsBetweenJokers, listOfCardsBelow, JOKER_A, JOKER_B);
 
-            for (int i = 0; i < listOfTrippleCutDeck.size(); i++) 
-            {
-                trippleCutDeck[i] = listOfTrippleCutDeck.get(i);
-            }
         } 
         else 
         {
-            int[] cardsAboveJokerA = mCardsAboveTopJoker(positionOfJokerA);
-            listOfCardsAbove = mAddElementsToList(cardsAboveJokerA);
+            listOfCardsAbove = mCardsAboveTopJoker(positionOfJokerA);
             
-            int[] cardsBelowJokerB = mCardsBelowBottomJoker(positionOfJokerB);
-            listOfCardsBelow = mAddElementsToList(cardsBelowJokerB);
+            listOfCardsBelow = mCardsBelowBottomJoker(positionOfJokerB);
             
-            numbercardsBetweenJokerAandJokerB = Math.abs(positionOfJokerA - positionOfJokerB);
-            int[] cardsBetweenJokers = mCardsBetweenJokers(numbercardsBetweenJokerAandJokerB, positionOfJokerB);
-            listOfCardsBetweenJokers = mAddElementsToList(cardsBetweenJokers);
+            listOfCardsBetweenJokers = mCardsBetweenJokers(numbercardsBetweenJokerAandJokerB, positionOfJokerB);
             
-            List<Integer> listOfTrippleCutDeck = new ArrayList<Integer>();
-            for (int i : listOfCardsAbove) 
-            {
-                listOfTrippleCutDeck.add(i);
-            }
-            listOfTrippleCutDeck.add(JOKER_B);
-            for (int i : listOfCardsBetweenJokers) 
-            {
-                listOfTrippleCutDeck.add(i);
-            }
-            listOfTrippleCutDeck.add(JOKER_A);
-            for (int i : listOfCardsBelow) 
-            {
-                listOfTrippleCutDeck.add(i);
-            }
+            trippleCutDeck = mFinalTrippleCutDeck(listOfCardsAbove, listOfCardsBetweenJokers, listOfCardsBelow, JOKER_B, JOKER_A);
 
-            for (int i = 0; i < listOfTrippleCutDeck.size(); i++) 
-            {
-                trippleCutDeck[i] = listOfTrippleCutDeck.get(i);
-            }
         }
         DeckOfCards = trippleCutDeck;
     }
 
-    public void mMoveCardsBasingOnBottomCard()
+    public void mCountCut()
     {
         int valueOfCardAtBottom = DeckOfCards[0];
-        int[] newDeckOfCards = new int[JOKER_B];   
-        newDeckOfCards[0] = valueOfCardAtBottom;
+        int[] newDeckOfCards = new int[54];   
 
         if(valueOfCardAtBottom == 54)
         {
             valueOfCardAtBottom = 53;
         }
-        for (int i = 0; i < valueOfCardAtBottom; i++) 
+        if(valueOfCardAtBottom ==53)
         {
-            newDeckOfCards[i+1] = DeckOfCards[53-i];
+            newDeckOfCards = DeckOfCards;
+            DeckOfCards = newDeckOfCards;      
         }
-        for (int i = 0; i < JOKER_A-valueOfCardAtBottom; i++) 
-        {
-            newDeckOfCards[valueOfCardAtBottom+i+1] = DeckOfCards[i+1];
+        else
+        { 
+            newDeckOfCards[0] = valueOfCardAtBottom;
+
+            for (int i = 0; i < valueOfCardAtBottom; i++) 
+            {
+                newDeckOfCards[i+1] = DeckOfCards[54 - valueOfCardAtBottom+i];
+            }
+            for (int i = 0; i < 53-valueOfCardAtBottom; i++) 
+            {
+                newDeckOfCards[valueOfCardAtBottom+i+1] = DeckOfCards[i+1];
+            }
+            DeckOfCards = newDeckOfCards;
         }
-        DeckOfCards = newDeckOfCards;
+        
     }
 
-    public void mCountOffCardsFromTopBaseOnTopCardValue()
+    public void mOutPutCardInNumbers()
     {
-        int valueOfCardAtTop = DeckOfCards[JOKER_A]; 
-        if(valueOfCardAtTop == JOKER_B)
+        int valueOfCardAtTop = DeckOfCards[53]; 
+        if(valueOfCardAtTop == 54)
         {
-            cardToConvert =DeckOfCards[0];
+            valueOfCardAtTop = 53;
         }       
-        cardToConvert = DeckOfCards[JOKER_A - valueOfCardAtTop];
+        cardToConvert = DeckOfCards[53 - valueOfCardAtTop];
     }
 
     public String cardValue() 
     {
-        if(cardToConvert == JOKER_B)
+        if(cardToConvert == JOKER_B || cardToConvert == JOKER_A)
         {
-            cardToConvert = JOKER_A;
-        }
-        if(cardToConvert == JOKER_A)
-        {
-            return "@";
+            return "";
         }
         else if(cardToConvert <= NUMBER_OF_ALPHABETS)
         {
@@ -231,12 +195,12 @@ public class Key
         }
         else
         {
-            cardToConvert = cardToConvert % NUMBER_OF_ALPHABETS;
+            cardToConvert = cardToConvert - NUMBER_OF_ALPHABETS;
             return String.valueOf((char) (ASCII_BASE + cardToConvert));
         }  
     }
 
-    private List<Integer> mAddElementsToList(int[] array)
+    private List<Integer> mChangeArrayToList(int[] array)
     {
         List<Integer> list = new ArrayList<>();
         for (int i : array) {
@@ -245,36 +209,64 @@ public class Key
         return list;
     }
 
-    private int[] mCardsBelowBottomJoker(int positionOfBottomJoker) 
+    private List<Integer> mCardsBelowBottomJoker(int positionOfBottomJoker) 
     {
         int[] cardsBelowBottomJoker = new int[positionOfBottomJoker];
         for (int j = 0; j < positionOfBottomJoker; j++) 
         {
             cardsBelowBottomJoker[j] = DeckOfCards[j];
         }
-        return cardsBelowBottomJoker;
+        return mChangeArrayToList(cardsBelowBottomJoker);
     }
 
-    private int[] mCardsAboveTopJoker(int positionOfTopJoker) 
+    private List<Integer> mCardsAboveTopJoker(int positionOfTopJoker) 
     {
         int[] cardsAboveTopJoker = new int[53 - positionOfTopJoker];
         for (int j = 0; j < 53 - positionOfTopJoker; j++) 
         {
             cardsAboveTopJoker[j] = DeckOfCards[positionOfTopJoker + j + 1];
         }
-        return cardsAboveTopJoker;
+        return mChangeArrayToList(cardsAboveTopJoker);
     }
 
-    private int[] mCardsBetweenJokers(int numbercardsBetweenJokers, int positionOfJokerA) 
+    private List<Integer> mCardsBetweenJokers(int numbercardsBetweenJokers, int positionOfJokerA) 
     {
         int[] cardsBetweenJokers = new int[numbercardsBetweenJokers - 1];
         for (int j = 0; j < cardsBetweenJokers.length; j++) 
         {
             cardsBetweenJokers[j] = DeckOfCards[j + positionOfJokerA + 1];
         }
-        return cardsBetweenJokers;
+        return mChangeArrayToList(cardsBetweenJokers);
     }
 
+    private int[] mFinalTrippleCutDeck(List<Integer> cardsAbove, List<Integer> cardsBetween, List<Integer> cardsBelow,  int joker1, int joker2)
+    {
+        List<Integer> listOfTrippleCutDeck = new ArrayList<Integer>();
+
+        for (int i : cardsAbove) 
+            {
+                listOfTrippleCutDeck.add(i);
+            }
+            listOfTrippleCutDeck.add(joker1);
+            for (int i : cardsBetween) 
+            {
+                listOfTrippleCutDeck.add(i);
+            }
+            listOfTrippleCutDeck.add(joker2);
+            for (int i : cardsBelow) 
+            {
+                listOfTrippleCutDeck.add(i);
+            }
+
+            int[] trippleCutDeck = new int[DECKOFCARDS_LENGTH];
+
+            for (int i = 0; i < listOfTrippleCutDeck.size(); i++) 
+            {
+                trippleCutDeck[i] = listOfTrippleCutDeck.get(i);
+            }
+
+            return trippleCutDeck;
+    }
     
     private int[] mRearrangeDeck(int newPositionOfJoker, int oldPostionOfJoker) 
     {
