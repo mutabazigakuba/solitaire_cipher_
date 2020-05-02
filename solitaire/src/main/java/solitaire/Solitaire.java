@@ -1,50 +1,79 @@
 package solitaire;
 
-import java.util.Arrays;
-
 public class Solitaire 
 {
-    private String _message;
-    public Solitaire(String message)
+    private Key Key;
+    private Message Message;
+    
+    public Solitaire (Key key, Message message)
     {
-        _message = message;
+        Key = key;
+        Message = message; 
     }
 
-    public String encoded_message() 
+    public String mEncryptMessage()
     {
-        _message = removeNonLetters();
-        _message = changeToUpperCase();
-        _message = groupLettersIntoFives();
-        _message = AddXs();
-        return _message;
-    }
-
-    private String removeNonLetters() 
-    {
-        return _message.replaceAll("[^\\p{L}\\p{Z}]","");
-    }
-
-    private String changeToUpperCase() 
-    {
-        return _message.toUpperCase();
-    }
-
-    private String groupLettersIntoFives() 
-    {
-        return Arrays.toString(_message.replaceAll("\\s+", "").split("(?<=\\G.{" + 5 + "})"))
-            .replaceAll("[^\\p{L}\\p{Z}]","");
-    }
-
-    private String AddXs()
-    {
-        String removeSpace = _message.replaceAll("\\s+", "");
-        int numberXtoAdd = removeSpace.length() % 5;
-
-        for (int i = 1; i < numberXtoAdd; i++) 
+        String message = Message.mClean();
+        if(message.length() == 0)
         {
-            _message = _message + "X";
+            return "";
         }
-        return _message;
+
+        String generatedKey = Key.mGenerate(message);
+
+        int[] keyArray = new int[generatedKey.length()];
+        int[] messageArray = new int[message.length()];
+
+        messageArray = mConvertsToArrayOfNumber(message);
+        keyArray = mConvertsToArrayOfNumber(generatedKey);
+
+        int[] encryptMessageArray = new int[message.length()];
+        for (int i = 0; i < generatedKey.length(); i++) 
+        {
+            encryptMessageArray[i] = messageArray[i] + keyArray[i];
+        }
+        return Message.mConvertsNumberToMessage(encryptMessageArray);
+    }
+
+    public String mDecryptMessage()
+    {
+        String message = Message.mClean();
+        if(message.length() == 0)
+        {
+            return "";
+        }
+
+        String generatedKey = Key.mGenerate(message);
+        
+        int[] keyArray = new int[generatedKey.length()];
+        int[] messageArray = new int[message.length()];
+
+        messageArray = mConvertsToArrayOfNumber(message);
+        keyArray = mConvertsToArrayOfNumber(generatedKey);
+
+        int[] decryptMessageArray = new int[message.length()];
+        for (int i = 0; i < generatedKey.length(); i++) 
+        {
+            decryptMessageArray[i] = messageArray[i] - keyArray[i];
+        }
+        return Message.mConvertsNumberToMessage(decryptMessageArray);
+    }
+
+    private int[] mConvertsToArrayOfNumber(String string)
+    {
+        if(string.isEmpty())
+        {
+            return new int[0];
+        }
+
+        int[] numbers = new int[string.length()];
+        char[] values = string.toCharArray();
+        for (int i = 0; i < values.length; i++) 
+        {
+            int number = values[i] - 'A' +1;
+            numbers[i] = number;
+        }
+        return numbers;
     }
 
 }

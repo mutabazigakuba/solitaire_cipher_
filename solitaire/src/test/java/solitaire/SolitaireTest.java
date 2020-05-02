@@ -4,85 +4,63 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
-public class SolitaireTest
+public class SolitaireTest 
 {
 
-    @Test
-    public void message_should_be_converted_into_upper_case()
-    {
-        Solitaire solitaire = new Solitaire("hello");
+   @Test
+   public void encryptesMessageWithOutSpecialChars() 
+   {
+      String message = "HELLO";
+      int[] _deckOfCards = mCreateDeckOfCards();
+      Key generateKey = new Key(_deckOfCards);
+      Message cleanMessage = new Message(message);
+      Solitaire solitaire = new Solitaire(generateKey, cleanMessage);
 
-        String expectedMessage = "HELLO";
-        String actualMessage = solitaire.encoded_message(); 
+      String expectedMessage = "LODZY";
+      String actualMessage = solitaire.mEncryptMessage();
 
-        assertEquals(expectedMessage, actualMessage);
-    }
+      assertEquals(expectedMessage, actualMessage);
+   }
+ 
+   @Test
+   public void keyAndMessageShouldBeOfSameLength() 
+   {
+      String message = "";
+      int[] _deckOfCards = mCreateDeckOfCards();
+      Key generateKey = new Key(_deckOfCards);
 
-    @Test
-    public void message_with_special_chars_should_be_converted_into_letters_only()
-    {
-        Solitaire solitaire = new Solitaire("hel,#$lo%");
+      int expectedKeyLength = generateKey.mGenerate(message).length();
+      int actualKeyLength = message.length();
 
-        String expectedMessage = "HELLO";
-        String actualMessage = solitaire.encoded_message();
+      assertEquals(expectedKeyLength, actualKeyLength);
+   }
 
-        assertEquals(expectedMessage, actualMessage);
-    }
+   @Test
+   public void decryptMessage() 
+   {
+      String message = "JGOQW";
+      int[] _deckOfCards = mCreateDeckOfCards();
+      Key generateKey = new Key(_deckOfCards);
+      Message cleanMessage = new Message(message);
+      Solitaire solitaire = new Solitaire(generateKey, cleanMessage);
+      String dencryptedMessage = "FCCCM";
 
-    
-    @Test
-    public void message_with_numbers_should_be_converted_into_letters_only()
-    {
-        Solitaire solitaire = new Solitaire("hel37lo5");
+      String expectedDencryptedMessage = dencryptedMessage;
+      String actualDencryptedMessage = solitaire.mDecryptMessage();
 
-        String expectedMessage = "HELLO";
-        String actualMessage = solitaire.encoded_message();
+      assertEquals(expectedDencryptedMessage, actualDencryptedMessage);
+   }
 
-        assertEquals(expectedMessage, actualMessage);
-    }
+   private int[] mCreateDeckOfCards() 
+   {
+      int j = 54;
+      int[] deck = new int[54];
+      for (int i = 0; i < deck.length; i++) 
+      {
+          deck[i] = j;
+          j--;
+      }
+      return deck;
+  }
 
-    @Test
-    public void message_without_space_should_be_grouped_into_fives()
-    {
-        Solitaire solitaire = new Solitaire("hellohello");
-
-        String expectedMessage = "HELLO HELLO";
-        String actualMessage = solitaire.encoded_message(); 
-
-        assertEquals(expectedMessage, actualMessage);
-    }
-
-    @Test
-    public void message_with_space_should_be_grouped_into_fives()
-    {
-        Solitaire solitaire = new Solitaire("hello hel lo");
-
-        String expectedMessage = "HELLO HELLO";
-        String actualMessage = solitaire.encoded_message(); 
-
-        assertEquals(expectedMessage, actualMessage);
-    }
-
-    @Test
-    public void message_without_space_should_be_grouped_in_fives_and_x_added_when_not_modulus_five()
-    {
-        Solitaire solitaire = new Solitaire("hellohel");
-
-        String expectedMessage = "HELLO HELXX";
-        String actualMessage = solitaire.encoded_message(); 
-
-        assertEquals(expectedMessage, actualMessage);
-    }
-
-    
-    @Test
-    public void message_with_space_should_be_grouped_in_fives_and_x_added_when_not_modulus_five()
-    {
-        Solitaire solitaire = new Solitaire("hel loh el");
-
-        String expectedMessage = "HELLO HELXX";
-        String actualMessage = solitaire.encoded_message(); 
-
-        assertEquals(expectedMessage, actualMessage);
-    }   
 }
