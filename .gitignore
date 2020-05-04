@@ -1,1 +1,6 @@
 solitaire/target
+.classpath
+.vscode
+.settings
+.project
+
