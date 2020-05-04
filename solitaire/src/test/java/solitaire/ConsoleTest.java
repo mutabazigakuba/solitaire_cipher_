@@ -8,14 +8,6 @@ public class ConsoleTest
 {
 
     @Test
-    public void consoleClassShouldBeCreated()
-    {
-        Console console = new Console();
-
-        assertEquals(true, console instanceof Console);
-    }
-
-    @Test
     public void shouldTakeInUserInput()
     {
         Console console = new Console();
