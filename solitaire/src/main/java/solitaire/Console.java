@@ -1,13 +1,12 @@
 package solitaire;
 
-import java.util.Arrays;
 import java.util.Scanner;
 
 public class Console 
 {
 
     public String userInput = "";
-    public int[] deck = new int[54];
+    private int[] deck = new int[54];
 
 
     public void mRunConsole()
@@ -22,14 +21,15 @@ public class Console
     private void mGetUserInput()
     {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Enter Input");
+        System.out.println("Enter message");
         userInput = scanner.nextLine();
         if(userInput.isBlank())
         {
-            System.out.println("Enter Input Please");
+            System.out.println("Enter a valid message please!");
         }
-        else{
-            System.out.println("Your Input is "+userInput);
+        else
+        {
+            System.out.println("Your message is "+userInput);
         }
         scanner.close();
     }
@@ -40,7 +40,7 @@ public class Console
         Message message = new Message(userInput);
         Solitaire solitaire = new Solitaire(generatedkKey, message);
         userInput = solitaire.mEncryptMessage();
-        System.out.println("Encrypted message "+userInput);
+        System.out.println("Encrypted message is "+userInput);
     }
 
     private void mDecryptInput()
@@ -49,7 +49,7 @@ public class Console
         Message message = new Message(userInput);
         Solitaire solitaire = new Solitaire(generatedkKey, message);
         userInput = solitaire.mDecryptMessage();
-        System.out.println("Decrpyted message "+userInput);
+        System.out.println("Decrpyted message is "+userInput);
     }
 
     private void generateDeckOfCards()
