@@ -5,22 +5,26 @@ import java.util.Scanner;
 public class Commandline 
 {
 
+    Scanner scanner = new Scanner(System.in);
     public String userInput = "";
     private int[] deck = new int[54];
-
+    private int numberOfTimes = 1;
 
     public void mRunConsole()
     {
-        mGetUserInput();
-        generateDeckOfCards();
-        mDisplayEncryptInput();
-        generateDeckOfCards();
-        mDisplayDecryptInput();
+        for (int i = 0; i < numberOfTimes; i++) {
+            mGetUserInput();
+            generateDeckOfCards();
+            mDisplayEncryptInput();
+            generateDeckOfCards();
+            mDisplayDecryptInput();
+            mContinueCipher();
+        }
     }
 
     public void mGetUserInput()
     {
-        Scanner scanner = new Scanner(System.in);
+        System.out.println("======================");
         System.out.println("Enter message");
         userInput = scanner.nextLine();
         if(userInput.isEmpty())
@@ -31,7 +35,6 @@ public class Commandline
         {
             System.out.println("Your message is "+userInput);
         }
-        scanner.close();
     }
 
     private void mDisplayEncryptInput()
@@ -44,6 +47,30 @@ public class Commandline
     {
         userInput = mIntializeSolitaire().mDecryptMessage();
         System.out.println("Decrpyted message is "+userInput);
+    }
+
+    private void mContinueCipher()
+    {
+        System.out.println("======================");
+        System.out.println("Add another message? ");
+        System.out.println("Type Y/N ");
+        Scanner scanner = new Scanner(System.in);
+        String answer = scanner.nextLine();
+        
+        switch(answer){
+            case "Y":
+                numberOfTimes += 1;
+                break;
+            
+            case "N":
+                numberOfTimes -= 1;
+                scanner.close();
+                break;
+            
+            default: 
+                System.out.println("Unknown Input! ");
+                scanner.close();
+        }
     }
 
     private void generateDeckOfCards()
