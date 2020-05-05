@@ -13,12 +13,12 @@ public class Commandline
     {
         mGetUserInput();
         generateDeckOfCards();
-        mEncryptInput();
+        mDisplayEncryptInput();
         generateDeckOfCards();
-        mDecryptInput();
+        mDisplayDecryptInput();
     }
 
-    private void mGetUserInput()
+    public void mGetUserInput()
     {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Enter message");
@@ -34,21 +34,15 @@ public class Commandline
         scanner.close();
     }
 
-    private void mEncryptInput()
+    private void mDisplayEncryptInput()
     {
-        Key generatedkKey = new Key(deck);
-        Message message = new Message(userInput);
-        Solitaire solitaire = new Solitaire(generatedkKey, message);
-        userInput = solitaire.mEncryptMessage();
+        userInput = mIntializeSolitaire().mEncryptMessage();
         System.out.println("Encrypted message is "+userInput);
     }
 
-    private void mDecryptInput()
+    private void mDisplayDecryptInput()
     {
-        Key generatedkKey = new Key(deck);
-        Message message = new Message(userInput);
-        Solitaire solitaire = new Solitaire(generatedkKey, message);
-        userInput = solitaire.mDecryptMessage();
+        userInput = mIntializeSolitaire().mDecryptMessage();
         System.out.println("Decrpyted message is "+userInput);
     }
 
@@ -60,5 +54,13 @@ public class Commandline
             deck[i] = j;
             j--;
         }
+    }
+
+    private Solitaire mIntializeSolitaire()
+    {
+        Key generatedkKey = new Key(deck);
+        Message message = new Message(userInput);
+        Solitaire solitaire = new Solitaire(generatedkKey, message);
+        return solitaire;
     }
 }
