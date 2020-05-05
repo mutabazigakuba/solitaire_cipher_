@@ -23,7 +23,7 @@ public class Console
         Scanner scanner = new Scanner(System.in);
         System.out.println("Enter message");
         userInput = scanner.nextLine();
-        if(userInput.isBlank())
+        if(userInput.isEmpty())
         {
             System.out.println("Enter a valid message please!");
         }
