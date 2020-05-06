@@ -1,13 +1,10 @@
 package solitaire;
 
-import java.util.Scanner;
-
 public class Validate 
 {
     public String errorMessage = "";
     private String InputMessage = "";
     public String validatedMessage = "";
-    Scanner scanner = new Scanner(System.in);
 
     public Validate(String message)
     {

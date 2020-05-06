@@ -9,7 +9,6 @@ public class App
         int numberOfTimes = 1;
         for (int i = 0; i < numberOfTimes; i++) 
         {
-            System.out.println("======================");
             System.out.println("Enter message");
             Scanner scanner = new Scanner(System.in);
 
@@ -20,7 +19,6 @@ public class App
             Commandline cmd = new Commandline(validatedMessage);
             cmd.mRunConsole();
 
-            System.out.println("======================");
             System.out.println("Add another message? ");
             System.out.println("Type Y/N ");
             Scanner scanner2 = new Scanner(System.in);
