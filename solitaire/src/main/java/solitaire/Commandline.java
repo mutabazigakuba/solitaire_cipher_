@@ -3,7 +3,6 @@ package solitaire;
 public class Commandline {
 
     public String userInput = "";
-    private int[] deck = new int[54];
 
     public Commandline(String message) {
         userInput = message;
@@ -11,9 +10,7 @@ public class Commandline {
 
     public void mRunConsole() 
     {
-        generateDeckOfCards();
         mDisplayEncryptInput();
-        generateDeckOfCards();
         mDisplayDecryptInput();
     }
 
@@ -27,16 +24,8 @@ public class Commandline {
         System.out.println("Decrpyted message is " + userInput);
     }
 
-    private void generateDeckOfCards() {
-        int j = 54;
-        for (int i = 0; i < deck.length; i++) {
-            deck[i] = j;
-            j--;
-        }
-    }
-
     private Solitaire mIntializeSolitaire() {
-        Key generatedkKey = new Key(deck);
+        Key generatedkKey = new Key(new int[54]);
         Message cleanedMessage = new Message(userInput);
         Solitaire solitaire = new Solitaire(generatedkKey, cleanedMessage);
         return solitaire;
