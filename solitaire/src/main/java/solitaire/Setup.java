@@ -5,6 +5,7 @@ import java.util.Scanner;
 public class Setup 
 {
     Scanner scanner = new Scanner(System.in);
+    public String InputMessage = "";
 
     public void mStart() 
     {
@@ -13,7 +14,7 @@ public class Setup
         while(numberOfTimes < 1)
         {
             
-            String InputMessage = mGetInput("Enter Message");
+            InputMessage = mGetInput("Enter Message");
             Validate validate = new Validate(InputMessage);
             validate.mValidateMessage();
 
