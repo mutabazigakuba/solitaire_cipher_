@@ -1,15 +1,12 @@
 package solitaire;
 
-import java.util.Scanner;
-
 public class Commandline {
 
-    Scanner scanner = new Scanner(System.in);
     public String userInput = "";
     private int[] deck = new int[54];
 
-    public Commandline(String validateMessage) {
-        userInput = validateMessage;
+    public Commandline(String message) {
+        userInput = message;
     }
 
     public void mRunConsole() 
@@ -40,8 +37,8 @@ public class Commandline {
 
     private Solitaire mIntializeSolitaire() {
         Key generatedkKey = new Key(deck);
-        Message message = new Message(userInput);
-        Solitaire solitaire = new Solitaire(generatedkKey, message);
+        Message cleanedMessage = new Message(userInput);
+        Solitaire solitaire = new Solitaire(generatedkKey, cleanedMessage);
         return solitaire;
     }
 }

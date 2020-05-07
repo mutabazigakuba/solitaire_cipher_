@@ -14,7 +14,7 @@ public class ValidateTest
         Validate validate = new Validate(message);
 
         String expectedErrorMessage = "Empty String Not Accepted";
-        validate.mRemoveSpace();
+        validate.mValidateMessage();
         String actualErrorMessage = validate.errorMessage;
 
         assertEquals(expectedErrorMessage, actualErrorMessage);
@@ -27,7 +27,7 @@ public class ValidateTest
         Validate validate = new Validate(message);
 
         String expectedErrorMessage = "Empty String Not Accepted";
-        validate.mRemoveSpace();
+        validate.mValidateMessage();
         String actualErrorMessage = validate.errorMessage;
 
         assertEquals(expectedErrorMessage, actualErrorMessage);
@@ -40,7 +40,7 @@ public class ValidateTest
         Validate validate = new Validate(message);
 
         String expectedErrorMessage = "Should Not Be Special Chararacters Only";
-        validate.mRemoveSpecialChars();
+        validate.mValidateMessage();
         String actualErrorMessage = validate.errorMessage;
 
         assertEquals(expectedErrorMessage, actualErrorMessage);
@@ -53,7 +53,20 @@ public class ValidateTest
         Validate validate = new Validate(message);
 
         String expectedErrorMessage = "Should Not Be Numbers Only";
-        validate.mRemoveNumbers();
+        validate.mValidateMessage();
+        String actualErrorMessage = validate.errorMessage;
+
+        assertEquals(expectedErrorMessage, actualErrorMessage);
+    }
+
+    @Test
+    public void shouldNotBeSpecialCharsAndNumbersOnly()
+    {
+        String message = "@#134";
+        Validate validate = new Validate(message);
+
+        String expectedErrorMessage = "Should Not Be Numbers OR Special Characters only";
+        validate.mValidateMessage();
         String actualErrorMessage = validate.errorMessage;
 
         assertEquals(expectedErrorMessage, actualErrorMessage);
@@ -66,7 +79,7 @@ public class ValidateTest
         Validate validate = new Validate(message);
 
         String expectedErrorMessage = "Accepted";
-        validate.mRemoveSpecialChars();
+        validate.mValidateMessage();
         String actualErrorMessage = validate.errorMessage;
 
         assertEquals(expectedErrorMessage, actualErrorMessage);
@@ -79,7 +92,7 @@ public class ValidateTest
         Validate validate = new Validate(message);
 
         String expectedErrorMessage = "Accepted";
-        validate.mRemoveNumbers();
+        validate.mValidateMessage();
         String actualErrorMessage = validate.errorMessage;
 
         assertEquals(expectedErrorMessage, actualErrorMessage);

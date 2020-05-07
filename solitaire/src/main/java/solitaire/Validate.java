@@ -4,50 +4,63 @@ public class Validate
 {
     public String errorMessage = "";
     private String InputMessage = "";
-    public String validatedMessage = "";
 
     public Validate(String message)
     {
         InputMessage = message;
     }
 
-    public void mValidateMessage()
+    public String mValidateMessage()
     {
-        mRemoveSpace();
-        mRemoveNumbers();
-        mRemoveSpecialChars();
-        validatedMessage = InputMessage;
-    }
-
-    public void mRemoveSpace()
-    {
-        String newInputString = InputMessage.replaceAll("\\s+", "");
-        InputMessage = newInputString;
-        mStringIsEmpty("Empty String Not Accepted");
-    }
-
-    public void mRemoveSpecialChars()
-    {
-        String newInputString = InputMessage.replaceAll("[^a-zA-Z0-9]", "");
-        InputMessage = newInputString;
-        mStringIsEmpty("Should Not Be Special Chararacters Only");
-    }
-
-    public void mRemoveNumbers()
-    {
-        String newInputString = InputMessage.replaceAll("[^a-zA-Z]", "");
-        InputMessage = newInputString;
-        mStringIsEmpty("Should Not Be Numbers Only");
-    }
-
-    private void mStringIsEmpty(String message)
-    {
-        if(InputMessage.isEmpty()){
-            errorMessage = message;
-            System.out.println(errorMessage);
+        if(mCheckIfEmpty()){
+            return errorMessage = "Empty String Not Accepted";
+        }
+        else if (mCheckIfSpecialChararctersOnly()){
+            return errorMessage = "Should Not Be Special Chararacters Only";
+        }
+        else if (mCheckIfNumbersOnly()){
+            return errorMessage = "Should Not Be Numbers Only";
+        }
+        else if(mCheckIfNumbersAndSpecialChars()){
+            return errorMessage = "Should Not Be Numbers OR Special Characters only";
         }
         else{
-            errorMessage = "Accepted";
+            return errorMessage = "Accepted";
         }
+    }
+
+    private boolean mCheckIfEmpty()
+    {
+        if(InputMessage.isBlank()){
+            return true;
+        }
+        return false;
+    }
+
+    private boolean mCheckIfSpecialChararctersOnly()
+    {
+        String specialCharacters = "[" + "-/@#!*$%^&.'_+={}()"+ "]+" ;
+        if(InputMessage.matches(specialCharacters)){
+            return true;
+        }
+        return false;
+    }
+
+    private boolean mCheckIfNumbersOnly()
+    {
+        String numbers = "[0-9]+" ;
+        if(InputMessage.matches(numbers)){
+            return true;
+        }
+        return false;
+    }
+
+    private boolean mCheckIfNumbersAndSpecialChars()
+    {
+        String numbersAndSpecialChars = ".*[a-zA-Z]+.*";
+        if(InputMessage.matches(numbersAndSpecialChars)){
+            return false;
+        }
+        return true;
     }
 }
