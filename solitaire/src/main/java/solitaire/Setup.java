@@ -36,8 +36,7 @@ public class Setup
                         System.out.println("Unknown Input!");
                 }
             } 
-            else 
-            {
+            else {
                 System.out.println(validate.errorMessage);
             }
         }

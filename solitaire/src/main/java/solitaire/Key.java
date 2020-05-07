@@ -23,8 +23,8 @@ public class Key
 
     public String mGenerate(String message) 
     {
-        generateDeckOfCards();
-        
+        mGenerateDeckOfCards();
+
         for (int i = 0; i < message.length(); i++) 
         {
             mMoveJokerA();
@@ -39,7 +39,7 @@ public class Key
         return keyGenerated;
     }
 
-    private void generateDeckOfCards() {
+    private void mGenerateDeckOfCards() {
         int j = 54;
         for (int i = 0; i < DeckOfCards.length; i++) {
             DeckOfCards[i] = j;

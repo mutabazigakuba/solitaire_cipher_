@@ -5,11 +5,10 @@ public class Commandline {
     public String userInput = "";
 
     public Commandline(String message) {
-        userInput = message;
+        userInput = message;   
     }
 
-    public void mRunConsole() 
-    {
+    public void mRunConsole() {
         mDisplayEncryptInput();
         mDisplayDecryptInput();
     }
