@@ -32,7 +32,7 @@ public class Validate
     private boolean mCheckIfEmpty()
     {
         InputMessage = InputMessage.replaceAll("\\s+", "");
-        if(InputMessage.isBlank()){
+        if(InputMessage.isEmpty()){
             return true;
         }
         return false;
