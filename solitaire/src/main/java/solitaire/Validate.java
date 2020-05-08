@@ -61,6 +61,6 @@ public class Validate
         if(InputMessage.matches(numbersAndSpecialChars)){
             return false;
         }
-        return true;
+        return false;
     }
 }
