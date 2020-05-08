@@ -31,6 +31,7 @@ public class Validate
 
     private boolean mCheckIfEmpty()
     {
+        InputMessage = InputMessage.replaceAll("\\s+", "");
         if(InputMessage.isBlank()){
             return true;
         }
@@ -61,6 +62,6 @@ public class Validate
         if(InputMessage.matches(numbersAndSpecialChars)){
             return false;
         }
-        return false;
+        return true;
     }
 }
