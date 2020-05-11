@@ -12,7 +12,7 @@ public class Key
     private int positionOfJokerA = 0;
     private int positionOfJokerB = 0;
     public int cardToConvert = 1;
-    String keyGenerated = "";
+    String keyGenerated= "";
     int ASCII_BASE = 64;
     int NUMBER_OF_ALPHABETS = 26;
 
