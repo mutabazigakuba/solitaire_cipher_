@@ -7,7 +7,7 @@ The Keyframe algorithm uses a deck of cards to generate the keys.
 
 ### How to decode and encode
 
-[Link to full description](https://github.com/mutabazigakuba/solitaire_cipher_challenge_MR/wiki)
+[See the Projectwiki file](https://github.com/mutabazigakuba/solitaire_cipher_challenge_MR/blob/master/ProjectWiki.md)
 
 ### Technologies used
 
