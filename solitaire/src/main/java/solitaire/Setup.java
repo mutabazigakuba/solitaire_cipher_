@@ -5,7 +5,7 @@ import java.util.Scanner;
 public class Setup 
 {
     Scanner scanner = new Scanner(System.in);
-    public String InputMessage = "";
+    public String InputMessage;
 
     public void mStart() 
     {

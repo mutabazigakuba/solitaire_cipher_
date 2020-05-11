@@ -2,12 +2,11 @@ package solitaire;
 
 public class Commandline {
 
-    public String userInput = "";
+    public String userInput;
 
     public Commandline(String message) {
         userInput = message;   
     }
-
     public void mRunConsole() {
         mDisplayEncryptInput();
         mDisplayDecryptInput();
@@ -24,9 +23,13 @@ public class Commandline {
     }
 
     private Solitaire mIntializeSolitaire() {
-        Key generatedkKey = new Key(new int[54]);
-        Message cleanedMessage = new Message(userInput);
-        Solitaire solitaire = new Solitaire(generatedkKey, cleanedMessage);
-        return solitaire;
+        return new Solitaire(
+            new Key(new int[54]),
+            new Message(userInput));
     }
 }
+
+
+
+
+

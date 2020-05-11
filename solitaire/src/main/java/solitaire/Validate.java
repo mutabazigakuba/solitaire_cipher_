@@ -2,8 +2,8 @@ package solitaire;
 
 public class Validate 
 {
-    public String errorMessage = "";
-    private String InputMessage = "";
+    public String errorMessage;
+    private String InputMessage;
 
     public Validate(String message)
     {
@@ -21,7 +21,7 @@ public class Validate
         else if (mCheckIfNumbersOnly()){
             return errorMessage = "Should Not Be Numbers Only";
         }
-        else if(mCheckIfNumbersAndSpecialChars()){
+        else if(mIsNumbersAndSpecialChars()){
             return errorMessage = "Should Not Be Numbers OR Special Characters only";
         }
         else{
@@ -31,37 +31,21 @@ public class Validate
 
     private boolean mCheckIfEmpty()
     {
-        InputMessage = InputMessage.replaceAll("\\s+", "");
-        if(InputMessage.isEmpty()){
-            return true;
-        }
-        return false;
+        return InputMessage.replaceAll("\\s+", "").isEmpty();
     }
 
     private boolean mCheckIfSpecialChararctersOnly()
     {
-        String specialCharacters = "[" + "-/@#!*$%^&.'_+={}()"+ "]+" ;
-        if(InputMessage.matches(specialCharacters)){
-            return true;
-        }
-        return false;
+        return InputMessage.matches("[" + "-/@#!*$%^&.'_+={}()"+ "]+" );
     }
 
     private boolean mCheckIfNumbersOnly()
     {
-        String numbers = "[0-9]+" ;
-        if(InputMessage.matches(numbers)){
-            return true;
-        }
-        return false;
+        return InputMessage.matches("[0-9]+");
     }
 
-    private boolean mCheckIfNumbersAndSpecialChars()
+    private boolean mIsNumbersAndSpecialChars()
     {
-        String numbersAndSpecialChars = ".*[a-zA-Z]+.*";
-        if(InputMessage.matches(numbersAndSpecialChars)){
-            return false;
-        }
-        return true;
+        return !InputMessage.matches( ".*[a-zA-Z]+.*");
     }
 }
